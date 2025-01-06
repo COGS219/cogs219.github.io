@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Exercise 5 - Categorizing Facial Expressions &#8212; Psych 750</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/ExerciseX-categorizingExpressions.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/favicon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Psych 750</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Schedule
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="schedule.html">
+   Week by week schedule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="submitting_assignments.html">
+   Submitting assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project_2023.html">
+   Project info
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Installation instructions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_osx.html">
+   Instructions for MacOS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_windows.html">
+   Installation and setup for Windows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Shell_reference.html">
+   Basic Linux commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Python_reference.html">
+   Python reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Psychopy_reference.html">
+   PsychoPy reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ImageMagick.html">
+   ImageMagick/GraphicsMagick reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="PRAW_demo.html">
+   PRAW Reddit API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API_list.html">
+   Some fun APIs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Self Study Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="var_string_num.html">
+   Variables, Strings, and Numbers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_basics.html">
+   Lists - the basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="if_statements.html">
+   If Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dictionaries.html">
+   Dictionaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introducing_functions.html">
+   Introducing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_comprehension.html">
+   List Comprehension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_a.html">
+   Review of Fundamentals A
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trial_generation.html">
+   Randomization and Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">
+   Handling Exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_b.html">
+   Review of Fundamentals B
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_basic_pandas_operations.html">
+   Using Pandas to read/write CSV files.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="globbing_files.html">
+   File access-Globbing and preloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_reference_vs_value.html">
+   Mutable and immutable types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="regexp.html">
+   Regular Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   Classes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  In class activities
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python_basics.html">
+   Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_print_pyramids.html">
+   The first thinking exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_file_writing.html">
+   Primer on writing files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_list_manip_vowels_1.html">
+   Working with strings in lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_dictionaries.html">
+   A few dictionary activities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_trial_generation.html">
+   Some more trial generation practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_debugging.html">
+   Debugging practice 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">
+   Basic Examples of GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="more_gss_practice.html">
+   More dataviz practice with GSS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nltk_demo.html">
+   NLTK demo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scraping.html">
+   Webscraping demo and practice
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise0-test.html">
+   Exercise 0-Test assignment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise1-square.html">
+   Exercise 1-Show a square and do stuff with it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise2-stroop.html">
+   Exercise 2-A Stroop task
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise3-extended-stroop.html">
+   Exercise 3-Extending the Stroop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise4-more_modularized_stroop.html">
+   Exercise 4-Modularization and speech recognition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise5-face-search.html">
+   Exercise 5-Loading external files and mouse action!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise6-stroop_analysis.html">
+   Exercise 6-Analyzing the Stroop data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise7-gss-wrangling.html">
+   Exercise 7-Exploring the general social survey
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise8-more-gss-wrangling.html">
+   Exercise 8-More practice with GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise9-regexps.html">
+   Exercise 9 - Practice with regular expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise10-nltk.html">
+   Exercise 10-Natural language processing with NLTK
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise11-oop_circles.html">
+   Exercise 11-Practice with object oriented programming
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/ExerciseX-categorizingExpressions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/ExerciseX-categorizingExpressions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Exercise 5 - Categorizing Facial Expressions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modularize-generatetrials">
+     Modularize generateTrials
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prompt-for-the-subject-code">
+     Prompt for the subject code
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-an-output-file">
+     Create an output file
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-5b-a-more-interesting-face-categorization-study">
+   Exercise 5b: A more interesting face categorization study
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modularize-the-generatetrials-code">
+     Modularize the generateTrials code
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effect-of-spatial-grouping">
+     Effect of spatial grouping?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-a-mouse-for-responding">
+     Use a mouse for responding
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Create an output file
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-yourself-on-the-task">
+     Run yourself on the task!
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonus-actor-positiontype">
+     Bonus: Actor + positionType
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Exercise 5 - Categorizing Facial Expressions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Exercise 5 - Categorizing Facial Expressions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modularize-generatetrials">
+     Modularize generateTrials
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prompt-for-the-subject-code">
+     Prompt for the subject code
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-an-output-file">
+     Create an output file
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-5b-a-more-interesting-face-categorization-study">
+   Exercise 5b: A more interesting face categorization study
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modularize-the-generatetrials-code">
+     Modularize the generateTrials code
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effect-of-spatial-grouping">
+     Effect of spatial grouping?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#use-a-mouse-for-responding">
+     Use a mouse for responding
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Create an output file
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-yourself-on-the-task">
+     Run yourself on the task!
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonus-actor-positiontype">
+     Bonus: Actor + positionType
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-5-categorizing-facial-expressions">
+<h1>Exercise 5 - Categorizing Facial Expressions<a class="headerlink" href="#exercise-5-categorizing-facial-expressions" title="Permalink to this headline">#</a></h1>
+<section id="modularize-generatetrials">
+<h2>Modularize generateTrials<a class="headerlink" href="#modularize-generatetrials" title="Permalink to this headline">#</a></h2>
+<p>Now that you have a working version of the basic expression-categorization study (a fixed <a class="reference external" href="http://debugThis2.py">debugThis2.py</a>), let’s split up the trial-generation part from the rest of the experimental script:</p>
+<ol class="simple">
+<li><p>Place the code and functions related to generating trials into a separate file <code class="docutils literal notranslate"><span class="pre">generateTrials.py</span></code>.</p></li>
+<li><p>Edit <a class="reference external" href="http://generateTrials.py">generateTrials.py</a> code so that instead of returning <code class="docutils literal notranslate"><span class="pre">trials</span></code>, it writes the trial info to a CSV file called trials.csv which contains in each row all the information needed for the current trial, separated by commas. This first row of this file should contain a column header:</p></li>
+</ol>
+<blockquote>
+<div><p>isMatch,emotionPrompt,shownActor,shownCategory,targetFaceImage</p>
+</div></blockquote>
+<ol class="simple">
+<li><p>Inside the main script, import you trial-generation function like so:</p></li>
+</ol>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">generateTrials</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>(your <a class="reference external" href="http://generateTrials.py">generateTrials.py</a> file should be in the same directory as your main experiment .py file):</p>
+<ol class="simple">
+<li><p>In your main experiment script, call <code class="docutils literal notranslate"><span class="pre">generateTrials()</span></code> This should have the effect of creating trials.csv.</p></li>
+<li><p>Now let’s read trials.csv into a list of dictionaries using <a class="reference external" href="http://sapir.psych.wisc.edu/programming_for_psychologists/notebooks/Psychopy_reference.html#Importing-a-trial-list">this importTrials function</a></p></li>
+</ol>
+<p>You should now have a trialList that you can access like so:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">trialList</span> <span class="o">=</span> <span class="n">importTrials</span><span class="p">(</span><span class="s1">&#39;trialList.txt&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">curTrial</span> <span class="ow">in</span> <span class="n">trialList</span><span class="p">:</span>
+    <span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;isMatch&#39;</span><span class="p">]</span> <span class="c1">#contains 1/0 depending on whether the current trial is a match or mismatch</span>
+</pre></div>
+</div>
+<p>Why did we go through the trouble of writing to a reading from a file? To have an extra record of the trial list to which a particular subject was exposed and to double-check that the distributions of different conditions are what we want.</p>
+</section>
+<section id="prompt-for-the-subject-code">
+<h2>Prompt for the subject code<a class="headerlink" href="#prompt-for-the-subject-code" title="Permalink to this headline">#</a></h2>
+<p>Let’s add the capability to collect the subject’s code. Pop up a box (as you did in <a class="reference external" href="http://sapir.psych.wisc.edu/programming_for_psychologists/notebooks/Exercise2-names.html">Exercise 2</a> prompting the experimenter to provide a subject code. Pass this values to <code class="docutils literal notranslate"><span class="pre">generateTrials()</span></code> and have generateTrials use it to create not a generically named trials.csv, but a trials file specific to this participant, e.g., if the subject code is <code class="docutils literal notranslate"><span class="pre">ec_101</span></code>, the trials-file should be <code class="docutils literal notranslate"><span class="pre">ec_101_trials.csv</span></code></p>
+<div class="alert alert-block alert-info">
+You'll need to modify your importTrials call so that you're including the subject name there as well instead of the generic trialList.txt. Also remember to add gui to the `from psychopy import...` statement at the start of the file</div>
+</section>
+<section id="create-an-output-file">
+<h2>Create an output file<a class="headerlink" href="#create-an-output-file" title="Permalink to this headline">#</a></h2>
+<p>Now let’s create an output file containing our data! Have your main script write to a subjCode_data.csv file. Each line should correspond to a trial and contain the following information, in this order:</p>
+<p>Independent Variables:</p>
+<ul class="simple">
+<li><p>Subject Code</p></li>
+<li><p>isMatch (0/1)</p></li>
+<li><p>emotionPrompt (‘Happy’,’Angry’, or ‘Sad’)</p></li>
+<li><p>shownActor (must be one of actors.keys())</p></li>
+<li><p>shownCategory (‘Happy’,’Angry’, or ‘Sad’)</p></li>
+<li><p>targetFaceImage (the filename of the face being shown, e.g., 005wN_90_60.jpg)</p></li>
+</ul>
+<p>Dependent Variables:</p>
+<ul class="simple">
+<li><p>accuracy (1 for correct/0 for incorrect)</p></li>
+<li><p>Reaction time (in milliseconds)</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exercise-5b-a-more-interesting-face-categorization-study">
+<h1>Exercise 5b: A more interesting face categorization study<a class="headerlink" href="#exercise-5b-a-more-interesting-face-categorization-study" title="Permalink to this headline">#</a></h1>
+<p>Here’s a more interesting version of the expressions categorization experiment. The code below will show a prompt (Happy, Angry, or Sad) as before, and then show you three faces (one of which displayes the prompted expression). The user should respond with the the 1 key the prompted expression is on the left, the 2 key if it’s in the middle, and the 3 key if on the right.</p>
+<div class="alert alert-block alert-info">
+Note that the key codes are strings '1', '2', '3' not integers 1, 2, 3
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">psychopy</span> <span class="kn">import</span> <span class="n">visual</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">event</span>
+
+<span class="n">categories</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Happy&#39;</span><span class="p">:</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;Angry&#39;</span><span class="p">:</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;Sad&#39;</span><span class="p">:</span><span class="s1">&#39;T&#39;</span><span class="p">}</span>
+<span class="n">actors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;001m&#39;</span><span class="p">,</span> <span class="s1">&#39;001w&#39;</span><span class="p">,</span> <span class="s1">&#39;002m&#39;</span><span class="p">,</span> <span class="s1">&#39;002w&#39;</span><span class="p">,</span> <span class="s1">&#39;003m&#39;</span><span class="p">,</span> <span class="s1">&#39;003w&#39;</span><span class="p">,</span> <span class="s1">&#39;004m&#39;</span><span class="p">,</span> <span class="s1">&#39;004w&#39;</span><span class="p">,</span> <span class="s1">&#39;005m&#39;</span><span class="p">,</span> <span class="s1">&#39;005w&#39;</span><span class="p">]</span>
+<span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;_90_60.jpg&#39;</span>
+<span class="n">positions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;left&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">190</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;middle&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;right&#39;</span><span class="p">:(</span><span class="mi">190</span><span class="p">,</span><span class="mi">0</span><span class="p">)}</span>
+<span class="n">responseMapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;left&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;middle&#39;</span><span class="p">:</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;right&#39;</span><span class="p">:</span><span class="s1">&#39;3&#39;</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">randomButNot</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">toExclude</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+	<span class="n">chosen</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">num</span><span class="p">)</span>
+	<span class="k">while</span> <span class="n">toExclude</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
+		<span class="n">chosen</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">num</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">chosen</span>
+
+<span class="k">def</span> <span class="nf">generateTrials</span><span class="p">(</span><span class="n">numTrials</span><span class="p">):</span>
+	<span class="n">trials</span><span class="o">=</span><span class="p">[]</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTrials</span><span class="p">):</span>
+		<span class="n">targetCategory</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+		<span class="n">distractorCategories</span> <span class="o">=</span> <span class="n">randomButNot</span><span class="p">(</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">targetCategory</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+		<span class="n">actorsToShow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">actors</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> 
+            <span class="c1">#this is the random.choice() function from the numpy library which samples </span>
+            <span class="c1">#with replacement. cf. random.sample() samples WITHOUT replacement</span>
+		<span class="n">targetLocation</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">positions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+		<span class="n">trials</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+					<span class="s1">&#39;emotionPrompt&#39;</span><span class="p">:</span><span class="n">targetCategory</span><span class="p">,</span>
+					<span class="s1">&#39;targetImage&#39;</span><span class="p">:</span><span class="n">actorsToShow</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">categories</span><span class="p">[</span><span class="n">targetCategory</span><span class="p">]</span><span class="o">+</span><span class="n">suffix</span><span class="p">,</span>
+					<span class="s1">&#39;distractorImage1&#39;</span><span class="p">:</span> <span class="n">actorsToShow</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">categories</span><span class="p">[</span><span class="n">distractorCategories</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="n">suffix</span><span class="p">,</span>
+					<span class="s1">&#39;distractorImage2&#39;</span><span class="p">:</span> <span class="n">actorsToShow</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">categories</span><span class="p">[</span><span class="n">distractorCategories</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">+</span><span class="n">suffix</span><span class="p">,</span>
+					<span class="s1">&#39;targetLocation&#39;</span><span class="p">:</span> <span class="n">targetLocation</span>
+					<span class="p">})</span>
+	<span class="k">return</span> <span class="n">trials</span>
+
+
+<span class="n">trials</span> <span class="o">=</span> <span class="n">generateTrials</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Window</span><span class="p">([</span><span class="mi">1024</span><span class="p">,</span><span class="mi">700</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;pix&#39;</span><span class="p">)</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">correctFeedback</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;CORRECT&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">incorrectFeedback</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;ERROR&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">pic1</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">ImageStim</span><span class="p">(</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pic2</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">ImageStim</span><span class="p">(</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pic3</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">ImageStim</span><span class="p">(</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">curTrial</span> <span class="ow">in</span> <span class="n">trials</span><span class="p">:</span>
+	<span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+	<span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.25</span><span class="p">)</span>
+	<span class="n">prompt</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;emotionPrompt&#39;</span><span class="p">])</span>
+	<span class="n">prompt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+	<span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+	<span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+
+	<span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+	<span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.1</span><span class="p">)</span>
+	<span class="n">pic1</span><span class="o">.</span><span class="n">setImage</span><span class="p">(</span><span class="s1">&#39;faces/&#39;</span><span class="o">+</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;targetImage&#39;</span><span class="p">])</span>
+	<span class="n">pic2</span><span class="o">.</span><span class="n">setImage</span><span class="p">(</span><span class="s1">&#39;faces/&#39;</span><span class="o">+</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;distractorImage1&#39;</span><span class="p">])</span>
+	<span class="n">pic3</span><span class="o">.</span><span class="n">setImage</span><span class="p">(</span><span class="s1">&#39;faces/&#39;</span><span class="o">+</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;distractorImage2&#39;</span><span class="p">])</span>
+	<span class="n">pic1</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;targetLocation&#39;</span><span class="p">]])</span>
+	<span class="n">distractorPositions</span> <span class="o">=</span> <span class="n">randomButNot</span><span class="p">(</span><span class="n">positions</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;targetLocation&#39;</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
+	<span class="n">pic2</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">distractorPositions</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+	<span class="n">pic3</span><span class="o">.</span><span class="n">setPos</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">distractorPositions</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+	<span class="n">pic1</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+	<span class="n">pic2</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+	<span class="n">pic3</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+	<span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+	<span class="n">response</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">waitKeys</span><span class="p">(</span><span class="n">keyList</span><span class="o">=</span><span class="n">responseMapping</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="nb">print</span> <span class="n">response</span><span class="p">,</span><span class="n">responseMapping</span><span class="p">[</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;targetLocation&#39;</span><span class="p">]]</span>
+	<span class="k">if</span> <span class="n">response</span><span class="o">==</span><span class="n">responseMapping</span><span class="p">[</span><span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;targetLocation&#39;</span><span class="p">]]:</span>
+		<span class="n">correctFeedback</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">incorrectFeedback</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+	<span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="modularize-the-generatetrials-code">
+<h2>Modularize the generateTrials code<a class="headerlink" href="#modularize-the-generatetrials-code" title="Permalink to this headline">#</a></h2>
+<p>Begin by modularizing the generateTrials() code as in Exercise 5a.</p>
+</section>
+<section id="effect-of-spatial-grouping">
+<h2>Effect of spatial grouping?<a class="headerlink" href="#effect-of-spatial-grouping" title="Permalink to this headline">#</a></h2>
+<p>Notice how we’re displaying the faces in a horizontal orientation. This allows for having the mouths and eyes nicely aligned which may help comparing faces. Let’s see if there’s an effect of this by intermixing trials with the three faces horizontally oriented as in the code above, and trials that are vertically oriented. To get you started, you’ll want to do is update your positions dictionary to this:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">positions</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="s1">&#39;vertical&#39;</span><span class="p">:</span>  <span class="p">{</span><span class="s1">&#39;bottom&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">190</span><span class="p">),</span> <span class="s1">&#39;middle&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;top&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">190</span><span class="p">)},</span>
+			<span class="s1">&#39;horizontal&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;left&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">190</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;middle&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;right&#39;</span><span class="p">:(</span><span class="mi">190</span><span class="p">,</span><span class="mi">0</span><span class="p">)}</span>
+			<span class="p">}</span>
+</pre></div>
+</div>
+<p>You’ll then want to introduce a position factor <code class="docutils literal notranslate"><span class="pre">positionType</span></code> which is ‘vertical’ or ‘horizontal’ (<code class="docutils literal notranslate"><span class="pre">positions.keys()</span></code>) and based on whether a given trial is ‘vertical’ or ‘horizontal’ you’ll want to:</p>
+<ol class="simple">
+<li><p>Access the appropriate positions for setting where your pictures appear. E.g., if your current position type is stored in <code class="docutils literal notranslate"><span class="pre">curPositionType</span></code>, use <code class="docutils literal notranslate"><span class="pre">positions[curPositionType]</span></code> to access the dictionary containing the possible positions.</p></li>
+<li><p>Set the location of the matching face by using e.g., <code class="docutils literal notranslate"><span class="pre">random.choice(positions[curPositionType].keys())</span></code></p></li>
+</ol>
+</section>
+<section id="use-a-mouse-for-responding">
+<h2>Use a mouse for responding<a class="headerlink" href="#use-a-mouse-for-responding" title="Permalink to this headline">#</a></h2>
+<p>It becomes awkward to use a keyboard for responding in a task like this, so let’s use a mouse for responding. See <a class="reference external" href="http://sapir.psych.wisc.edu/programming_for_psychologists/notebooks/Psychopy_reference.html#How-do-I-have-people-respond-with-a-mouse?">here</a> for sample mouse code. You’ll want to display the three faces until a person clicks on one of them.</p>
+</section>
+<section id="id1">
+<h2>Create an output file<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>Now let’s create an output file containing our data! Have your main script write to a subjCode_data.csv file. Each line should correspond to a trial and contain the following information, precisely in this order:</p>
+<p>Independent Variables:</p>
+<ul class="simple">
+<li><p>subject code (the unique subject code for the subject being run)</p></li>
+<li><p>position type (‘vertical’ or ‘horizontal’)</p></li>
+<li><p>emotion prompt (the string ‘Happy’, ‘Angry’ or ‘Sad’)</p></li>
+<li><p>targetActor (must be one of actors.keys())</p></li>
+<li><p>distractor1Actor (must be one of actors.keys())</p></li>
+<li><p>distractor2Actor (must be one of actors.keys())</p></li>
+<li><p>distractorEmotion1 (the string ‘Happy’, ‘Angry’ or ‘Sad’)</p></li>
+<li><p>distractorEmotion2 (the string ‘Happy’, ‘Angry’ or ‘Sad’)</p></li>
+<li><p>targetImage (the filename corresponding to the correct response, e.g., ‘005wN_90_60.jpg’)</p></li>
+<li><p>distractorImage1 (the filename corresponding to the first distractor)</p></li>
+<li><p>distractorImage2 (the filename corresponding to the second distractor)</p></li>
+<li><p>targetLocation (the location of the target: bottom/middle/top/left/right)</p></li>
+</ul>
+<p>Dependent Variables:</p>
+<ul class="simple">
+<li><p>isRight (1 if response is correct; 0 if incorrect)</p></li>
+<li><p>emotionChosen (the chosen emotion (Happy/Angry/Sad; should equal emotionPrompt if the response is correct)</p></li>
+<li><p>RT (Reaction time in milliseconds from when faces appeared to mouseclick on one of them)</p></li>
+</ul>
+<p>You may run into some trouble figuring out the emotion of the face that the participant clicked on.
+If you set your <code class="docutils literal notranslate"><span class="pre">generateTrials()</span></code> function correctly, the following code will work:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">isRight</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pic1</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">isRight</span><span class="p">:</span>
+    <span class="n">correctFeedback</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">emotionChosen</span> <span class="o">=</span> <span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;emotionPrompt&#39;</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">incorrectFeedback</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">pic2</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+        <span class="n">emotionChosen</span> <span class="o">=</span> <span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;distractorEmotion1&#39;</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">pic3</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+        <span class="n">emotionChosen</span> <span class="o">=</span> <span class="n">curTrial</span><span class="p">[</span><span class="s1">&#39;distractorEmotion2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="run-yourself-on-the-task">
+<h2>Run yourself on the task!<a class="headerlink" href="#run-yourself-on-the-task" title="Permalink to this headline">#</a></h2>
+<p>Please run yourself on this task to produce 100 trials of data. Should take &lt;10 mins. Please take care to have your output file be precisely in the above-mentioned format so that we can combine data from everyone in the class. Here is a <a class="reference external" href="http://sapir.psych.wisc.edu/classMaterials/psych711/sample_data.csv">sample output file</a>. To check that your data is in the correct format, do the following:</p>
+<p>At the terminal, inside
+<code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">sample.csv</span> <span class="pre">your_data.csv</span> <span class="pre">&gt;</span> <span class="pre">data_format_test.csv</span></code></p>
+<p>(replacing your_data.csv with the name of your output file, and including the appropriate path to sample_data.csv if it’s not in the same directory as your data)</p>
+<p>Load the data into R:</p>
+<p>In R: <code class="docutils literal notranslate"><span class="pre">dat</span> <span class="pre">&lt;-</span> <span class="pre">read.csv('data_format_test.csv')</span></code></p>
+<p>Look at the summary: <code class="docutils literal notranslate"><span class="pre">summary(dat)</span></code></p>
+</section>
+<section id="bonus-actor-positiontype">
+<h2>Bonus: Actor + positionType<a class="headerlink" href="#bonus-actor-positiontype" title="Permalink to this headline">#</a></h2>
+<p>Let’s cross the actor and positionType to see if e.g., having faces lined up in horizontally helps especially when they’re all of same gender. You want to have the following trial distribution</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">horizontal</span> <span class="p">(</span><span class="mi">50</span><span class="o">%</span><span class="p">)</span><span class="o">.</span> <span class="n">Of</span> <span class="n">these</span><span class="p">:</span>
+<span class="n">same</span><span class="o">-</span><span class="n">gender</span><span class="p">(</span><span class="n">Male</span><span class="p">)</span> <span class="o">-</span> <span class="mi">25</span><span class="o">%</span>
+<span class="n">same</span><span class="o">-</span><span class="n">gender</span><span class="p">(</span><span class="n">Female</span><span class="p">)</span> <span class="o">-</span> <span class="mi">25</span><span class="o">%</span>
+<span class="n">different</span><span class="o">-</span><span class="n">gender</span> <span class="o">-</span> <span class="mi">50</span><span class="o">%</span>
+
+<span class="n">vertical</span> <span class="p">(</span><span class="mi">50</span><span class="o">%</span><span class="p">)</span><span class="o">.</span> <span class="n">Of</span> <span class="n">these</span><span class="p">:</span>
+<span class="n">same</span><span class="o">-</span><span class="n">gender</span><span class="p">(</span><span class="n">Male</span><span class="p">)</span> <span class="o">-</span> <span class="mi">25</span><span class="o">%</span>
+<span class="n">same</span><span class="o">-</span><span class="n">gender</span><span class="p">(</span><span class="n">Female</span><span class="p">)</span> <span class="o">-</span> <span class="mi">25</span><span class="o">%</span>
+<span class="n">different</span><span class="o">-</span><span class="n">gender</span> <span class="o">-</span> <span class="mi">50</span><span class="o">%</span>
+</pre></div>
+</div>
+<p>To cross factors, you can use for-loops, but a more compact way is to use the <a class="reference external" href="https://docs.python.org/2/library/itertools.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code> package</a>. So you might want to do something like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="n">positions</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="s1">&#39;vertical&#39;</span><span class="p">:</span>  <span class="p">{</span><span class="s1">&#39;bottom&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">190</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;middle&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;top&#39;</span><span class="p">:(</span><span class="mi">190</span><span class="p">,</span><span class="mi">0</span><span class="p">)},</span>
+			<span class="s1">&#39;horiontal&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;left&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">190</span><span class="p">),</span> <span class="s1">&#39;middle&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;right&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span><span class="mi">190</span><span class="p">)}</span>
+			<span class="p">}</span>
+
+<span class="n">genderMix</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;same-gender&#39;</span><span class="p">:[</span><span class="s1">&#39;male&#39;</span><span class="p">,</span><span class="s1">&#39;female&#39;</span><span class="p">],</span> <span class="s1">&#39;diff-gender&#39;</span><span class="p">:[]}</span>
+
+
+<span class="n">trialTypes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">positions</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">genderMix</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+<span class="nb">print</span> <span class="n">trialTypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;horiontal&#39;, &#39;diff-gender&#39;), (&#39;horiontal&#39;, &#39;same-gender&#39;), (&#39;vertical&#39;, &#39;diff-gender&#39;), (&#39;vertical&#39;, &#39;same-gender&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python2",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python2'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Gary Lupyan<br/>
+  
+      &copy; Copyright 2023. Some examples adapted from http://introtopython.org/.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

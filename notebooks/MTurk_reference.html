@@ -1,0 +1,1025 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Amazon Mechanical Turk &#8212; Psych 750</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/MTurk_reference.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/favicon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Psych 750</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Schedule
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="schedule.html">
+   Week by week schedule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="submitting_assignments.html">
+   Submitting assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project_2023.html">
+   Project info
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Installation instructions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_osx.html">
+   Instructions for MacOS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_windows.html">
+   Installation and setup for Windows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Shell_reference.html">
+   Basic Linux commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Python_reference.html">
+   Python reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Psychopy_reference.html">
+   PsychoPy reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ImageMagick.html">
+   ImageMagick/GraphicsMagick reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="PRAW_demo.html">
+   PRAW Reddit API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API_list.html">
+   Some fun APIs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Self Study Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="var_string_num.html">
+   Variables, Strings, and Numbers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_basics.html">
+   Lists - the basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="if_statements.html">
+   If Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dictionaries.html">
+   Dictionaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introducing_functions.html">
+   Introducing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_comprehension.html">
+   List Comprehension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_a.html">
+   Review of Fundamentals A
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trial_generation.html">
+   Randomization and Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">
+   Handling Exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_b.html">
+   Review of Fundamentals B
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_basic_pandas_operations.html">
+   Using Pandas to read/write CSV files.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="globbing_files.html">
+   File access-Globbing and preloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_reference_vs_value.html">
+   Mutable and immutable types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="regexp.html">
+   Regular Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   Classes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  In class activities
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python_basics.html">
+   Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_print_pyramids.html">
+   The first thinking exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_file_writing.html">
+   Primer on writing files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_list_manip_vowels_1.html">
+   Working with strings in lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_dictionaries.html">
+   A few dictionary activities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_trial_generation.html">
+   Some more trial generation practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_debugging.html">
+   Debugging practice 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">
+   Basic Examples of GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="more_gss_practice.html">
+   More dataviz practice with GSS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nltk_demo.html">
+   NLTK demo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scraping.html">
+   Webscraping demo and practice
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise0-test.html">
+   Exercise 0-Test assignment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise1-square.html">
+   Exercise 1-Show a square and do stuff with it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise2-stroop.html">
+   Exercise 2-A Stroop task
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise3-extended-stroop.html">
+   Exercise 3-Extending the Stroop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise4-more_modularized_stroop.html">
+   Exercise 4-Modularization and speech recognition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise5-face-search.html">
+   Exercise 5-Loading external files and mouse action!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise6-stroop_analysis.html">
+   Exercise 6-Analyzing the Stroop data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise7-gss-wrangling.html">
+   Exercise 7-Exploring the general social survey
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise8-more-gss-wrangling.html">
+   Exercise 8-More practice with GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise9-regexps.html">
+   Exercise 9 - Practice with regular expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise10-nltk.html">
+   Exercise 10-Natural language processing with NLTK
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise11-oop_circles.html">
+   Exercise 11-Practice with object oriented programming
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/MTurk_reference.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/MTurk_reference.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#papers-describing-mturk-methods-demographics-pitfalls-etc">
+   Papers describing MTurk methods, demographics, pitfalls, etc.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#various-tutorials-and-software-for-online-experiments">
+   Various tutorials and software for online experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mturk-and-qualtrics">
+     MTurk and Qualtrics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-embed-a-qualtrics-survey-in-mturk-and-give-qualtrics-access-to-worker-id-and-hit-id-info">
+     How to embed a Qualtrics survey in MTurk and give Qualtrics access to worker id and hit id info
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-get-qualtrics-to-parse-variables-passed-in-from-mturk">
+     How to get Qualtrics to parse variables passed in from MTurk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-get-qualtrics-to-generate-a-completion-code">
+     How to get Qualtrics to generate a completion code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-prevent-a-turker-from-participating-in-a-hit-related-to-one-they-ve-done-before">
+     How to prevent a Turker from participating in a HIT related to one they’ve done before
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#with-qualtrics-a-workaround-rather-than-a-solution">
+       With Qualtrics (a workaround rather than a solution)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#turkgate-a-real-solution">
+       TurkGate (a real solution)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#turkgate-manager-an-extension-of-turkgate">
+       TurkGate Manager (an extension of TurkGate)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Amazon Mechanical Turk</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#papers-describing-mturk-methods-demographics-pitfalls-etc">
+   Papers describing MTurk methods, demographics, pitfalls, etc.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#various-tutorials-and-software-for-online-experiments">
+   Various tutorials and software for online experiments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mturk-and-qualtrics">
+     MTurk and Qualtrics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-embed-a-qualtrics-survey-in-mturk-and-give-qualtrics-access-to-worker-id-and-hit-id-info">
+     How to embed a Qualtrics survey in MTurk and give Qualtrics access to worker id and hit id info
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-get-qualtrics-to-parse-variables-passed-in-from-mturk">
+     How to get Qualtrics to parse variables passed in from MTurk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-get-qualtrics-to-generate-a-completion-code">
+     How to get Qualtrics to generate a completion code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-prevent-a-turker-from-participating-in-a-hit-related-to-one-they-ve-done-before">
+     How to prevent a Turker from participating in a HIT related to one they’ve done before
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#with-qualtrics-a-workaround-rather-than-a-solution">
+       With Qualtrics (a workaround rather than a solution)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#turkgate-a-real-solution">
+       TurkGate (a real solution)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#turkgate-manager-an-extension-of-turkgate">
+       TurkGate Manager (an extension of TurkGate)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <h1>Table of Contents<span class="tocSkip"></span></h1>
+<div class="toc" style="margin-top: 1em;"><ul class="toc-item"><li><span><a href="#Amazon-Mechanical-Turk" data-toc-modified-id="Amazon-Mechanical-Turk-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Amazon Mechanical Turk</a></span><ul class="toc-item"><li><span><a href="#Papers-describing-MTurk-methods,-demographics,-pitfalls,-etc." data-toc-modified-id="Papers-describing-MTurk-methods,-demographics,-pitfalls,-etc.-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>Papers describing MTurk methods, demographics, pitfalls, etc.</a></span></li><li><span><a href="#Various-tutorials-and-software-for-online-experiments" data-toc-modified-id="Various-tutorials-and-software-for-online-experiments-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>Various tutorials and software for online experiments</a></span><ul class="toc-item"><li><span><a href="#MTurk-and-Qualtrics" data-toc-modified-id="MTurk-and-Qualtrics-1.2.1"><span class="toc-item-num">1.2.1&nbsp;&nbsp;</span>MTurk and Qualtrics</a></span></li><li><span><a href="#How-to-embed-a-Qualtrics-survey-in-MTurk-and-give-Qualtrics-access-to-worker-id-and-hit-id-info" data-toc-modified-id="How-to-embed-a-Qualtrics-survey-in-MTurk-and-give-Qualtrics-access-to-worker-id-and-hit-id-info-1.2.2"><span class="toc-item-num">1.2.2&nbsp;&nbsp;</span>How to embed a Qualtrics survey in MTurk and give Qualtrics access to worker id and hit id info</a></span></li><li><span><a href="#How-to-get-Qualtrics-to-parse-variables-passed-in-from-MTurk" data-toc-modified-id="How-to-get-Qualtrics-to-parse-variables-passed-in-from-MTurk-1.2.3"><span class="toc-item-num">1.2.3&nbsp;&nbsp;</span>How to get Qualtrics to parse variables passed in from MTurk</a></span></li><li><span><a href="#How-to-get-Qualtrics-to-generate-a-completion-code" data-toc-modified-id="How-to-get-Qualtrics-to-generate-a-completion-code-1.2.4"><span class="toc-item-num">1.2.4&nbsp;&nbsp;</span>How to get Qualtrics to generate a completion code</a></span></li><li><span><a href="#How-to-prevent-a-Turker-from-participating-in-a-HIT-related-to-one-they've-done-before" data-toc-modified-id="How-to-prevent-a-Turker-from-participating-in-a-HIT-related-to-one-they've-done-before-1.2.5"><span class="toc-item-num">1.2.5&nbsp;&nbsp;</span>How to prevent a Turker from participating in a HIT related to one they've done before</a></span><ul class="toc-item"><li><span><a href="#With-Qualtrics-(a-workaround-rather-than-a-solution)" data-toc-modified-id="With-Qualtrics-(a-workaround-rather-than-a-solution)-1.2.5.1"><span class="toc-item-num">1.2.5.1&nbsp;&nbsp;</span>With Qualtrics (a workaround rather than a solution)</a></span></li><li><span><a href="#TurkGate-(a-real-solution)" data-toc-modified-id="TurkGate-(a-real-solution)-1.2.5.2"><span class="toc-item-num">1.2.5.2&nbsp;&nbsp;</span>TurkGate (a real solution)</a></span></li><li><span><a href="#TurkGate-Manager-(an-extension-of-TurkGate)" data-toc-modified-id="TurkGate-Manager-(an-extension-of-TurkGate)-1.2.5.3"><span class="toc-item-num">1.2.5.3&nbsp;&nbsp;</span>TurkGate Manager (an extension of TurkGate)</a></span></li></ul></li></ul></li></ul></li></ul></div><section class="tex2jax_ignore mathjax_ignore" id="amazon-mechanical-turk">
+<h1>Amazon Mechanical Turk<a class="headerlink" href="#amazon-mechanical-turk" title="Permalink to this headline">#</a></h1>
+<p>We will be gradually posting various tips on using Mechanical Turk for
+data collection For now, here are some recommended resources:</p>
+<section id="papers-describing-mturk-methods-demographics-pitfalls-etc">
+<h2>Papers describing MTurk methods, demographics, pitfalls, etc.<a class="headerlink" href="#papers-describing-mturk-methods-demographics-pitfalls-etc" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://experimentalturk.wordpress.com/2012/02/02/experimenting-on-amt-fundamental-articles/">Gabriele Paolacci’s list</a></p></li>
+<li><p>A <a class="reference external" href="http://sapir.psych.wisc.edu/papers/mTurkPapers.zip">list of papers</a> I compiled</p></li>
+<li><p>My <a class="reference external" href="http://sapir.psych.wisc.edu/papers/mTurk-presentation_6-5-2012.pptx">presentation/tutorial</a> from 6/5/2012</p></li>
+</ul>
+</section>
+<section id="various-tutorials-and-software-for-online-experiments">
+<h2>Various tutorials and software for online experiments<a class="headerlink" href="#various-tutorials-and-software-for-online-experiments" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://reactiontimes.wordpress.com/">ScriptingRT</a> – platform for building flash based psych experiments. Also includes a nice tutorial on integrating Turk/Qualtrics/ScriptingRT</p></li>
+<li><p><a class="reference external" href="http://www.jspsych.org/">jsPsych</a> – javascript library for running behavioral experiments in the browser.</p></li>
+</ul>
+<section id="mturk-and-qualtrics">
+<h3>MTurk and Qualtrics<a class="headerlink" href="#mturk-and-qualtrics" title="Permalink to this headline">#</a></h3>
+<p>UW has a <a class="reference external" href="http://survey.wisc.edu/QualtricsLogin/">site license for Qualtrics</a>. When used properly,
+it’s a fantastic resource allowing you to post both traditional surveys
+as well as actual experiments involving randomized assignment to groups,
+complex randomization of conditions, etc. A very nice feature is that
+Qualtrics allows you to embed HTML5 which can be used for real-time
+interaction and presentation of things like a briefly flashed image, and
+much much more. The first thing you’ll want to do after creating your
+survey/experiment in Qualtrics is to have it play well with MTurk. To
+make this happen you’ll want to do at least three things:</p>
+<ol class="simple">
+<li><p>Give Qualtrics access to the workers’ worker-ids</p></li>
+<li><p>Embed your Qualtrics survey <em>inside</em> MTUrk so that workers don’t have to open up a whole new window for it (although a separate window may sometimes be preferable).</p></li>
+<li><p>Have Qualtrics spit out a completion code to verify that they completed the study.</p></li>
+</ol>
+</section>
+<section id="how-to-embed-a-qualtrics-survey-in-mturk-and-give-qualtrics-access-to-worker-id-and-hit-id-info">
+<h3>How to embed a Qualtrics survey in MTurk and give Qualtrics access to worker id and hit id info<a class="headerlink" href="#how-to-embed-a-qualtrics-survey-in-mturk-and-give-qualtrics-access-to-worker-id-and-hit-id-info" title="Permalink to this headline">#</a></h3>
+<p>When you are creating your HIT, click ‘Edit HTML source’ and paste in
+this code, replacing <code class="docutils literal notranslate"><span class="pre">YOUR_FULL_QUALTRICS_URL_HERE</span></code> with the actual
+Qualtrics link you are given when you launch your Qualtrics task
+(including the <a class="reference external" href="http://">http://</a> part).</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>You will be given a code when you complete answering the questions below. Please type it into the box at the bottom<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#39;text/javascript&#39;</span><span class="p">&gt;</span>
+<span class="kd">function</span> <span class="nx">getParamFromURL</span><span class="p">(</span> <span class="nx">name</span> <span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\[]/</span><span class="p">,</span><span class="s2">&quot;\\[&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[\]]/</span><span class="p">,</span><span class="s2">&quot;\\]&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">regexS</span> <span class="o">=</span> <span class="s2">&quot;[\?&amp;]&quot;</span><span class="o">+</span><span class="nx">name</span><span class="o">+</span><span class="s2">&quot;=([^&amp;#]*)&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">regex</span> <span class="o">=</span> <span class="ow">new</span> <span class="nb">RegExp</span><span class="p">(</span> <span class="nx">regexS</span> <span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">regex</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span> <span class="nx">results</span> <span class="o">==</span> <span class="kc">null</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="nx">results</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">//GET PARAMETERS</span>
+<span class="kd">var</span> <span class="nx">usernameFromParamString</span> <span class="o">=</span> <span class="nx">getParamFromURL</span><span class="p">(</span> <span class="s1">&#39;workerId&#39;</span> <span class="p">);</span>
+<span class="kd">var</span> <span class="nx">assignmentIdFromParamString</span> <span class="o">=</span> <span class="nx">getParamFromURL</span><span class="p">(</span> <span class="s1">&#39;assignmentId&#39;</span> <span class="p">);</span>
+<span class="kd">var</span> <span class="nx">hitIdFromParamString</span> <span class="o">=</span> <span class="nx">getParamFromURL</span><span class="p">(</span> <span class="s1">&#39;hitId&#39;</span> <span class="p">);</span>
+
+<span class="c1">//CREATE AND POST LINK TO REAL HIT</span>
+<span class="kd">var</span> <span class="nx">link</span> <span class="o">=</span> <span class="s2">&quot;YOUR_FULL_QUALTRICS_URL_HERE&amp;worker=&quot;</span> <span class="o">+</span> <span class="nx">usernameFromParamString</span> <span class="o">+</span> <span class="s2">&quot;&amp;assignment=&quot;</span> 
+<span class="o">+</span> <span class="nx">assignmentIdFromParamString</span> <span class="o">+</span> <span class="s2">&quot;&amp;hit=&quot;</span> <span class="o">+</span> <span class="nx">hitIdFromParamString</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;&lt;iframe src=&quot;</span> <span class="o">+</span><span class="nx">link</span> <span class="o">+</span> <span class="s2">&quot; width=\&quot;800\&quot; height=\&quot;600\&quot;&gt;&lt;br&gt;&lt;/iframe&gt;&quot;</span><span class="p">);</span>
+
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Completion code:<span class="ni">&amp;nbsp;</span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Q2&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;Q2&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;20&quot;</span> <span class="p">/&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Let’s go through this step by step. The code above is a mix of
+javascript and HTML. The function <code class="docutils literal notranslate"><span class="pre">getParamFromURL</span></code> parses the URL to get
+three things: the workerID, the assignmentID, and the hitId. The first
+is a unique identifier for each worker. The second is a unique code for
+this assignment. The third is a unique code for this HIT. Once we have
+the fields (the Get Parameteres part of the code), we can insert them
+into the URL passed to Qualtrics which can then parse it and include it
+in your data file (see instructions below).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">link</span></code> part sets up a JavaScript variable containing the link
+to the Qualtrics page along with the workerID, assignmentIT, and hitID
+info (and anything else you want to pass in). <em>Caveat: These variables
+will only be defined if you are actually doing the HIT as a worker. They
+won’t work when you test it from the requester page. To test it fully,
+use the Workers’ Sandbox MTurk site to do your HIT.</em></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">document.write</span></code> bit of the code creates an iframe which embeds
+the Qualtrics page defined in the link variable right above it. Voila.</p>
+<p>When you preview your HIT, it will look something like this:</p>
+<p><img alt="" src="notebooks/images/QualtricsEmbedScreenshot.png" /></p>
+</section>
+<section id="how-to-get-qualtrics-to-parse-variables-passed-in-from-mturk">
+<h3>How to get Qualtrics to parse variables passed in from MTurk<a class="headerlink" href="#how-to-get-qualtrics-to-parse-variables-passed-in-from-mturk" title="Permalink to this headline">#</a></h3>
+<p>To read and log variables passed from MTurk, go to ‘Survey Flow’ and
+add an ‘Embedded Data’ element as the first element of your survey.
+Then enter the variables you’d like to log (using the names from the
+code you embedded in the MTurk hit (see above). In my case, I’m logging
+the variables ‘worker’, ‘hit’, and ‘assignment’.</p>
+<p><img alt="" src="../_images/embeddedData.png" /></p>
+<p>Now the values of these variables, e.g., the person’s workerID, will be
+stored alongside the participant’s responses to your Qualtrics
+questions in the very same output file.</p>
+</section>
+<section id="how-to-get-qualtrics-to-generate-a-completion-code">
+<h3>How to get Qualtrics to generate a completion code<a class="headerlink" href="#how-to-get-qualtrics-to-generate-a-completion-code" title="Permalink to this headline">#</a></h3>
+<p>You will want to have Qualtrics generate a ‘completion code’ at the
+end of the study. The participant then copy/pastes the code into the
+MTurk box to confirm that they actually did the study. You can then look
+at what codes the participants entered (in MTurk) and accept/deny work
+accordingly.</p>
+<p>To get Qualtrics to generate a completion code takes a couple steps.
+First, you’ll want to add a ‘web service’ element to your survey
+flow. Add it right below the embedded-data element. The service we’re
+adding is a link to a small PHP script that generates a pseudo-random
+code that will serve as the completion code. All the script does is
+generate and print the code, for example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">code</span><span class="o">=</span><span class="n">MAqdJtVrTrBfRfNrVGLk</span>
+</pre></div>
+</div>
+<p>Go ahead and <a class="reference external" href="http://sapir.psych.wisc.edu/~lupyan/randString.php">click here</a> to see what
+happens. Reload the page to get a new code.</p>
+<p>To get Qualtrics to do this in the background, insert a ‘web service’
+like so:</p>
+<p><img alt="" src="../_images/WebService.png" /></p>
+<p>You can easily write your own script to generate completion codes, or
+just use mine. The randString.php file in the example above looks like
+this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;?php
+function randLetter()
+{
+    $int = rand(0,51);
+    $a_z = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
+    $rand_letter = $a_z[$int];
+    return $rand_letter;
+}
+$secretCode = &quot;rTr&quot;;
+$string = &quot;&quot;;
+
+for($i = 0; $i &lt; 7; $i++){
+    $string = $string.randLetter();
+}
+$string = $string.$secretCode;
+
+for($i = 0; $i &lt; 10; $i++){
+    $string = $string.randLetter();
+}
+
+echo &quot;code=$string&quot;;
+?&gt;
+</pre></div>
+</div>
+<p>What’s going on here? On top we have a function that, on each call,
+outputs a random character from the string <code class="docutils literal notranslate"><span class="pre">$a_z</span></code>. We output 7 random
+characters, then the string ‘rTr’, and then a bunch more random
+characters. What’s with the ‘rTr’? We don’t actually care what the
+code is – all we need is a way to verify that the participant actually
+completed the task. If we just generate a bunch of random characters,
+then people can cheat by entering a bunch of random characters in the
+MTurk box. We can verify that the characters are the correct ones, but
+that takes time. An easier way is just to have part of the string be a
+constant, here ‘rTr’. Then just by glancing at the string you can tell
+if it’s the correct on or not.</p>
+<p>The survey now has a stored variable <code class="docutils literal notranslate"><span class="pre">code</span></code> containing the completion
+code (a unique one for each participant). But how do we get it to
+display at the of the study?</p>
+<p>First, we’ll create a “message” that will output the code.
+Go to the library tab, and create an ‘End of Survey’ message. Let’s
+call it MTurk.</p>
+<p><img alt="" src="notebooks/images/MTurk_library.png" /></p>
+<p>Hit edit, and enter something like the text below.</p>
+<p><img alt="" src="notebooks/images/EndOfSurvey_mTurk.png" /></p>
+<p>All this is doing is outputting the value of the code that Qualtrics
+obtained from the little PHP script above.</p>
+<p>Lastly, we need to insert the ‘End of Survey’ message into the actual
+survey. Go back to ‘Survey Flow’ and if it’s not already there, add
+an ‘End of Survey’ block. Click on ‘edit’ and set the end of survey
+message to the one you’ve just created, like so:</p>
+<p><img alt="" src="notebooks/images/CustomizeEndOfSurvey.png" /></p>
+<p>You are done!
+Preview the survey to make sure it’s working (note that since you’re
+not passing in any mTurk variables, those will remain null).</p>
+<p><em>Tip</em> You only need to execute the steps above once! Once you have a
+survey with the appropriate elements, you can just create new ones by
+copying the survey and changing out the questions, but preserving the
+end of survey block, web service, and embedded data blocks.</p>
+</section>
+<section id="how-to-prevent-a-turker-from-participating-in-a-hit-related-to-one-they-ve-done-before">
+<h3>How to prevent a Turker from participating in a HIT related to one they’ve done before<a class="headerlink" href="#how-to-prevent-a-turker-from-participating-in-a-hit-related-to-one-they-ve-done-before" title="Permalink to this headline">#</a></h3>
+<p>Suppose you want to run a study with several between-subject conditions,
+or run several related studies and don’t want the same people to
+participate in more than one condition/study. If you post multiple HITs,
+each linking to a study or condition, there is nothing to prevent some
+of the same people from participating in all of them. The most general
+way of solving this problem is to store in a database who did what
+study, store their IDs and prevent people from doing a related study by
+looking up their ID in a database and only allowing them to do the study
+if they haven’t already done one that disqualifies them. In my lab we
+have a system like this in place, but it still needs to be tested, so
+stay tuned for info.</p>
+<section id="with-qualtrics-a-workaround-rather-than-a-solution">
+<h4>With Qualtrics (a workaround rather than a solution)<a class="headerlink" href="#with-qualtrics-a-workaround-rather-than-a-solution" title="Permalink to this headline">#</a></h4>
+<p>For people using Qualtrics, there is a much simpler solution. Simply set up your
+task to include a ‘Randomizer’ element (in Survey Flow) and include
+multiple branches. This lets you funnel people to just condition A, just
+condition B, 50/50, etc. Play around with it. It’s very flexible, and
+the best part is that you can make these changes after your HIT is live
+on Turk. So, for example, if you realize you want another condition, you
+can add an extra branch, add questions to it, and start funneling people
+to it through Survey Flow.</p>
+<p><strong>Note:</strong> You may notice that although you’ve set Qualtrics to present
+the conditions in the randomizer equally, the final data has more of one
+type than the other. From what I can tell this is due to incomplete
+surveys which are counted by the randomizer. The only way I’ve found to
+overcome this is by manually setting the numbers to make up for a lower
+N in one condition or another.</p>
+</section>
+<section id="turkgate-a-real-solution">
+<h4>TurkGate (a real solution)<a class="headerlink" href="#turkgate-a-real-solution" title="Permalink to this headline">#</a></h4>
+<p>If you self-host, Mechanical Turk participation can be managed very
+efficiently with <a class="reference external" href="http://gideongoldin.github.io/TurkGate/">TurkGate</a>,
+which stands for <strong>G</strong>rouping and <strong>A</strong>ccess
+<strong>T</strong>ools for <strong>E</strong>xternal surveys (for use
+with Amazon Mechanical <strong>Turk</strong>).</p>
+<p>TurkGate is a nifty open source web application designed by Adam Darlow
+and Gideon Goldin. Installation is very simple (again, if you self-host)
+and the application has an easy-to-use interface.</p>
+<p>Once installed, TurkGate can be used to generate HTML/javascript that,
+when inserted into your HIT, serves as a “doorway” between mTurk
+workers and your survey. TurkGate allows you to allow or deny
+participation based on that worker’s previously accepted HITs.</p>
+<p>The basic setup is the same as described above:</p>
+<ul class="simple">
+<li><p>Create a new survey using, e.g., Qualtrics.</p></li>
+<li><p>Create a new survey group in TurkGate.</p>
+<ul>
+<li><p>Start the TurkGate application by navigating to the installation
+directory in your browser. This might be something like
+<a class="reference external" href="http://yourhost.edu/TurkGate/">yourhost.edu/TurkGate/</a></p></li>
+<li><p>Paste in your survey URL and give your new survey group a name.
+<strong>Note:</strong> this group name will be displayed to the
+workers by default.</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">HIT</span></code> button to generate TurkGate’s default
+code.</p></li>
+</ul>
+</li>
+<li><p>Create a new HIT in Mechanical Turk and paste in the code from
+TurkGate.</p></li>
+<li><p>Before you run a new batch, edit your survey to send participants to
+the URL generated by TurkGate at the end. See the Worker IDs section
+below.</p></li>
+</ul>
+<p><img alt="" src="notebooks/images/Turkgateapplication.png" /></p>
+<p>Now any worker who accepts a HIT via the TurkGate “doorway” will have
+their worker ID associated with the group name that you provided for the
+survey, and won’t be allowed reentry. That is, you can create
+completely new surveys and completely new Mechanical Turk HITs, and if
+the surveys are associated with a particular group in the TurkGate
+database, workers will be prevented from participating twice.</p>
+<p>TurkGate uses a different system for generating and verifying completion
+codes than the above. However, you can still configure TurkGate to
+include worker IDs in the survey URL so they can be parsed by your
+survey provider (see
+<a class="reference external" href="https://github.com/gideongoldin/TurkGate/wiki/Configuring-turkgate">here</a>).</p>
+</section>
+<section id="turkgate-manager-an-extension-of-turkgate">
+<h4>TurkGate Manager (an extension of TurkGate)<a class="headerlink" href="#turkgate-manager-an-extension-of-turkgate" title="Permalink to this headline">#</a></h4>
+<p>If you’re like us, the need to exclude participants from certain HITs
+was present before TurkGate. Pierce wrote a TurkGate Manager class in
+python that can be used to communicate with both the MySQL database that
+stores the TurkGate survey request information and Amazon Mechanical
+Turk API to fetch worker IDs from previously completed HITs. This way
+you can flexibly add and remove worker IDs to control group management
+via TurkGate. Eventually these management tools might be possible
+through the TurkGate application directly.</p>
+<p>See <a class="reference external" href="https://github.com/pedmiston/turkgatemanager">here</a> for details.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python2",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python2'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Gary Lupyan<br/>
+  
+      &copy; Copyright 2023. Some examples adapted from http://introtopython.org/.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

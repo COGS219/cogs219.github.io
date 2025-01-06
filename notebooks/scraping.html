@@ -1,0 +1,1768 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Webscraping with Beautiful Soup &#8212; Psych 750</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/scraping.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise 0 - Test assignment" href="Exercise0-test.html" />
+    <link rel="prev" title="Intro to NLTK" href="nltk_demo.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/favicon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Psych 750</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Schedule
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="schedule.html">
+   Week by week schedule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="submitting_assignments.html">
+   Submitting assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project_2023.html">
+   Project info
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Installation instructions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_osx.html">
+   Instructions for MacOS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_windows.html">
+   Installation and setup for Windows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Shell_reference.html">
+   Basic Linux commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Python_reference.html">
+   Python reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Psychopy_reference.html">
+   PsychoPy reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ImageMagick.html">
+   ImageMagick/GraphicsMagick reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="PRAW_demo.html">
+   PRAW Reddit API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API_list.html">
+   Some fun APIs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Self Study Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="var_string_num.html">
+   Variables, Strings, and Numbers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_basics.html">
+   Lists - the basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="if_statements.html">
+   If Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dictionaries.html">
+   Dictionaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introducing_functions.html">
+   Introducing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_comprehension.html">
+   List Comprehension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_a.html">
+   Review of Fundamentals A
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trial_generation.html">
+   Randomization and Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">
+   Handling Exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_b.html">
+   Review of Fundamentals B
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_basic_pandas_operations.html">
+   Using Pandas to read/write CSV files.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="globbing_files.html">
+   File access-Globbing and preloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_reference_vs_value.html">
+   Mutable and immutable types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="regexp.html">
+   Regular Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   Classes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  In class activities
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python_basics.html">
+   Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_print_pyramids.html">
+   The first thinking exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_file_writing.html">
+   Primer on writing files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_list_manip_vowels_1.html">
+   Working with strings in lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_dictionaries.html">
+   A few dictionary activities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_trial_generation.html">
+   Some more trial generation practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_debugging.html">
+   Debugging practice 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">
+   Basic Examples of GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="more_gss_practice.html">
+   More dataviz practice with GSS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nltk_demo.html">
+   NLTK demo
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Webscraping demo and practice
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise0-test.html">
+   Exercise 0-Test assignment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise1-square.html">
+   Exercise 1-Show a square and do stuff with it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise2-stroop.html">
+   Exercise 2-A Stroop task
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise3-extended-stroop.html">
+   Exercise 3-Extending the Stroop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise4-more_modularized_stroop.html">
+   Exercise 4-Modularization and speech recognition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise5-face-search.html">
+   Exercise 5-Loading external files and mouse action!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise6-stroop_analysis.html">
+   Exercise 6-Analyzing the Stroop data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise7-gss-wrangling.html">
+   Exercise 7-Exploring the general social survey
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise8-more-gss-wrangling.html">
+   Exercise 8-More practice with GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise9-regexps.html">
+   Exercise 9 - Practice with regular expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise10-nltk.html">
+   Exercise 10-Natural language processing with NLTK
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise11-oop_circles.html">
+   Exercise 11-Practice with object oriented programming
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/scraping.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/scraping.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-heading-names-in-a-wikipedia-article">
+   Get heading names in a Wikipedia article
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-current-temperature-in-madison">
+   Get current temperature in Madison
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-of-using-the-newspaper-package">
+   Example of using the newspaper package
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lots-of-examples-and-pre-written-code-out-there">
+   Lots of examples and pre-written code out there!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#now-it-s-your-turn">
+   Now it’s your turn
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-weather">
+     More weather
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#billboard-100">
+     Billboard 100
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#isthmus-music-calendar">
+     Isthmus Music Calendar
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Webscraping with Beautiful Soup</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-heading-names-in-a-wikipedia-article">
+   Get heading names in a Wikipedia article
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-current-temperature-in-madison">
+   Get current temperature in Madison
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-of-using-the-newspaper-package">
+   Example of using the newspaper package
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lots-of-examples-and-pre-written-code-out-there">
+   Lots of examples and pre-written code out there!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#now-it-s-your-turn">
+   Now it’s your turn
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-weather">
+     More weather
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#billboard-100">
+     Billboard 100
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#isthmus-music-calendar">
+     Isthmus Music Calendar
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="webscraping-with-beautiful-soup">
+<h1>Webscraping with Beautiful Soup<a class="headerlink" href="#webscraping-with-beautiful-soup" title="Permalink to this headline">#</a></h1>
+<p>This notebook shows off some basic capabilities. of the <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> webscraping package. And here’s a handy <a class="reference external" href="https://whatacold.io/blog/2021-12-05-beautifulsoup4-cheatsheet/">cheat sheet</a>.</p>
+<p>Why is it called “Beautiful Soup”? If you <a class="reference external" href="https://groups.google.com/g/beautifulsoup/c/nCOB_U4HqRc?pli=1">google it</a>, you’ll be told that it’s because of “tag soup” or something like thatnonsense. But here’s a <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/">hint</a>. See that picture? That’s your <a class="reference external" href="https://www.youtube.com/watch?v=FWxFsJUlBbw">answer</a>.</p>
+<section id="get-heading-names-in-a-wikipedia-article">
+<h2>Get heading names in a Wikipedia article<a class="headerlink" href="#get-heading-names-in-a-wikipedia-article" title="Permalink to this headline">#</a></h2>
+<p>Let’s begin by automatically grabbing The Simpsons character names from the <em>Simpson Family</em> <a class="reference external" href="https://en.wikipedia.org/wiki/Simpson_family">Wikipedia page</a>. Looking at the wiki article, we see that the character names are part of a bulleted list (produced by the html <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> tag. Furthermore, they’re bolded. Using this we can do the following:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://en.wikipedia.org/wiki/Simpson_family&quot;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">headline</span> <span class="ow">in</span> <span class="n">soup</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span> <span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">}):</span>
+    <span class="n">topics</span> <span class="o">=</span> <span class="n">headline</span><span class="o">.</span><span class="n">find_next</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span> <span class="c1">#ul is bulletpoints; b is bold</span>
+    <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* Herbert &quot;Herb&quot; Powell (voiced by Danny DeVito) – As his paternal half-brother, Herb resembles Homer, though he is much thinner, boasts a full head of hair and is more astute. He first appeared in the season two episode &quot;Oh Brother, Where Art Thou?&quot; when Homer is informed by his father Abe, after the latter suffered a mild heart attack, that he had a half-brother, the product of a short-lived affair between Abe and a carnival dunk-tank worker who was also a prostitute (identified in The Simpsons Uncensored Family Album as &#39;Gaby&#39;). A year after putting the baby up for adoption, Abe married Mona, who insisted he promise never to tell Homer about Herb or how he was conceived. Herb was raised by his adoptive parents Edward and Mililani Powell (first names given in The Simpsons Uncensored Family Album), put himself through college by working odd jobs, then founded Powell Motors, a car company based in Detroit. Herb is an exception to &#39;the Simpson gene&#39;, which causes all male members of the Simpson family to gradually lose their intelligence as they mature, as Herb is intelligent, successful and an astute businessman. Overjoyed to learn that he had a blood family, Herb bonded with the children and hired Homer, as a representative of average Americans, to design a car. The car was a flop, bankrupting the company, and Herb angrily rejected Homer as a brother and became a street vagrant.[56] The episode was written by Jeff Martin but the idea of having Herb voiced by Danny DeVito had been pitched by Sam Simon.[57] Some were upset with the sad ending of the episode, and as a result, the producers decided to make a sequel.[50] Herb re-appeared the next season in &quot;Brother, Can You Spare Two Dimes?&quot;. Now broke and homeless, he briefly settled in the Simpson household, despite his intense continuing antipathy toward Homer. Homer loaned Herb $2000, which he used to build an invention that translated infantile speech into comprehensible English, based on observations he made of Maggie. He proceeded to mass-produce his new product and regained his fortune. In gratitude, he bought gifts for each member of the family and paid Homer back with his forgiveness.[58] Homer&#39;s &quot;seldom seen half-brother&quot;[59] has had only one brief speaking part since this episode: DeVito reprised his role for the Season 24 episode &quot;The Changing of the Guardian&quot;, in which Powell&#39;s answering machine message is heard: &#39;Hi, you&#39;ve reached Herb Powell. I&#39;m poor again.&#39;[60][non-primary source needed]
+* 
+
+* Abbey (voiced by Dan Castellaneta) – Abbey is hinted to be Abe&#39;s illegitimate daughter and Homer&#39;s half-sister from a relationship he had with a British woman named Edwina during World War II.[61]
+* 
+
+* Chet Simpson (voiced by Dan Castellaneta[62]) – Chet is Bart, Lisa, Maggie’s great-uncle who owns an unsuccessful shrimp company.[63]
+* 
+
+* Dr. Simpson (voiced by Tress MacNeille[55]) – Dr. Simpson is the chief of complicated surgeries at the invasive care unit; she is first seen in &quot;Lisa the Simpson&quot;.[63] She is the one who reassures Lisa that she will not suffer the defective Simpson Gene because of her sex and also reveals that only male members are affected by it. Dr. Simpson resembles Lisa, minus the spikes.
+* 
+
+* Stanley Simpson (voiced by Dan Castellaneta[62]) – Stanley is the Simpson children&#39;s second cousin who shoots birds at the airport.[63]
+* 
+
+*  Uncle Tyrone Simpson  (voiced by Hank Azaria) – Uncle Tyrone is a cynical elderly Simpson relative who lives in Dayton, Ohio. The family intends to visit him during his birthday in the episode &quot;Catch &#39;Em If You Can&quot;.[64]
+* 
+
+* Great-Aunt Hortense Simpson – Great-Aunt Hortense died before &quot;Bart the Fink&quot; and left Homer, Marge, Bart, and Lisa $100 each. The rest of her estate was passed to Ann Landers. In a continuity error, Great-Aunt Hortense appeared on Bart&#39;s journey to Heaven in &quot;Bart Gets Hit by a Car&quot;.
+* 
+
+* A group of unnamed relatives show up in the episode &quot;Lisa the Simpson&quot;, when Homer tries to prove to Lisa that not all Simpsons are failures.[63] In the end, only Dr. Simpson and three other female members proved successful.
+* 
+
+* Hugo Simpson (voiced by Nancy Cartwright) – Hugo is Bart&#39;s conjoined twin from the &quot;Treehouse of Horror VII&quot; segment &quot;The Thing and I&quot;. He and Bart were separated as babies by Dr. Hibbert and was deemed &quot;evil&quot;. To hide the secret, Marge and Homer chained Hugo in the attic and fed him fish heads once a week. Later, Bart goes up to the attic and Hugo escapes, wanting to sew him and Bart back together. Dr. Hibbert managed to catch Hugo, but notices that the surgical scar is on the wrong side, meaning Bart is the evil twin. As a result, Hugo is released while Bart is chained in the attic. Hugo resembles Bart, but with ratty clothes, messy hair, and malformed teeth. Since he is a Treehouse of Horror character, he does not exist in the main episode continuity.
+* 
+
+* Mabel Simpson (voiced by Julie Kavner) – Mabel is an ancestor of the Simpson family who was part of the Underground Railroad. She was married to Hiram before divorcing him and fleeing to Canada to marry Virgil. She kept the Simpson surname.
+Ex-husband: Hiram Simpson (voiced by Dan Castellaneta) – Hiram is a distant relative of the Simpson family who was bribed with a new pair of shoes into revealing Virgil&#39;s whereabouts. He is the parent of Eliza Simpson.
+* 
+
+* Virgil (voiced by Wren T. Brown) – Virgil, later Virgil Simpson, is an enslaved African American owned by Mr. Burns&#39;s father, Colonel Burns, and rescued by Eliza. He was betrayed by Hiram but escaped with Mabel, whom he later married, from whom the Simpson family are really descended.
+* 
+
+* Eliza Simpson (voiced by Yeardley Smith) – Eliza Simpson is a distant relative of the Simpson family and daughter of Mabel and Hiram. She was part of the Underground Railroad with her mother and initially helped Virgil evade capture before giving him up to Wainwright Burns. In later life, she is revealed to have married Milford Van Houten, being the direct ancestor of the Van Houten family.
+* 
+
+* Abraham Simpson – The son of Mabel and Virgil, half-brother of Eliza, and great-grandfather of Grampa Simpson.
+* 
+
+* Grampa&#39;s parents – Grampa&#39;s parents both appear briefly in &quot;Much Apu About Nothing&quot; when Grampa tells the story of how his family emigrated to America.[65] Their names were given to be Orville J. Simpson and Yuma Hickman in The Simpsons Uncensored Family Album, but have not been mentioned in the series. In the Season 25 episode &quot;The Winter of His Content&quot;, Homer reveals that Abe&#39;s father is alive, but Abe ignores him.[66]
+* 
+
+* Cyrus Simpson (voiced by Hank Azaria) - Cyrus is Grampa&#39;s older brother who is seen in &quot;Simpsons Christmas Stories&quot;. Cyrus crashed his Corsair at Tahiti in World War II&#39;s Pacific Theater of Operations during a kamikaze raid. He never left and has 15 wives.[67]
+* 
+
+* Rita LaFleur (voiced by Anika Noni Rose) – Rita is the second wife of Abraham Simpson and a jazz recording artist.[68][69] She was a singer at Spiro&#39;s Restaurant and met Abe when he was a waiter. They married[70] and LaFleur left the restaurant, wishing to become a successful singer. She was invited to tour in Europe, but Homer suffered a head injury and Abraham realized that Homer was defenseless and would not survive in Europe, so he stayed behind with him while Rita went to Europe, and the two never saw each other again. It was revealed that she later became a heroin addict which ended up ruining her singing career. In &quot;Gone Abie Gone&quot;, Rita reunited with Abraham and they played piano.[71] It was unknown why they were not together.[72][73]
+* 
+
+* Amber Simpson (voiced by Pamela Hayden) – Amber was the Vegas ex-wife of both Homer and Abe Simpson from the season ten episode &quot;Viva Ned Flanders&quot;. Homer and Ned Flanders visit Las Vegas for the weekend, get drunk and unknowingly marry two women.[74] Amber reappears in &quot;Brawl in the Family&quot;, where the Simpson family trick her into marrying Grampa, and in the process forsake all other spouses. Amber is horrified at the deception and runs away back to Vegas, much to Grampa&#39;s disappointment at losing another wife.[75] In &quot;Jazzy and the Pussycats&quot;, the Simpsons attend Homer&#39;s ex-wife and former stepmother&#39;s funeral after Amber’s death from a drug overdose.[76]
+* 
+
+* Bill Simpson is one of Abe&#39;s brothers, and is apparently a communist. He is mentioned in Million-Dollar Abie as a member of the Communist Party along with Joseph Stalin and many others. It is unknown how old Bill is, or if he is still alive.[77]
+* 
+
+* Great Uncle Boris – Boris is Homer&#39;s great-uncle who left his great-nephew his country home in the episode &quot;Homer Loves Flanders&quot;.
+* 
+
+* Mother Shabubu/Cousin Frank/Francine – Cousin Francine is Homer&#39;s cousin (it is unknown if she is Abraham or Mona&#39;s niece) who was mentioned in the episode &quot;Lisa&#39;s First Word&quot;.
+* &quot;Sideshow Bob&quot; Terwilliger (voiced by Kelsey Grammer) – Sideshow Bob meets Selma via a prison pen pal program in the season three episode &quot;Black Widower&quot;. After he is released and marries the very smitten Selma, Sideshow Bob fools everyone except for Bart, who eventually foils Sideshow Bob&#39;s plot to murder Selma on their honeymoon.
+* 
+
+* Lionel Hutz (voiced by Phil Hartman) – Lionel Hutz is mentioned as Selma&#39;s ex-husband in between Terwilliger and McClure in the season nine episode &quot;The Two Mrs. Nahasapeemapetilons&quot;. However, this is the extent to which their relationship is depicted at any point in the series.
+* 
+
+* Troy McClure (voiced by Phil Hartman) Troy marries Selma in the season seven episode &quot;A Fish Called Selma&quot;. It is a sham marriage devised to revitalize his career and image. When he tells her this, Selma is devastated to have been used by yet another terrible husband. For a while, she attempts to go along with the ruse, if only for the creature comforts she can access. When Troy says they need to have a child to divert public attention from rumors of his fetish involving aquarium fish, Selma knows this is a line she will not cross, and they divorce.
+* 
+
+* Disco Stu (voiced by Hank Azaria) – Disco Stu is referenced as Selma&#39;s ex-husband in the season sixteen episode &quot;There&#39;s Something About Marrying&quot;. Despite his last name actually being &quot;Discothèque&quot;, the name &quot;Stu&quot; was attached to Selma&#39;s last name upon marrying him.
+* 
+
+* Grampa Simpson (voiced by Dan Castellaneta) – Grampa Simpson married Selma in the season eighteen episode &quot;Rome-Old and Juli-Eh&quot;; he previously had dated her mother, Jacqueline.
+* 
+
+* &quot;Fat Tony&quot; D&#39;Amico (voiced by Joe Mantegna) – Fat Tony became Selma&#39;s sixth and most recent husband in the season twenty-two episode &quot;The Real Housewives of Fat Tony&quot;. The two divorced when Selma discovered that Fat Tony was already married.
+* &quot;Sideshow Bob&quot; Terwilliger (voiced by Kelsey Grammer) – Sideshow Bob meets Selma via a prison pen pal program in the season three episode &quot;Black Widower&quot;. After he is released and marries the very smitten Selma, Sideshow Bob fools everyone except for Bart, who eventually foils Sideshow Bob&#39;s plot to murder Selma on their honeymoon.
+* 
+
+* Lionel Hutz (voiced by Phil Hartman) – Lionel Hutz is mentioned as Selma&#39;s ex-husband in between Terwilliger and McClure in the season nine episode &quot;The Two Mrs. Nahasapeemapetilons&quot;. However, this is the extent to which their relationship is depicted at any point in the series.
+* 
+
+* Troy McClure (voiced by Phil Hartman) Troy marries Selma in the season seven episode &quot;A Fish Called Selma&quot;. It is a sham marriage devised to revitalize his career and image. When he tells her this, Selma is devastated to have been used by yet another terrible husband. For a while, she attempts to go along with the ruse, if only for the creature comforts she can access. When Troy says they need to have a child to divert public attention from rumors of his fetish involving aquarium fish, Selma knows this is a line she will not cross, and they divorce.
+* 
+
+* Disco Stu (voiced by Hank Azaria) – Disco Stu is referenced as Selma&#39;s ex-husband in the season sixteen episode &quot;There&#39;s Something About Marrying&quot;. Despite his last name actually being &quot;Discothèque&quot;, the name &quot;Stu&quot; was attached to Selma&#39;s last name upon marrying him.
+* 
+
+* Grampa Simpson (voiced by Dan Castellaneta) – Grampa Simpson married Selma in the season eighteen episode &quot;Rome-Old and Juli-Eh&quot;; he previously had dated her mother, Jacqueline.
+* 
+
+* &quot;Fat Tony&quot; D&#39;Amico (voiced by Joe Mantegna) – Fat Tony became Selma&#39;s sixth and most recent husband in the season twenty-two episode &quot;The Real Housewives of Fat Tony&quot;. The two divorced when Selma discovered that Fat Tony was already married.
+* &quot;Sideshow Bob&quot; Terwilliger (voiced by Kelsey Grammer) – Sideshow Bob meets Selma via a prison pen pal program in the season three episode &quot;Black Widower&quot;. After he is released and marries the very smitten Selma, Sideshow Bob fools everyone except for Bart, who eventually foils Sideshow Bob&#39;s plot to murder Selma on their honeymoon.
+* 
+
+* Lionel Hutz (voiced by Phil Hartman) – Lionel Hutz is mentioned as Selma&#39;s ex-husband in between Terwilliger and McClure in the season nine episode &quot;The Two Mrs. Nahasapeemapetilons&quot;. However, this is the extent to which their relationship is depicted at any point in the series.
+* 
+
+* Troy McClure (voiced by Phil Hartman) Troy marries Selma in the season seven episode &quot;A Fish Called Selma&quot;. It is a sham marriage devised to revitalize his career and image. When he tells her this, Selma is devastated to have been used by yet another terrible husband. For a while, she attempts to go along with the ruse, if only for the creature comforts she can access. When Troy says they need to have a child to divert public attention from rumors of his fetish involving aquarium fish, Selma knows this is a line she will not cross, and they divorce.
+* 
+
+* Disco Stu (voiced by Hank Azaria) – Disco Stu is referenced as Selma&#39;s ex-husband in the season sixteen episode &quot;There&#39;s Something About Marrying&quot;. Despite his last name actually being &quot;Discothèque&quot;, the name &quot;Stu&quot; was attached to Selma&#39;s last name upon marrying him.
+* 
+
+* Grampa Simpson (voiced by Dan Castellaneta) – Grampa Simpson married Selma in the season eighteen episode &quot;Rome-Old and Juli-Eh&quot;; he previously had dated her mother, Jacqueline.
+* 
+
+* &quot;Fat Tony&quot; D&#39;Amico (voiced by Joe Mantegna) – Fat Tony became Selma&#39;s sixth and most recent husband in the season twenty-two episode &quot;The Real Housewives of Fat Tony&quot;. The two divorced when Selma discovered that Fat Tony was already married.
+* &quot;Sideshow Bob&quot; Terwilliger (voiced by Kelsey Grammer) – Sideshow Bob meets Selma via a prison pen pal program in the season three episode &quot;Black Widower&quot;. After he is released and marries the very smitten Selma, Sideshow Bob fools everyone except for Bart, who eventually foils Sideshow Bob&#39;s plot to murder Selma on their honeymoon.
+* 
+
+* Lionel Hutz (voiced by Phil Hartman) – Lionel Hutz is mentioned as Selma&#39;s ex-husband in between Terwilliger and McClure in the season nine episode &quot;The Two Mrs. Nahasapeemapetilons&quot;. However, this is the extent to which their relationship is depicted at any point in the series.
+* 
+
+* Troy McClure (voiced by Phil Hartman) Troy marries Selma in the season seven episode &quot;A Fish Called Selma&quot;. It is a sham marriage devised to revitalize his career and image. When he tells her this, Selma is devastated to have been used by yet another terrible husband. For a while, she attempts to go along with the ruse, if only for the creature comforts she can access. When Troy says they need to have a child to divert public attention from rumors of his fetish involving aquarium fish, Selma knows this is a line she will not cross, and they divorce.
+* 
+
+* Disco Stu (voiced by Hank Azaria) – Disco Stu is referenced as Selma&#39;s ex-husband in the season sixteen episode &quot;There&#39;s Something About Marrying&quot;. Despite his last name actually being &quot;Discothèque&quot;, the name &quot;Stu&quot; was attached to Selma&#39;s last name upon marrying him.
+* 
+
+* Grampa Simpson (voiced by Dan Castellaneta) – Grampa Simpson married Selma in the season eighteen episode &quot;Rome-Old and Juli-Eh&quot;; he previously had dated her mother, Jacqueline.
+* 
+
+* &quot;Fat Tony&quot; D&#39;Amico (voiced by Joe Mantegna) – Fat Tony became Selma&#39;s sixth and most recent husband in the season twenty-two episode &quot;The Real Housewives of Fat Tony&quot;. The two divorced when Selma discovered that Fat Tony was already married.
+* &quot;Sideshow Bob&quot; Terwilliger (voiced by Kelsey Grammer) – Sideshow Bob meets Selma via a prison pen pal program in the season three episode &quot;Black Widower&quot;. After he is released and marries the very smitten Selma, Sideshow Bob fools everyone except for Bart, who eventually foils Sideshow Bob&#39;s plot to murder Selma on their honeymoon.
+* 
+
+* Lionel Hutz (voiced by Phil Hartman) – Lionel Hutz is mentioned as Selma&#39;s ex-husband in between Terwilliger and McClure in the season nine episode &quot;The Two Mrs. Nahasapeemapetilons&quot;. However, this is the extent to which their relationship is depicted at any point in the series.
+* 
+
+* Troy McClure (voiced by Phil Hartman) Troy marries Selma in the season seven episode &quot;A Fish Called Selma&quot;. It is a sham marriage devised to revitalize his career and image. When he tells her this, Selma is devastated to have been used by yet another terrible husband. For a while, she attempts to go along with the ruse, if only for the creature comforts she can access. When Troy says they need to have a child to divert public attention from rumors of his fetish involving aquarium fish, Selma knows this is a line she will not cross, and they divorce.
+* 
+
+* Disco Stu (voiced by Hank Azaria) – Disco Stu is referenced as Selma&#39;s ex-husband in the season sixteen episode &quot;There&#39;s Something About Marrying&quot;. Despite his last name actually being &quot;Discothèque&quot;, the name &quot;Stu&quot; was attached to Selma&#39;s last name upon marrying him.
+* 
+
+* Grampa Simpson (voiced by Dan Castellaneta) – Grampa Simpson married Selma in the season eighteen episode &quot;Rome-Old and Juli-Eh&quot;; he previously had dated her mother, Jacqueline.
+* 
+
+* &quot;Fat Tony&quot; D&#39;Amico (voiced by Joe Mantegna) – Fat Tony became Selma&#39;s sixth and most recent husband in the season twenty-two episode &quot;The Real Housewives of Fat Tony&quot;. The two divorced when Selma discovered that Fat Tony was already married.
+* &quot;Sideshow Bob&quot; Terwilliger (voiced by Kelsey Grammer) – Sideshow Bob meets Selma via a prison pen pal program in the season three episode &quot;Black Widower&quot;. After he is released and marries the very smitten Selma, Sideshow Bob fools everyone except for Bart, who eventually foils Sideshow Bob&#39;s plot to murder Selma on their honeymoon.
+* 
+
+* Lionel Hutz (voiced by Phil Hartman) – Lionel Hutz is mentioned as Selma&#39;s ex-husband in between Terwilliger and McClure in the season nine episode &quot;The Two Mrs. Nahasapeemapetilons&quot;. However, this is the extent to which their relationship is depicted at any point in the series.
+* 
+
+* Troy McClure (voiced by Phil Hartman) Troy marries Selma in the season seven episode &quot;A Fish Called Selma&quot;. It is a sham marriage devised to revitalize his career and image. When he tells her this, Selma is devastated to have been used by yet another terrible husband. For a while, she attempts to go along with the ruse, if only for the creature comforts she can access. When Troy says they need to have a child to divert public attention from rumors of his fetish involving aquarium fish, Selma knows this is a line she will not cross, and they divorce.
+* 
+
+* Disco Stu (voiced by Hank Azaria) – Disco Stu is referenced as Selma&#39;s ex-husband in the season sixteen episode &quot;There&#39;s Something About Marrying&quot;. Despite his last name actually being &quot;Discothèque&quot;, the name &quot;Stu&quot; was attached to Selma&#39;s last name upon marrying him.
+* 
+
+* Grampa Simpson (voiced by Dan Castellaneta) – Grampa Simpson married Selma in the season eighteen episode &quot;Rome-Old and Juli-Eh&quot;; he previously had dated her mother, Jacqueline.
+* 
+
+* &quot;Fat Tony&quot; D&#39;Amico (voiced by Joe Mantegna) – Fat Tony became Selma&#39;s sixth and most recent husband in the season twenty-two episode &quot;The Real Housewives of Fat Tony&quot;. The two divorced when Selma discovered that Fat Tony was already married.
+* Gladys Gurney (voiced by Julie Kavner[78]) – Gladys is Marge&#39;s spinster aunt and the sister of Jacqueline. Her death was noted in the episode &quot;Selma&#39;s Choice&quot;, in which she died of a bowel obstruction. Her final words to Patty and Selma during a video will is a plea that they not end their lives old and alone like herself, prompting Selma to become more intent on having a family.[91]
+* 
+
+* Great-Uncle Hubert – Great Uncle Hubert is Bart, Lisa, and Maggie&#39;s great uncle who died in the short &quot;The Funeral&quot;. It is unknown which side of the family he came from or how he died. He is only mentioned once. At the funeral, Bart views his great uncle&#39;s corpse, which makes Bart turn green and faint. Later, Bart is seen running away up a hill with Lisa and Maggie, resulting in Homer and Marge scolding them in the car.
+* 
+
+* Dot – Dot is the cousin of Marge, Patty and Selma. She gave Selma a video camera at her wedding to Sideshow Bob. This is the only time she is mentioned.
+* 
+
+* Lou Gurney – Lou is the uncle of Marge Simpson, Patty Bouvier and Selma Bouvier. In &quot;Children of a Lesser Clod&quot;, Marge is called to identify Lou&#39;s body, which turns out to be a very much alive Hans Moleman. While Marge is identifying the body, Homer starts a daycare center for local children.
+* 
+
+* Uncle Arthur Bouvier – Uncle Arthur is the uncle of Bart, Lisa and Maggie, mentioned by Marge in &quot;The Boy Who Knew Too Much&quot;. According to Marge, Arthur suffered from auditory hallucinations and went on a homicidal spree before 75 federal marshals brought him down. Otherwise, he is never mentioned and has never made an appearance.
+* 
+
+* Meaux and Genevieve Bouvier – Marge&#39;s atheist grandmother Genevieve Bouvier lived in Nazi-occupied France in 1944 during World War II, in Vichy, France. She is discussed in &quot;My Way or the Highway to Heaven&quot;. Genevieve co-managed Cafe Meaux with the café&#39;s namesake, her husband Meaux, a Nazi-collaborator, and self-described treasoner. They team up to stop Nazi officers from revealing the impending D-day invasion is to happen in Normandy.
+* Santa&#39;s Little Helper (voiced by Frank Welker[92] and Dan Castellaneta[78]) – Santa&#39;s Little Helper is the Simpsons&#39; pet greyhound. He first appeared in &quot;Simpsons Roasting on an Open Fire&quot; as a race dog adopted by Homer and Bart and has been in the series since.[92] While usually well-behaved, he can be vicious at times, having a female dog giving birth to 25 puppies which angers Bart at first, although Bart loves and cares for him deeply.
+* Santa&#39;s Little Helper (voiced by Frank Welker[92] and Dan Castellaneta[78]) – Santa&#39;s Little Helper is the Simpsons&#39; pet greyhound. He first appeared in &quot;Simpsons Roasting on an Open Fire&quot; as a race dog adopted by Homer and Bart and has been in the series since.[92] While usually well-behaved, he can be vicious at times, having a female dog giving birth to 25 puppies which angers Bart at first, although Bart loves and cares for him deeply.
+* Snowball – Snowball (also known as Snowball I) was the Simpson family&#39;s first cat. She was first mentioned in the series premiere in a Christmas letter Marge is writing where she explains that Snowball died that year and went to &quot;kitty heaven&quot;. Snowball was named due to her white fur. Snowball was, according to Lisa in a poem, run over by a Chrysler belonging to Mayor Quimby&#39;s brother &quot;Clovis&quot;.[93] She is seen during Bart&#39;s escalator ride to Heaven in the second-season episode &quot;Bart Gets Hit by a Car&quot; and in flashback in the ninth-season episode &quot;Lisa&#39;s Sax&quot;. Bart unsuccessfully tries to revive her in &quot;Dial Z for Zombies&quot;.
+* 
+
+* Snowball II – (voiced by Frank Welker[92] and Dan Castellaneta[78]) Snowball II was the Simpson family&#39;s second cat. Although Snowball I had white fur, which inspired her name, Snowball II had black fur. She first appeared in the series premiere but has received little attention in the series. Snowball II and Santa&#39;s Little Helper have always been shown as having a good relationship; usually they are seen sleeping near each other. Snowball II&#39;s largest role is in the fourteenth season episode &quot;Old Yeller Belly&quot;, in which she saves Homer from a burning treehouse. She also has minor roles in &quot;Bart Gets an Elephant&quot;, where she tries to get attention; in &quot;Two Dozen and One Greyhounds&quot;, in which she is scared by the many puppies; and in &quot;Make Room for Lisa&quot;, in which Lisa has a hallucination where she becomes Snowball II.
+* Plopper – Plopper, formerly known as Harry Plopper and Spider Pig, is Homer&#39;s pet pig, introduced in The Simpsons Movie, later having recurring appearances in the series.
+* 
+
+* Princess – Princess was Lisa&#39;s pony from the episode &quot;Lisa&#39;s Pony&quot;. Homer bought Lisa a pony to show her that he loves her, but he has to work two jobs to keep her. When Lisa discovers this she gives up Princess.
+* 
+
+* Stampy – Stampy was an African elephant briefly owned by the Simpson family in the episode &quot;Bart Gets an Elephant&quot;.
+* 
+
+* Chirpy Boy and Bart Junior – Chirpy Boy and Bart Junior were Bart&#39;s pet lizards in the episode &quot;Bart the Mother&quot;.
+* 
+
+* Pinchy – Pinchy was Homer&#39;s pet lobster in &quot;Lisa Gets an &quot;A&quot;&quot;. Homer went to the supermarket to buy a lobster that he could cook for dinner. Homer found that the big lobsters were too expensive, so he bought a smaller lobster with the intention of fattening him up, but he grew attached to the lobster and decided to keep him as a pet instead, naming him Pinchy. At the end of the episode, Homer puts Pinchy in a hot bath, but accidentally boils and kills him. Since his body is cooked, a sobbing Homer eats Pinchy&#39;s remains, saying that &quot;That&#39;s what he would want&quot;.
+* 
+
+* Mojo – Mojo was the helper monkey Homer had in the episode &quot;Girly Edition&quot;. Mojo, an intelligent and highly trained service animal when Homer adopted him, quickly adapted to match Homer&#39;s lazy and unhealthy lifestyle. When Mojo&#39;s condition severely worsens, Homer, fearing the repercussions of potentially having the monkey die under his watch, drops him off at the adoption center.
+* 
+
+* Strangles – Strangles was a green tree python that Bart owned during the episode &quot;Stop or My Dog Will Shoot&quot;, during which time Santa&#39;s Little Helper was a police dog. Strangles&#39; current owner is Groundskeeper Willie. Bart named the snake Strangles while it was strangling Homer on the dinner table.
+* 
+
+* Pokey – Pokey was a guinea pig and Lisa&#39;s first pet of her own in the episode &quot;The War of Art&quot;, where it destroyed the iconic artwork over the lounge.
+*  The Simpsons portal
+* Cartwright, Nancy (2000). My Life as a 10-Year-Old Boy. New York City: Hyperion. ISBN 978-0-7868-8600-5.
+* 
+
+* Gimple, Scott M.; Matt Groening (December 1, 1999). The Simpsons Forever!: A Complete Guide to Our Favorite Family ...Continued. HarperCollins. ISBN 978-0-06-098763-3.
+* 
+
+* Groening, Matt (1991). The Simpsons Uncensored Family Album. HarperCollins. ISBN 978-0-06-096582-2.
+* 
+
+* Groening, Matt (1997). Richmond, Ray; Coffman, Antonia (eds.). The Simpsons: A Complete Guide to Our Favorite Family (1st ed.). New York: HarperPerennial. ISBN 978-0-06-095252-5. LCCN 98141857. OCLC 37796735. OL 433519M.
+* 
+
+* McCann, Jesse L.; Matt Groening (2005). The Simpsons One Step Beyond Forever!: A Complete Guide to Our Favorite Family ...Continued Yet Again. HarperCollins. ISBN 978-0-06-081754-1.
+* 
+
+* Turner, Chris (2004). Planet Simpson: How a Cartoon Masterpiece Documented an Era and Defined a Generation. Foreword by Douglas Coupland. (1st ed.). Toronto: Random House Canada. ISBN 978-0-679-31318-2. OCLC 55682258.
+* Cartwright, Nancy (2000). My Life as a 10-Year-Old Boy. New York City: Hyperion. ISBN 978-0-7868-8600-5.
+* 
+
+* Gimple, Scott M.; Matt Groening (December 1, 1999). The Simpsons Forever!: A Complete Guide to Our Favorite Family ...Continued. HarperCollins. ISBN 978-0-06-098763-3.
+* 
+
+* Groening, Matt (1991). The Simpsons Uncensored Family Album. HarperCollins. ISBN 978-0-06-096582-2.
+* 
+
+* Groening, Matt (1997). Richmond, Ray; Coffman, Antonia (eds.). The Simpsons: A Complete Guide to Our Favorite Family (1st ed.). New York: HarperPerennial. ISBN 978-0-06-095252-5. LCCN 98141857. OCLC 37796735. OL 433519M.
+* 
+
+* McCann, Jesse L.; Matt Groening (2005). The Simpsons One Step Beyond Forever!: A Complete Guide to Our Favorite Family ...Continued Yet Again. HarperCollins. ISBN 978-0-06-081754-1.
+* 
+
+* Turner, Chris (2004). Planet Simpson: How a Cartoon Masterpiece Documented an Era and Defined a Generation. Foreword by Douglas Coupland. (1st ed.). Toronto: Random House Canada. ISBN 978-0-679-31318-2. OCLC 55682258.
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are some false alarms, but it works pretty well! You might wonder whether this is too much trouble to go through just to get the Simpsons characters. But of course the identical code will work on pretty much <em>any</em> wiki article. And this general approach can be used on any webpage. And that’s really the point.</p>
+</section>
+<section id="get-current-temperature-in-madison">
+<h2>Get current temperature in Madison<a class="headerlink" href="#get-current-temperature-in-madison" title="Permalink to this headline">#</a></h2>
+<p>Let’s look at another example showing how we can grab a particular piece of information from a webpage: the current temperature. I’ll walk you through what’s going on here in class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://weather.com/weather/today/l/USWI0411:1:US&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">results</span><span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;CurrentConditions--tempValue--MHmYY&#39;</span><span class="p">})</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getText</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33°
+</pre></div>
+</div>
+</div>
+</div>
+<p>(This is about as simple as it gets). This approach scales (and that’s the point!). If we want to get the temperature of a 100 different cities, just load the appropriate URLs and iterate through them.</p>
+</section>
+<section id="example-of-using-the-newspaper-package">
+<h2>Example of using the newspaper package<a class="headerlink" href="#example-of-using-the-newspaper-package" title="Permalink to this headline">#</a></h2>
+<p>There’s an enormous infrastructure for web scraping with lots of codebases for common tasks, e.g., scraping <a class="reference external" href="https://newspaper.readthedocs.io/en/latest/">newspapers3k</a> for scraping online news. Let’s do a quick demo of this one.</p>
+<p>First install the package using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">newspaper3k</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">newspaper</span> <span class="kn">import</span> <span class="n">Article</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.cnn.com/2022/11/30/world/black-hole-devours-star-scn/index.html&quot;</span>
+<span class="n">article</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">article</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
+<span class="n">article</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">authors</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">publish_date</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span> <span class="c1">#first 1000 chars</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;newspaper.article.Article object at 0x7fb1a6fdb8e0&gt;
+[&#39;Ashley Strickland&#39;]
+2022-11-30 00:00:00
+Sign up for CNN’s Wonder Theory science newsletter. Explore the universe with news on fascinating discoveries, scientific advancements and more.
+
+CNN —
+
+An incredibly bright flash that appeared in the night sky in February was the result of a star straying too close to a supermassive black hole, meeting its untimely end there as it was ripped to shreds.
+
+But the rare cosmic event actually occurred 8.5 billion light years away from Earth, when the universe was just a third of its current age — and it has created more questions than answers.
+
+The signal from the luminous explosion, known as AT 2022cmc, was first picked up by the Zwicky Transient Facility at the California Institute of Technology’s Palomar Observatory on February 11.
+
+This graphic shows how a tidal disruption event might look in space. Carl Knox/OzGrav/Swinburne University of Technology
+
+When a star is torn apart by a black hole’s gravitational tidal forces, it’s known as a tidal disruption event. Astronomers have observe
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also grab images associated with it. Let’s grab the URL of the head image and then download it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">top_image</span><span class="p">)</span>
+<span class="n">raw_img</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">top_image</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1">#display.Image(raw_img) # this will work when you render the notebook locally, but not when it&#39;s uploaded to github as we do here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://media.cnn.com/api/v1/images/stellar/prod/221130121224-01-black-hole-tidal-disruption-event.jpg?c=16x9&amp;q=w_800,c_fill
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="top_image" src="https://media.cnn.com/api/v1/images/stellar/prod/221130121224-01-black-hole-tidal-disruption-event.jpg" /></p>
+</section>
+<section id="lots-of-examples-and-pre-written-code-out-there">
+<h2>Lots of examples and pre-written code out there!<a class="headerlink" href="#lots-of-examples-and-pre-written-code-out-there" title="Permalink to this headline">#</a></h2>
+<p>Here’s a nice step by step tutorial  example of a script that uses BeautifulSoup to <a class="reference external" href="https://proxiesapi-com.medium.com/scraping-google-scholar-with-python-and-beautifulsoup-850cbdfedbcf">scrape data from google scholar</a>.</p>
+<p>For an especially creative example of scraping, check out <a class="reference external" href="https://erikbern.com/2017/02/01/language-pitch.html">this blog post by Erik Bern</a> which bulk downloads pronunciations of words in various languages to examine whether there are consistent differences in pitch (fundamental frequency) between languages (Sounds like Finnish is Lowwww).</p>
+</section>
+<section id="now-it-s-your-turn">
+<h2>Now it’s your turn<a class="headerlink" href="#now-it-s-your-turn" title="Permalink to this headline">#</a></h2>
+<section id="more-weather">
+<h3>More weather<a class="headerlink" href="#more-weather" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Get the low and high temperatures for today in Madison, from Wundergound:
+<code class="docutils literal notranslate"><span class="pre">https://www.wunderground.com/weather/us/wi/madison</span></code></p></li>
+</ul>
+</section>
+<section id="billboard-100">
+<h3>Billboard 100<a class="headerlink" href="#billboard-100" title="Permalink to this headline">#</a></h3>
+<p>Let’s do another one. Here’s an example of scraping the top songs of 2022 from the <em>Billboard 100</em> site</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.billboard.com/charts/year-end/2022/hot-100-songs/&#39;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;c-title&#39;</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">placement</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">placement</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">result</span><span class="o">.</span><span class="n">getText</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">placement</span><span class="o">+</span><span class="mi">1</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">:</span> <span class="c1">#avoids some junk at the end</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can you figure out how to get the <strong>artists</strong> instead?</p>
+</section>
+<section id="isthmus-music-calendar">
+<h3>Isthmus Music Calendar<a class="headerlink" href="#isthmus-music-calendar" title="Permalink to this headline">#</a></h3>
+<p>Another, somewhat more complex task. The Isthmus publishes a <a class="reference external" href="https://isthmus.com/search/event/music-calendar/#page=1">local music calendar</a>.</p>
+<p>Have a look at the calendar and figure out how to scrap the event name, date/time, and location of the listed events. Print them out like in a format like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Event</span><span class="p">:</span> <span class="n">Jazz</span> <span class="n">Jam</span>
+<span class="n">Date</span> <span class="ow">and</span> <span class="n">Time</span><span class="p">:</span> <span class="n">Nov</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2023</span> <span class="mi">5</span><span class="p">:</span><span class="mi">30</span> <span class="n">PM</span> <span class="o">-</span> <span class="mi">7</span><span class="p">:</span><span class="mi">30</span> <span class="n">PM</span>
+<span class="n">Location</span><span class="p">:</span> <span class="n">Zuzu</span> <span class="n">Cafe</span>
+<span class="o">--------------------------------------------------</span>
+<span class="n">Event</span><span class="p">:</span> <span class="n">Tony</span> <span class="n">Castañeda</span> <span class="n">Latin</span> <span class="n">Jazz</span> <span class="n">Band</span>
+<span class="n">Date</span> <span class="ow">and</span> <span class="n">Time</span><span class="p">:</span> <span class="n">Nov</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2023</span> <span class="mi">5</span><span class="p">:</span><span class="mi">30</span> <span class="n">PM</span> <span class="o">-</span> <span class="mi">7</span><span class="p">:</span><span class="mi">30</span> <span class="n">PM</span>
+<span class="n">Location</span><span class="p">:</span> <span class="n">Cardinal</span> <span class="n">Bar</span>
+<span class="o">--------------------------------------------------</span>
+
+<span class="o">...</span> <span class="n">etc</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Gary Lupyan<br/>
+  
+      &copy; Copyright 2023. Some examples adapted from http://introtopython.org/.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

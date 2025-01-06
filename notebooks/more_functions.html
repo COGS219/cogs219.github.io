@@ -1,0 +1,1756 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>More Functions &#8212; Psych 750</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/more_functions.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/favicon.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Psych 750</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Schedule
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="schedule.html">
+   Week by week schedule
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="submitting_assignments.html">
+   Submitting assignments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="project_2023.html">
+   Project info
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Installation instructions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_osx.html">
+   Instructions for MacOS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="programming_environment_windows.html">
+   Installation and setup for Windows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  References
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Shell_reference.html">
+   Basic Linux commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Python_reference.html">
+   Python reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Psychopy_reference.html">
+   PsychoPy reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ImageMagick.html">
+   ImageMagick/GraphicsMagick reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="PRAW_demo.html">
+   PRAW Reddit API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="API_list.html">
+   Some fun APIs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Self Study Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="var_string_num.html">
+   Variables, Strings, and Numbers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_basics.html">
+   Lists - the basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="if_statements.html">
+   If Statements
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dictionaries.html">
+   Dictionaries
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introducing_functions.html">
+   Introducing Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="list_comprehension.html">
+   List Comprehension
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_a.html">
+   Review of Fundamentals A
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trial_generation.html">
+   Randomization and Iteration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">
+   Handling Exceptions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="review_of_fundamentals_b.html">
+   Review of Fundamentals B
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_basic_pandas_operations.html">
+   Using Pandas to read/write CSV files.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="globbing_files.html">
+   File access-Globbing and preloading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_reference_vs_value.html">
+   Mutable and immutable types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="regexp.html">
+   Regular Expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classes.html">
+   Classes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  In class activities
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="python_basics.html">
+   Python basics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_print_pyramids.html">
+   The first thinking exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_file_writing.html">
+   Primer on writing files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_list_manip_vowels_1.html">
+   Working with strings in lists
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_dictionaries.html">
+   A few dictionary activities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_trial_generation.html">
+   Some more trial generation practice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activity_debugging.html">
+   Debugging practice 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">
+   Basic Examples of GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="more_gss_practice.html">
+   More dataviz practice with GSS
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="nltk_demo.html">
+   NLTK demo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="scraping.html">
+   Webscraping demo and practice
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise0-test.html">
+   Exercise 0-Test assignment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise1-square.html">
+   Exercise 1-Show a square and do stuff with it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise2-stroop.html">
+   Exercise 2-A Stroop task
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise3-extended-stroop.html">
+   Exercise 3-Extending the Stroop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise4-more_modularized_stroop.html">
+   Exercise 4-Modularization and speech recognition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise5-face-search.html">
+   Exercise 5-Loading external files and mouse action!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise6-stroop_analysis.html">
+   Exercise 6-Analyzing the Stroop data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise7-gss-wrangling.html">
+   Exercise 7-Exploring the general social survey
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise8-more-gss-wrangling.html">
+   Exercise 8-More practice with GSS data wrangling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise9-regexps.html">
+   Exercise 9 - Practice with regular expressions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise10-nltk.html">
+   Exercise 10-Natural language processing with NLTK
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Exercise11-oop_circles.html">
+   Exercise 11-Practice with object oriented programming
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/more_functions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/more_functions.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   More Functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contents">
+   Contents
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#default-argument-values">
+   Default argument values
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-id-exercises-default-a-exercises">
+     <a id="Exercises-default">
+     </a>
+     Exercises
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#games">
+       Games
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#favorite-movie">
+       Favorite Movie
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positional-arguments">
+   Positional Arguments
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-id-exercises-positional-a-exercises">
+     <a id="Exercises-positional">
+     </a>
+     Exercises
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#favorite-colors">
+       Favorite Colors
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phones">
+       Phones
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keyword-arguments">
+   Keyword arguments
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixing-positional-and-keyword-arguments">
+     Mixing positional and keyword arguments
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-id-exercises-keyword-a-exercises">
+     <a id="Exercises-keyword">
+     </a>
+     Exercises
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sports-teams">
+       Sports Teams
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#world-languages">
+       World Languages
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accepting-an-arbitrary-number-of-arguments">
+   Accepting an arbitrary number of arguments
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accepting-a-sequence-of-arbitrary-length">
+     Accepting a sequence of arbitrary length
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accepting-an-arbitrary-number-of-keyword-arguments">
+     Accepting an arbitrary number of keyword arguments
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>More Functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   More Functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contents">
+   Contents
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#default-argument-values">
+   Default argument values
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-id-exercises-default-a-exercises">
+     <a id="Exercises-default">
+     </a>
+     Exercises
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#games">
+       Games
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#favorite-movie">
+       Favorite Movie
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#positional-arguments">
+   Positional Arguments
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-id-exercises-positional-a-exercises">
+     <a id="Exercises-positional">
+     </a>
+     Exercises
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#favorite-colors">
+       Favorite Colors
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phones">
+       Phones
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#keyword-arguments">
+   Keyword arguments
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixing-positional-and-keyword-arguments">
+     Mixing positional and keyword arguments
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-id-exercises-keyword-a-exercises">
+     <a id="Exercises-keyword">
+     </a>
+     Exercises
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#sports-teams">
+       Sports Teams
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#world-languages">
+       World Languages
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accepting-an-arbitrary-number-of-arguments">
+   Accepting an arbitrary number of arguments
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accepting-a-sequence-of-arbitrary-length">
+     Accepting a sequence of arbitrary length
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accepting-an-arbitrary-number-of-keyword-arguments">
+     Accepting an arbitrary number of keyword arguments
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="more-functions">
+<h1>More Functions<a class="headerlink" href="#more-functions" title="Permalink to this headline">#</a></h1>
+<p>Earlier we learned the most bare-boned versions of functions. In this section we will learn more general concepts about functions, such as how to use functions to return values, and how to pass different kinds of data structures between functions.</p>
+<p><a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/dictionaries.ipynb">Previous: Dictionaries</a> |
+<a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/index.ipynb">Home</a> |
+<a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/classes.ipynb">Next: Classes</a></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="#Default-argument-values">Default argument values</a></p>
+<ul>
+<li><p><a class="reference external" href="#Exercises-default">Exercises</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#Positional-arguments">Positional arguments</a></p>
+<ul>
+<li><p><a class="reference external" href="#Exercises-positional">Exercises</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#Keyword-arguments">Keyword arguments</a></p>
+<ul>
+<li><p><a class="reference external" href="#Mixing-positional-and-keyword-arguments">Mixing positional and keyword arguments</a></p></li>
+<li><p><a class="reference external" href="#Exercises-keyword">Exercises</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#Accepting-an-arbitrary-number-of-arguments">Accepting an arbitrary number of arguments</a></p>
+<ul>
+<li><p><a class="reference external" href="#Accepting-a-sequence-of-arbitrary-length">Accepting a sequence of arbitrary length</a></p></li>
+<li><p><a class="reference external" href="#Accepting-an-arbitrary-number-of-keyword-arguments">Accepting an arbitrary number of keyword arguments</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="default-argument-values">
+<h1>Default argument values<a class="headerlink" href="#default-argument-values" title="Permalink to this headline">#</a></h1>
+<p>When we first introduced functions, we started with this example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">thank_you</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1"># This function prints a two-line personalized thank you message.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are doing good work, </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you very much for your efforts on this project.&quot;</span><span class="p">)</span>
+    
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Adriana&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Billy&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Caroline&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You are doing good work, Adriana!
+Thank you very much for your efforts on this project.
+
+You are doing good work, Billy!
+Thank you very much for your efforts on this project.
+
+You are doing good work, Caroline!
+Thank you very much for your efforts on this project.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function works fine, but it fails if you don’t pass in a value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[10]</span>
+<span class="k">def</span> <span class="nf">thank_you</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="c1"># This function prints a two-line personalized thank you message.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are doing good work, </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you very much for your efforts on this project.&quot;</span><span class="p">)</span>
+    
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Adriana&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Billy&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Caroline&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-2-a964f1e96d9b&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Billy&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Caroline&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">thank_you</span><span class="p">()</span>
+
+<span class="ne">TypeError</span>: thank_you() takes exactly 1 argument (0 given)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You are doing good work, Adriana!
+Thank you very much for your efforts on this project.
+
+You are doing good work, Billy!
+Thank you very much for your efforts on this project.
+
+You are doing good work, Caroline!
+Thank you very much for your efforts on this project.
+</pre></div>
+</div>
+</div>
+</div>
+<p>That makes sense; the function needs to have a name in order to do its work, so without a name it is stuck.</p>
+<p>If you want your function to do something by default, even if no information is passed to it, you can do so by giving your arguments default values. You do this by specifying the default values when you define the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[2,3,4,5]</span>
+<span class="k">def</span> <span class="nf">thank_you</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;everyone&#39;</span><span class="p">):</span>
+    <span class="c1"># This function prints a two-line personalized thank you message.</span>
+    <span class="c1">#  If no name is passed in, it prints a general thank you message</span>
+    <span class="c1">#  to everyone.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are doing good work, </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you very much for your efforts on this project.&quot;</span><span class="p">)</span>
+    
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Adriana&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Billy&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">(</span><span class="s1">&#39;Caroline&#39;</span><span class="p">)</span>
+<span class="n">thank_you</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You are doing good work, Adriana!
+Thank you very much for your efforts on this project.
+
+You are doing good work, Billy!
+Thank you very much for your efforts on this project.
+
+You are doing good work, Caroline!
+Thank you very much for your efforts on this project.
+
+You are doing good work, everyone!
+Thank you very much for your efforts on this project.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is particularly useful when you have a number of arguments in your function, and some of those arguments almost always have the same value. This allows people who use the function to only specify the values that are unique to their use of the function.</p>
+<p><span class="xref myst">top</span></p>
+<section id="a-id-exercises-default-a-exercises">
+<h2><a id="Exercises-default"></a>
+Exercises<a class="headerlink" href="#a-id-exercises-default-a-exercises" title="Permalink to this headline">#</a></h2>
+<section id="games">
+<h3>Games<a class="headerlink" href="#games" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Write a function that accepts the name of a game and prints a statement such as, “I like playing chess!”</p></li>
+<li><p>Give the argument a default value, such as <code class="docutils literal notranslate"><span class="pre">chess</span></code>.</p></li>
+<li><p>Call your function at least three times. Make sure at least one of the calls includes an argument, and at least one call includes no arguments.</p></li>
+</ul>
+</section>
+<section id="favorite-movie">
+<h3>Favorite Movie<a class="headerlink" href="#favorite-movie" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Write a function that accepts the name of a movie, and prints a statement such as, “My favorite movie is The Princess Bride.”</p></li>
+<li><p>Give the argument a default value, such as <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">Princess</span> <span class="pre">Bride</span></code>.</p></li>
+<li><p>Call your function at least three times. Make sure at least one of the calls includes an argument, and at least one call includes no arguments.</p></li>
+</ul>
+<p><span class="xref myst">top</span></p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="positional-arguments">
+<h1>Positional Arguments<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">#</a></h1>
+<p>Much of what you will have to learn about using functions involves how to pass values from your calling statement to the function itself. The example we just looked at is pretty simple, in that the function only needed one argument in order to do its work. Let’s take a look at a function that requires two arguments to do its work.</p>
+<p>Let’s make a simple function that takes in three arguments. Let’s make a function that takes in a person’s first and last name, and then prints out everything it knows about the person.</p>
+<p>Here is a simple implementation of this function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  and their age.</span>
+    <span class="c1"># It then prints this information out in a simple format.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">,</span> <span class="mi">71</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">,</span> <span class="mi">70</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">,</span> <span class="mi">68</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First name: Brian
+Last name: Kernighan
+Age: 71
+
+First name: Ken
+Last name: Thompson
+Age: 70
+
+First name: Adele
+Last name: Goldberg
+Age: 68
+</pre></div>
+</div>
+</div>
+</div>
+<p>The arguments in this function are <code class="docutils literal notranslate"><span class="pre">first_name</span></code>, <code class="docutils literal notranslate"><span class="pre">last_name</span></code>, and <code class="docutils literal notranslate"><span class="pre">age</span></code>. These are called <em>positional arguments</em> because Python knows which value to assign to each by the order in which you give the function values. In the calling line</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>describe_person(&#39;brian&#39;, &#39;kernighan&#39;, 71)
+</pre></div>
+</div>
+<p>we send the values <em>brian</em>, <em>kernighan</em>, and <em>71</em> to the function. Python matches the first value <em>brian</em> with the first argument <code class="docutils literal notranslate"><span class="pre">first_name</span></code>. It matches the second value <em>kernighan</em> with the second argument <code class="docutils literal notranslate"><span class="pre">last_name</span></code>. Finally it matches the third value <em>71</em> with the third argument <code class="docutils literal notranslate"><span class="pre">age</span></code>.</p>
+<p>This is pretty straightforward, but it means we have to make sure to get the arguments in the right order. If we mess up the order, we get nonsense results or an error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[10,11,12]</span>
+<span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  and their age.</span>
+    <span class="c1"># It then prints this information out in a simple format.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="mi">71</span><span class="p">,</span> <span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-23-59fb6d0341c1&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">describe_person</span><span class="p">(</span><span class="mi">71</span><span class="p">,</span> <span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">describe_person</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">describe_person</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">)</span>
+
+<span class="nn">&lt;ipython-input-23-59fb6d0341c1&gt;</span> in <span class="ni">describe_person</span><span class="nt">(first_name, last_name, age)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="c1">#  and their age.</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1"># It then prints this information out in a simple format.</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;int&#39; object has no attribute &#39;title&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This fails because Python tries to match the value 71 with the argument <code class="docutils literal notranslate"><span class="pre">first_name</span></code>, the value <em>brian</em> with the argument <code class="docutils literal notranslate"><span class="pre">last_name</span></code>, and the value <em>kernighan</em> with the argument <code class="docutils literal notranslate"><span class="pre">age</span></code>. Then when it tries to print the value <code class="docutils literal notranslate"><span class="pre">first_name.title()</span></code>, it realizes it can’t use the <code class="docutils literal notranslate"><span class="pre">title()</span></code> method on an integer.</p>
+<p><span class="xref myst">top</span></p>
+<section id="a-id-exercises-positional-a-exercises">
+<h2><a id="Exercises-positional"></a>
+Exercises<a class="headerlink" href="#a-id-exercises-positional-a-exercises" title="Permalink to this headline">#</a></h2>
+<section id="favorite-colors">
+<h3>Favorite Colors<a class="headerlink" href="#favorite-colors" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Write a function that takes two arguments, a person’s name and their favorite color. The function should print out a statement such as “Hillary’s favorite color is blue.”</p></li>
+<li><p>Call your function three times, with a different person and color each time.</p></li>
+</ul>
+</section>
+<section id="phones">
+<h3>Phones<a class="headerlink" href="#phones" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Write a function that takes two arguments, a brand of phone and a model name. The function should print out a phrase such as “iPhone 6 Plus”.</p></li>
+<li><p>Call your function three times, with a different combination of brand and model each time.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="keyword-arguments">
+<h1>Keyword arguments<a class="headerlink" href="#keyword-arguments" title="Permalink to this headline">#</a></h1>
+<p>Python allows us to use a syntax called <em>keyword arguments</em>. In this case, we can give the arguments in any order when we call the function, as long as we use the name of the arguments in our calling statement. Here is how the previous code can be made to work using keyword arguments:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  and their age.</span>
+    <span class="c1"># It then prints this information out in a simple format.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">71</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;kernighan&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;thompson&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;goldberg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First name: Brian
+Last name: Kernighan
+Age: 71
+
+First name: Ken
+Last name: Thompson
+Age: 70
+
+First name: Adele
+Last name: Goldberg
+Age: 68
+</pre></div>
+</div>
+</div>
+</div>
+<p>This works, because Python does not have to match values to arguments by position. It matches the value 71 with the argument <code class="docutils literal notranslate"><span class="pre">age</span></code>, because the value 71 is clearly marked to go with that argument. This syntax is a little more typing, but it makes for very readable code.</p>
+<section id="mixing-positional-and-keyword-arguments">
+<h2>Mixing positional and keyword arguments<a class="headerlink" href="#mixing-positional-and-keyword-arguments" title="Permalink to this headline">#</a></h2>
+<p>It can make good sense sometimes to mix positional and keyword arguments. In our previous example, we can expect this function to always take in a first name and a last name. Before we start mixing positional and keyword arguments, let’s add another piece of information to our description of a person. Let’s also go back to using just positional arguments for a moment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">favorite_language</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  their age, and their favorite language.</span>
+    <span class="c1"># It then prints this information out in a simple format.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Favorite language: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">favorite_language</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="s1">&#39;Go&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="s1">&#39;Smalltalk&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First name: Brian
+Last name: Kernighan
+Age: 71
+Favorite language: C
+
+First name: Ken
+Last name: Thompson
+Age: 70
+Favorite language: Go
+
+First name: Adele
+Last name: Goldberg
+Age: 68
+Favorite language: Smalltalk
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can expect anyone who uses this function to supply a first name and a last name, in that order. But now we are starting to include some information that might not apply to everyone. We can address this by keeping positional arguments for the first name and last name, but expect keyword arguments for everything else. We can show this works by adding a few more people, and having different information about each person:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[2,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,26]</span>
+<span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">died</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  their age, and their favorite language.</span>
+    <span class="c1"># It then prints this information out in a simple format.</span>
+    
+    <span class="c1"># Required information:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    
+    <span class="c1"># Optional information:</span>
+    <span class="k">if</span> <span class="n">age</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">favorite_language</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Favorite language: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">favorite_language</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">died</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Died: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">died</span><span class="p">)</span>
+    
+    <span class="c1"># Blank line at end.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Smalltalk&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;dennis&#39;</span><span class="p">,</span> <span class="s1">&#39;ritchie&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">died</span><span class="o">=</span><span class="mi">2011</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;guido&#39;</span><span class="p">,</span> <span class="s1">&#39;van rossum&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First name: Brian
+Last name: Kernighan
+Favorite language: C
+
+
+First name: Ken
+Last name: Thompson
+Age: 70
+
+
+First name: Adele
+Last name: Goldberg
+Age: 68
+Favorite language: Smalltalk
+
+
+First name: Dennis
+Last name: Ritchie
+Favorite language: C
+Died: 2011
+
+
+First name: Guido
+Last name: Van Rossum
+Favorite language: Python
+</pre></div>
+</div>
+</div>
+</div>
+<p>Everyone needs a first and last name, but everthing else is optional. This code takes advantage of the Python keyword <code class="docutils literal notranslate"><span class="pre">None</span></code>, which acts as an empty value for a variable. This way, the user is free to supply any of the ‘extra’ values they care to. Any arguments that don’t receive a value are not displayed. Python matches these extra values by name, rather than by position. This is a very common and useful way to define functions.</p>
+</section>
+<section id="a-id-exercises-keyword-a-exercises">
+<h2><a id="Exercises-keyword"></a>
+Exercises<a class="headerlink" href="#a-id-exercises-keyword-a-exercises" title="Permalink to this headline">#</a></h2>
+<section id="sports-teams">
+<h3>Sports Teams<a class="headerlink" href="#sports-teams" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Write a function that takes in two arguments, the name of a city and the name of a sports team from that city.</p></li>
+<li><p>Call your function three times, using a mix of positional and keyword arguments.</p></li>
+</ul>
+</section>
+<section id="world-languages">
+<h3>World Languages<a class="headerlink" href="#world-languages" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Write a function that takes in two arguments, the name of a country and a major language spoken there.</p></li>
+<li><p>Call your function three times, using a mix of positional and keyword arguments.</p></li>
+</ul>
+<p><span class="xref myst">top</span></p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="accepting-an-arbitrary-number-of-arguments">
+<h1>Accepting an arbitrary number of arguments<a class="headerlink" href="#accepting-an-arbitrary-number-of-arguments" title="Permalink to this headline">#</a></h1>
+<p>We have now seen that using keyword arguments can allow for much more flexible calling statements.</p>
+<ul class="simple">
+<li><p>This benefits you in your own programs, because you can write one function that can handle many different situations you might encounter.</p></li>
+<li><p>This benefits you if other programmers use your programs, because your functions can apply to a wide range of situations.</p></li>
+<li><p>This benefits you when you use other programmers’ functions, because their functions can apply to many situations you will care about.</p></li>
+</ul>
+<p>There is another issue that we can address, though. Let’s consider a function that takes two number in, and prints out the sum of the two numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adder</span><span class="p">(</span><span class="n">num_1</span><span class="p">,</span> <span class="n">num_2</span><span class="p">):</span>
+    <span class="c1"># This function adds two numbers together, and prints the sum.</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">num_1</span> <span class="o">+</span> <span class="n">num_2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of your numbers is </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">)</span>
+    
+<span class="c1"># Let&#39;s add some numbers.</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">adder</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sum of your numbers is 3.
+The sum of your numbers is 1.
+The sum of your numbers is -1.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function appears to work well. But what if we pass it three numbers, which is a perfectly reasonable thing to do mathematically?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[8]</span>
+<span class="k">def</span> <span class="nf">adder</span><span class="p">(</span><span class="n">num_1</span><span class="p">,</span> <span class="n">num_2</span><span class="p">):</span>
+    <span class="c1"># This function adds two numbers together, and prints the sum.</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">num_1</span> <span class="o">+</span> <span class="n">num_2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of your numbers is </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">)</span>
+    
+<span class="c1"># Let&#39;s add some numbers.</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-40-9939998d2a01&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Let&#39;s add some numbers.</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: adder() takes exactly 2 arguments (3 given)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This function fails, because no matter what mix of positional and keyword arguments we use, the function is only written two accept two arguments. In fact, a function written in this way will only work with <em>exactly</em> two arguments.</p>
+<section id="accepting-a-sequence-of-arbitrary-length">
+<h2>Accepting a sequence of arbitrary length<a class="headerlink" href="#accepting-a-sequence-of-arbitrary-length" title="Permalink to this headline">#</a></h2>
+<p>Python gives us a syntax for letting a function accept an arbitrary number of arguments. If we place an argument at the end of the list of arguments, with an asterisk in front of it, that argument will collect any remaining values from the calling statement into a tuple. Here is an example demonstrating how this works:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">arg_1</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">,</span> <span class="o">*</span><span class="n">arg_3</span><span class="p">):</span>
+    <span class="c1"># Let&#39;s look at the argument values.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">arg_1:&#39;</span><span class="p">,</span> <span class="n">arg_1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_2:&#39;</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_3:&#39;</span><span class="p">,</span> <span class="n">arg_3</span><span class="p">)</span>
+    
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>arg_1: 1
+arg_2: 2
+arg_3: ()
+
+arg_1: 1
+arg_2: 2
+arg_3: (3,)
+
+arg_1: 1
+arg_2: 2
+arg_3: (3, 4)
+
+arg_1: 1
+arg_2: 2
+arg_3: (3, 4, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can use a for loop to process these other arguments:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[6,7]</span>
+<span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">arg_1</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">,</span> <span class="o">*</span><span class="n">arg_3</span><span class="p">):</span>
+    <span class="c1"># Let&#39;s look at the argument values.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">arg_1:&#39;</span><span class="p">,</span> <span class="n">arg_1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_2:&#39;</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">arg_3</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_3 value:&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>arg_1: 1
+arg_2: 2
+
+arg_1: 1
+arg_2: 2
+arg_3 value: 3
+
+arg_1: 1
+arg_2: 2
+arg_3 value: 3
+arg_3 value: 4
+
+arg_1: 1
+arg_2: 2
+arg_3 value: 3
+arg_3 value: 4
+arg_3 value: 5
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now rewrite the adder() function to accept two or more arguments, and print the sum of those numbers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adder</span><span class="p">(</span><span class="n">num_1</span><span class="p">,</span> <span class="n">num_2</span><span class="p">,</span> <span class="o">*</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># This function adds the given numbers together,</span>
+    <span class="c1">#  and prints the sum.</span>
+    
+    <span class="c1"># Start by adding the first two numbers, which</span>
+    <span class="c1">#  will always be present.</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">num_1</span> <span class="o">+</span> <span class="n">num_2</span>
+    
+    <span class="c1"># Then add any other numbers that were sent.</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">num</span>
+        
+    <span class="c1"># Print the results.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of your numbers is </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">)</span>
+    
+<span class="c1"># Let&#39;s add some numbers.</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sum of your numbers is 6.
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this new version, Python does the following:</p>
+<ul class="simple">
+<li><p>stores the first value in the calling statement in the argument <code class="docutils literal notranslate"><span class="pre">num_1</span></code>;</p></li>
+<li><p>stores the second value in the calling statement in the argument <code class="docutils literal notranslate"><span class="pre">num_2</span></code>;</p></li>
+<li><p>stores all other values in the calling statement as a tuple in the argument <code class="docutils literal notranslate"><span class="pre">nums</span></code>.</p></li>
+</ul>
+<p>We can then “unpack” these values, using a for loop. We can demonstrate how flexible this function is by calling it a number of times, with a different number of arguments each time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[19,20,21,22]</span>
+<span class="k">def</span> <span class="nf">adder</span><span class="p">(</span><span class="n">num_1</span><span class="p">,</span> <span class="n">num_2</span><span class="p">,</span> <span class="o">*</span><span class="n">nums</span><span class="p">):</span>
+    <span class="c1"># This function adds the given numbers together,</span>
+    <span class="c1">#  and prints the sum.</span>
+    
+    <span class="c1"># Start by adding the first two numbers, which</span>
+    <span class="c1">#  will always be present.</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">num_1</span> <span class="o">+</span> <span class="n">num_2</span>
+    
+    <span class="c1"># Then add any other numbers that were sent.</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="nb">sum</span> <span class="o">=</span> <span class="nb">sum</span> <span class="o">+</span> <span class="n">num</span>
+        
+    <span class="c1"># Print the results.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The sum of your numbers is </span><span class="si">%d</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="nb">sum</span><span class="p">)</span>
+
+    
+<span class="c1"># Let&#39;s add some numbers.</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">adder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sum of your numbers is 3.
+The sum of your numbers is 6.
+The sum of your numbers is 10.
+The sum of your numbers is 15.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="accepting-an-arbitrary-number-of-keyword-arguments">
+<h2>Accepting an arbitrary number of keyword arguments<a class="headerlink" href="#accepting-an-arbitrary-number-of-keyword-arguments" title="Permalink to this headline">#</a></h2>
+<p>Python also provides a syntax for accepting an arbitrary number of keyword arguments. The syntax looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">arg_1</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># Let&#39;s look at the argument values.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">arg_1:&#39;</span><span class="p">,</span> <span class="n">arg_1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_2:&#39;</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_3:&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+    
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">value_3</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">value_3</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">value_4</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">value_3</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">value_4</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">value_5</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>arg_1: a
+arg_2: b
+arg_3: {}
+
+arg_1: a
+arg_2: b
+arg_3: {&#39;value_3&#39;: &#39;c&#39;}
+
+arg_1: a
+arg_2: b
+arg_3: {&#39;value_4&#39;: &#39;d&#39;, &#39;value_3&#39;: &#39;c&#39;}
+
+arg_1: a
+arg_2: b
+arg_3: {&#39;value_5&#39;: &#39;e&#39;, &#39;value_4&#39;: &#39;d&#39;, &#39;value_3&#39;: &#39;c&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The third argument has two asterisks in front of it, which tells Python to collect all remaining key-value arguments in the calling statement. This argument is commonly named <em>kwargs</em>. We see in the output that these key-values are stored in a dictionary. We can loop through this dictionary to work with all of the values that are passed into the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###highlight=[6,7]</span>
+<span class="k">def</span> <span class="nf">example_function</span><span class="p">(</span><span class="n">arg_1</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># Let&#39;s look at the argument values.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">arg_1:&#39;</span><span class="p">,</span> <span class="n">arg_1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_2:&#39;</span><span class="p">,</span> <span class="n">arg_2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arg_3 value:&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">value_3</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">value_3</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">value_4</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="n">example_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">value_3</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">value_4</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">value_5</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>arg_1: a
+arg_2: b
+
+arg_1: a
+arg_2: b
+arg_3 value: c
+
+arg_1: a
+arg_2: b
+arg_3 value: d
+arg_3 value: c
+
+arg_1: a
+arg_2: b
+arg_3 value: e
+arg_3 value: d
+arg_3 value: c
+</pre></div>
+</div>
+</div>
+</div>
+<p>Earlier we created a function that let us describe a person, and we had three things we could describe about a person. We could include their age, their favorite language, and the date they passed away. But that was the only information we could include, because it was the only information that the function was prepared to handle:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">died</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  their age, and their favorite language.</span>
+    <span class="c1"># It then prints this information out in a simple format.</span>
+    
+    <span class="c1"># Required information:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    
+    <span class="c1"># Optional information:</span>
+    <span class="k">if</span> <span class="n">age</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Age: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">age</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">favorite_language</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Favorite language: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">favorite_language</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">died</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Died: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">died</span><span class="p">)</span>
+    
+    <span class="c1"># Blank line at end.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Smalltalk&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;dennis&#39;</span><span class="p">,</span> <span class="s1">&#39;ritchie&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">died</span><span class="o">=</span><span class="mi">2011</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;guido&#39;</span><span class="p">,</span> <span class="s1">&#39;van rossum&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First name: Brian
+Last name: Kernighan
+Favorite language: C
+
+
+First name: Ken
+Last name: Thompson
+Age: 70
+
+
+First name: Adele
+Last name: Goldberg
+Age: 68
+Favorite language: Smalltalk
+
+
+First name: Dennis
+Last name: Ritchie
+Favorite language: C
+Died: 2011
+
+
+First name: Guido
+Last name: Van Rossum
+Favorite language: Python
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can make this function much more flexible by accepting any number of keyword arguments. Here is what the function looks like, using the syntax for accepting as many keyword arguments as the caller wants to provide:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  and then an arbitrary number of keyword arguments.</span>
+    
+    <span class="c1"># Required information:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    
+    <span class="c1"># Optional information:</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+    
+    <span class="c1"># Blank line at end.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Smalltalk&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;dennis&#39;</span><span class="p">,</span> <span class="s1">&#39;ritchie&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">died</span><span class="o">=</span><span class="mi">2011</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;guido&#39;</span><span class="p">,</span> <span class="s1">&#39;van rossum&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First name: Brian
+Last name: Kernighan
+Favorite_Language: C
+
+
+First name: Ken
+Last name: Thompson
+Age: 70
+
+
+First name: Adele
+Last name: Goldberg
+Age: 68
+Favorite_Language: Smalltalk
+
+
+First name: Dennis
+Last name: Ritchie
+Favorite_Language: C
+Died: 2011
+
+
+First name: Guido
+Last name: Van Rossum
+Favorite_Language: Python
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is pretty neat. We get the same output, and we don’t have to include a bunch of if tests to see what kind of information was passed into the function. We always require a first name and a last name, but beyond that the caller is free to provide any keyword-value pair to describe a person. Let’s show that any kind of information can be provided to this function. We also clean up the output by replacing any underscores in the keys with a space.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">describe_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># This function takes in a person&#39;s first and last name,</span>
+    <span class="c1">#  and then an arbitrary number of keyword arguments.</span>
+    
+    <span class="c1"># Required information:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">first_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">last_name</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+    
+    <span class="c1"># Optional information:</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">),</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+    
+    <span class="c1"># Blank line at end.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;kernighan&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">famous_book</span><span class="o">=</span><span class="s1">&#39;The C Programming Language&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;ken&#39;</span><span class="p">,</span> <span class="s1">&#39;thompson&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">alma_mater</span><span class="o">=</span><span class="s1">&#39;UC Berkeley&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;adele&#39;</span><span class="p">,</span> <span class="s1">&#39;goldberg&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">68</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Smalltalk&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;dennis&#39;</span><span class="p">,</span> <span class="s1">&#39;ritchie&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">died</span><span class="o">=</span><span class="mi">2011</span><span class="p">,</span> <span class="n">famous_book</span><span class="o">=</span><span class="s1">&#39;The C Programming Language&#39;</span><span class="p">)</span>
+<span class="n">describe_person</span><span class="p">(</span><span class="s1">&#39;guido&#39;</span><span class="p">,</span> <span class="s1">&#39;van rossum&#39;</span><span class="p">,</span> <span class="n">favorite_language</span><span class="o">=</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="s1">&#39;Dropbox&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First name: Brian
+Last name: Kernighan
+Famous Book: The C Programming Language
+Favorite Language: C
+
+
+First name: Ken
+Last name: Thompson
+Alma Mater: UC Berkeley
+Age: 70
+
+
+First name: Adele
+Last name: Goldberg
+Age: 68
+Favorite Language: Smalltalk
+
+
+First name: Dennis
+Last name: Ritchie
+Famous Book: The C Programming Language
+Favorite Language: C
+Died: 2011
+
+
+First name: Guido
+Last name: Van Rossum
+Company: Dropbox
+Favorite Language: Python
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is plenty more to learn about using functions, but with all of this flexibility in terms of how to accept arguments for your functions you should be able to write simple, clean functions that do exactly what you need them to do.</p>
+<p><span class="xref myst">top</span></p>
+<hr class="docutils" />
+<p><a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/dictionaries.ipynb">Previous: Dictionaries</a> |
+<a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/index.ipynb">Home</a> |
+<a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/ehmatthes/intro_programming/master/notebooks/classes.ipynb">Next: Classes</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Gary Lupyan<br/>
+  
+      &copy; Copyright 2023. Some examples adapted from http://introtopython.org/.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
