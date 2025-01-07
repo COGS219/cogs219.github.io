@@ -8,10 +8,10 @@ parts:
     chapters:
     - file: notebooks/schedule
       title: Week by week schedule
-    - url: https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf
-      title: Syllabus
-    - file: notebooks/submitting_assignments
-      title: Instructions for submitting assignments
+    # - url: https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf
+    #   title: Syllabus
+    # - file: notebooks/submitting_assignments
+    #   title: Instructions for submitting assignments
     # - file: notebooks/viewing_solutions
     #   title: How to get solutions
     - file: notebooks/project_2023
@@ -66,6 +66,8 @@ parts:
       title: Object Oriented Programming
   - caption: In class activities
     chapters:
+    - url: https://psych750.github.io/knitted_Rmd/intro_to_tidyverse.html
+      title: Introduction to Tidyverse
     - file: notebooks/python_basics
       title: Python basics 
     - file: notebooks/activity_print_pyramids
@@ -88,29 +90,29 @@ parts:
       title: NLTK demo
     - file: notebooks/scraping
       title: Webscraping demo and practice
-  - caption: Exercises
-    chapters:
-    - file: notebooks/Exercise0-test
-      title: Exercise 0-Test assignment
-    - file: notebooks/Exercise1-square
-      title: Exercise 1-Show a square and do stuff with it
-    - file: notebooks/Exercise2-stroop
-      title: Exercise 2-A Stroop task
-    - file: notebooks/Exercise3-extended-stroop
-      title: Exercise 3-Extending the Stroop
-    - file: notebooks/Exercise4-more_modularized_stroop
-      title: Exercise 4-Modularization and speech recognition
-    - file: notebooks/Exercise5-face-search
-      title: Exercise 5-Loading external files and mouse action!
-    - file: notebooks/Exercise6-stroop_analysis
-      title: Exercise 6-Analyzing the Stroop data
-    - file: notebooks/Exercise7-gss-wrangling
-      title: Exercise 7-Exploring the general social survey 
-    - file: notebooks/Exercise8-more-gss-wrangling
-      title: Exercise 8-More practice with GSS data wrangling 
-    - file: notebooks/Exercise9-regexps
-      title: Exercise 9-Regular expressions 
-    - file: notebooks/Exercise10-nltk.ipynb
-      title: Exercise 10-Natural language processing with NLTK 
-    - file: notebooks/Exercise11-oop_circles.ipynb
-      title: Exercise 11-Practice with object oriented programming
+  # - caption: Exercises
+  #   chapters:
+  #   - file: notebooks/Exercise0-test
+  #     title: Exercise 0-Test assignment
+  #   - file: notebooks/Exercise1-square
+  #     title: Exercise 1-Show a square and do stuff with it
+  #   - file: notebooks/Exercise2-stroop
+  #     title: Exercise 2-A Stroop task
+  #   - file: notebooks/Exercise3-extended-stroop
+  #     title: Exercise 3-Extending the Stroop
+  #   - file: notebooks/Exercise4-more_modularized_stroop
+  #     title: Exercise 4-Modularization and speech recognition
+  #   - file: notebooks/Exercise5-face-search
+  #     title: Exercise 5-Loading external files and mouse action!
+  #   - file: notebooks/Exercise6-stroop_analysis
+  #     title: Exercise 6-Analyzing the Stroop data
+  #   - file: notebooks/Exercise7-gss-wrangling
+  #     title: Exercise 7-Exploring the general social survey 
+  #   - file: notebooks/Exercise8-more-gss-wrangling
+  #     title: Exercise 8-More practice with GSS data wrangling 
+  #   - file: notebooks/Exercise9-regexps
+  #     title: Exercise 9-Regular expressions 
+  #   - file: notebooks/Exercise10-nltk.ipynb
+  #     title: Exercise 10-Natural language processing with NLTK 
+  #   - file: notebooks/Exercise11-oop_circles.ipynb
+  #     title: Exercise 11-Practice with object oriented programming
