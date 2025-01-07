@@ -66,7 +66,7 @@ parts:
       title: Object Oriented Programming
   - caption: In class activities
     chapters:
-    - url: https://psych750.github.io/knitted_Rmd/intro_to_tidyverse.html
+    - url: https://cogs219.github.io/knitted_Rmd/intro_to_tidyverse.html
       title: Introduction to Tidyverse
     - file: notebooks/python_basics
       title: Python basics 
@@ -82,7 +82,7 @@ parts:
       title: Some more trial generation practice
     - file: notebooks/activity_debugging
       title: Debugging practice 1
-    - url: https://psych750.github.io/knitted_Rmd/playing_around_gss.html
+    - url: https://cogs219.github.io/knitted_Rmd/playing_around_gss.html
       title: Basic Examples of GSS data wrangling
     - file: notebooks/more_gss_practice
       title: More dataviz practice with GSS
