@@ -161,7 +161,7 @@ window.Quarto = {
 
 <section id="data-wrangling-with-r" class="level1">
 <h1>Data Wrangling with R</h1>
-<p>Today’s goal is to get familiar with some of the basics of working with data using R’s <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.tidyverse.org%2F">tidyverse</a> environment.</p>
+<p>Today’s goal is to get familiar with some of the basics of working with data using R’s <a href="https://www.tidyverse.org/">tidyverse</a> environment.</p>
 <p>Tidyverse is a set of packages written for the statistical software R that is optimized for data science.</p>
 <p>There are many components to the tidyverse, but we will focus on three packages in particular:</p>
 <ul>
@@ -170,7 +170,7 @@ window.Quarto = {
 <li><p>Visualizing data using <code>ggplot2</code></p></li>
 </ul>
 <p>The overarching goal is to give you the basic tools for data exploration and visualization as quickly as possible.</p>
-<p>The workflow and philosophy of how this works is captured in this figure from the excellent <a href="https://www.google.com/url?q=https%3A%2F%2Fr4ds.hadley.nz%2F">R for Data Science</a> book by Hadley Wickham (the main author of the tidyverse packages).</p>
+<p>The workflow and philosophy of how this works is captured in this figure from the excellent <a href="https://r4ds.hadley.nz/">R for Data Science</a> book by Hadley Wickham (the main author of the tidyverse packages).</p>
 <p>The goal of these packages is to give you the tools to:</p>
 <ul>
 <li><p><strong>import</strong> your data for analysis</p></li>
@@ -478,12 +478,11 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <p>In this section, we’re going to become familiar with some of the key tidyverse “verbs”: tidyverse functions for quickly and easily manipulating (“wrangling”) data.</p>
 <p>There are many of these functions, but for know, we’ll get to know the following key verbs:</p>
 <ul>
-<li>pull()<br>
-</li>
-<li>filter()</li>
-<li>mutate()</li>
-<li>summarize()</li>
-<li>group_by()</li>
+<li><code>pull()</code></li>
+<li><code>filter()</code></li>
+<li><code>mutate()</code></li>
+<li><code>summarize()</code></li>
+<li><code>group_by()</code></li>
 </ul>
 <p><strong>NOTE:</strong> Tidyverse functions often have very intuitive names, but always be sure to check and make sure you understand what they do by reading the documentation!</p>
 <p>You can always get help on a given function by typing <code>?function_name</code> (e.g., <code>?pull</code>).</p>
@@ -887,7 +886,12 @@ dbl (3): total_trial_num, block_num, is_right
 <h3 class="anchored" data-anchor-id="summarize-the-data-from-experiment-1a">4.3. Summarize the data from Experiment 1A</h3>
 <p>Let’s summarize the average accuracy for each participant from Experiment 1A only, retaining information about which condition they were in.</p>
 <p>Why is it important to first summarize the data by participant? (tip: non-independence of observations)</p>
-<p>To do so, we need to: * filter the data to Experiment 1A * group the data by condition (why?) and participant * summarize the average accuracy</p>
+<p>To do so, we need to:</p>
+<ul>
+<li><p>filter the data to Experiment 1A</p></li>
+<li><p>group the data by condition (why?) and participant</p></li>
+<li><p>summarize the average accuracy</p></li>
+</ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -991,8 +995,12 @@ using the `.groups` argument.</code></pre>
 </div>
 <p>Finally, it would be helpful to use the participant-level compute the group-level means for each condition, along with error bars (to give a sense of variability).</p>
 <p>Go through each line. Can you figure out what each one is doing?</p>
-<p>Notes: * we introduce a couple of new functions here: * <code>sd()</code>: computes the standard deviation * <code>sqrt()</code>: computes the square root * we compute the standard error of the mean (<code>sem</code>) using the following formula:</p>
-<p><span class="math inline">\(SEM = \frac{SD}{\sqrt{N}}\)</span></p>
+<p>Notes: we introduce a couple of new functions here:</p>
+<ul>
+<li><p><code>sd()</code>: computes the standard deviation</p></li>
+<li><p><code>sqrt()</code>: computes the square root</p></li>
+<li><p>we compute the standard error of the mean (<code>sem</code>) using the following formula: <span class="math inline">\(SEM = \frac{SD}{\sqrt{N}}\)</span></p></li>
+</ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1526,7 +1534,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Wrangling with R</span></span>
 <span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>Today's goal is to get familiar with some of the basics of working with data using R's <span class="co">[</span><span class="ot">tidyverse</span><span class="co">](https://www.google.com/url?q=https%3A%2F%2Fwww.tidyverse.org%2F)</span> environment.</span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>Today's goal is to get familiar with some of the basics of working with data using R's <span class="co">[</span><span class="ot">tidyverse</span><span class="co">](https://www.tidyverse.org/)</span> environment.</span>
 <span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a>Tidyverse is a set of packages written for the statistical software R that is optimized for data science.</span>
 <span id="cb70-16"><a href="#cb70-16" aria-hidden="true" tabindex="-1"></a></span>
@@ -1540,7 +1548,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-24"><a href="#cb70-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-25"><a href="#cb70-25" aria-hidden="true" tabindex="-1"></a>The overarching goal is to give you the basic tools for data exploration and visualization as quickly as possible.</span>
 <span id="cb70-26"><a href="#cb70-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-27"><a href="#cb70-27" aria-hidden="true" tabindex="-1"></a>The workflow and philosophy of how this works is captured in this figure from the excellent <span class="co">[</span><span class="ot">R for Data Science</span><span class="co">](https://www.google.com/url?q=https%3A%2F%2Fr4ds.hadley.nz%2F)</span> book by Hadley Wickham (the main author of the tidyverse packages).</span>
+<span id="cb70-27"><a href="#cb70-27" aria-hidden="true" tabindex="-1"></a>The workflow and philosophy of how this works is captured in this figure from the excellent <span class="co">[</span><span class="ot">R for Data Science</span><span class="co">](https://r4ds.hadley.nz/)</span> book by Hadley Wickham (the main author of the tidyverse packages).</span>
 <span id="cb70-28"><a href="#cb70-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-29"><a href="#cb70-29" aria-hidden="true" tabindex="-1"></a>The goal of these packages is to give you the tools to:</span>
 <span id="cb70-30"><a href="#cb70-30" aria-hidden="true" tabindex="-1"></a></span>
@@ -1610,15 +1618,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-100"><a href="#cb70-100" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-101"><a href="#cb70-101" aria-hidden="true" tabindex="-1"></a>Each row in the data represents the data from one penguin on one of the 3 islands. Let's think about what each of our columns means.</span>
 <span id="cb70-102"><a href="#cb70-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-103"><a href="#cb70-103" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**species**: the species that the penguin belongs to (Chinstrap, Gentoo and Adelie)</span>
-<span id="cb70-104"><a href="#cb70-104" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**island**: the island that the penguin lives on (Biscoe, Dream, Torgersen)</span>
-<span id="cb70-105"><a href="#cb70-105" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>information about the penguins' general size and dimensions:</span>
-<span id="cb70-106"><a href="#cb70-106" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>**bill_length_mm**: bill length in mm</span>
-<span id="cb70-107"><a href="#cb70-107" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>**bill_depth_mm**: bill depth in mm</span>
-<span id="cb70-108"><a href="#cb70-108" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>**flipper_length_mm**: flipper length in mm</span>
-<span id="cb70-109"><a href="#cb70-109" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>**body_mass_g**: body mass in grams</span>
-<span id="cb70-110"><a href="#cb70-110" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**sex**: the sex of the penguin</span>
-<span id="cb70-111"><a href="#cb70-111" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**year**: the year the penguin was observed</span>
+<span id="cb70-103"><a href="#cb70-103" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**species**: the species that the penguin belongs to (Chinstrap, Gentoo and Adelie)</span>
+<span id="cb70-104"><a href="#cb70-104" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**island**: the island that the penguin lives on (Biscoe, Dream, Torgersen)</span>
+<span id="cb70-105"><a href="#cb70-105" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>information about the penguins' general size and dimensions:</span>
+<span id="cb70-106"><a href="#cb70-106" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**bill_length_mm**: bill length in mm</span>
+<span id="cb70-107"><a href="#cb70-107" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**bill_depth_mm**: bill depth in mm</span>
+<span id="cb70-108"><a href="#cb70-108" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**flipper_length_mm**: flipper length in mm</span>
+<span id="cb70-109"><a href="#cb70-109" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>**body_mass_g**: body mass in grams</span>
+<span id="cb70-110"><a href="#cb70-110" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**sex**: the sex of the penguin</span>
+<span id="cb70-111"><a href="#cb70-111" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**year**: the year the penguin was observed</span>
 <span id="cb70-112"><a href="#cb70-112" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-113"><a href="#cb70-113" aria-hidden="true" tabindex="-1"></a>This data is in tidy format!</span>
 <span id="cb70-114"><a href="#cb70-114" aria-hidden="true" tabindex="-1"></a></span>
@@ -1626,7 +1634,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-116"><a href="#cb70-116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-117"><a href="#cb70-117" aria-hidden="true" tabindex="-1"></a>... each column is a variable with a single value for each observation (penguin)</span>
 <span id="cb70-118"><a href="#cb70-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-119"><a href="#cb70-119" aria-hidden="true" tabindex="-1"></a>One useful tip: an easy way to access individual columns in a data frame (or "tibble") is to use the $ character. So, for example, to access all of the bill lengths we can do penguins$bill_length_mm</span>
+<span id="cb70-119"><a href="#cb70-119" aria-hidden="true" tabindex="-1"></a>One useful tip: an easy way to access individual columns in a data frame (or "tibble") is to use the \$ character. So, for example, to access all of the bill lengths we can do penguins\$bill_length_mm</span>
 <span id="cb70-120"><a href="#cb70-120" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-123"><a href="#cb70-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb70-124"><a href="#cb70-124" aria-hidden="true" tabindex="-1"></a><span class="co">#access the bill length column</span></span>
@@ -1657,102 +1665,102 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-153"><a href="#cb70-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb70-154"><a href="#cb70-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb70-155"><a href="#cb70-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-156"><a href="#cb70-156" aria-hidden="true" tabindex="-1"></a>Ooooh, now I see that there's something systematic happening here. Let's put some final touches on this graph so that it looks a bit better:</span>
-<span id="cb70-157"><a href="#cb70-157" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Change the color scheme to something more attractive</span>
-<span id="cb70-158"><a href="#cb70-158" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>rename the axes for humans</span>
-<span id="cb70-159"><a href="#cb70-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-162"><a href="#cb70-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-163"><a href="#cb70-163" aria-hidden="true" tabindex="-1"></a><span class="co"># scatterplot example: penguin bill length versus bill depth</span></span>
-<span id="cb70-164"><a href="#cb70-164" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm, <span class="at">color=</span>species)) <span class="sc">+</span></span>
-<span id="cb70-165"><a href="#cb70-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
-<span id="cb70-166"><a href="#cb70-166" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change colors manually</span></span>
-<span id="cb70-167"><a href="#cb70-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>))<span class="sc">+</span></span>
-<span id="cb70-168"><a href="#cb70-168" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
-<span id="cb70-169"><a href="#cb70-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill Length (in mm)"</span>)<span class="sc">+</span></span>
-<span id="cb70-170"><a href="#cb70-170" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Bill Depth (in mm)"</span>)</span>
-<span id="cb70-171"><a href="#cb70-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-156"><a href="#cb70-156" aria-hidden="true" tabindex="-1"></a>Ooooh, now I see that there's something systematic happening here. Let's put some final touches on this graph so that it looks a bit better: <span class="sc">\*</span> Change the color scheme to something more attractive <span class="sc">\*</span> rename the axes for humans</span>
+<span id="cb70-157"><a href="#cb70-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-160"><a href="#cb70-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-161"><a href="#cb70-161" aria-hidden="true" tabindex="-1"></a><span class="co"># scatterplot example: penguin bill length versus bill depth</span></span>
+<span id="cb70-162"><a href="#cb70-162" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm, <span class="at">color=</span>species)) <span class="sc">+</span></span>
+<span id="cb70-163"><a href="#cb70-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span></span>
+<span id="cb70-164"><a href="#cb70-164" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change colors manually</span></span>
+<span id="cb70-165"><a href="#cb70-165" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>,<span class="st">"darkorchid"</span>,<span class="st">"cyan4"</span>))<span class="sc">+</span></span>
+<span id="cb70-166"><a href="#cb70-166" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
+<span id="cb70-167"><a href="#cb70-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Bill Length (in mm)"</span>)<span class="sc">+</span></span>
+<span id="cb70-168"><a href="#cb70-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Bill Depth (in mm)"</span>)</span>
+<span id="cb70-169"><a href="#cb70-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-170"><a href="#cb70-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-171"><a href="#cb70-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Some coding basics</span></span>
 <span id="cb70-172"><a href="#cb70-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-173"><a href="#cb70-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Some coding basics</span></span>
+<span id="cb70-173"><a href="#cb70-173" aria-hidden="true" tabindex="-1"></a>To get warmed up, let's get familiar with two key concepts in R:</span>
 <span id="cb70-174"><a href="#cb70-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-175"><a href="#cb70-175" aria-hidden="true" tabindex="-1"></a>To get warmed up, let's get familiar with two key concepts in R:</span>
-<span id="cb70-176"><a href="#cb70-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-177"><a href="#cb70-177" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>functions</span>
-<span id="cb70-178"><a href="#cb70-178" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>pipes</span>
+<span id="cb70-175"><a href="#cb70-175" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>functions</span>
+<span id="cb70-176"><a href="#cb70-176" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>pipes</span>
+<span id="cb70-177"><a href="#cb70-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-178"><a href="#cb70-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions</span></span>
 <span id="cb70-179"><a href="#cb70-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-180"><a href="#cb70-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### Functions</span></span>
-<span id="cb70-181"><a href="#cb70-181" aria-hidden="true" tabindex="-1"></a>We'll start with the concept of a function.</span>
-<span id="cb70-182"><a href="#cb70-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-183"><a href="#cb70-183" aria-hidden="true" tabindex="-1"></a>Just like in other programming languages, a function is a way to **do** something to a data object. It takes an argument (or a series of arguments) and returns a value.</span>
-<span id="cb70-184"><a href="#cb70-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-185"><a href="#cb70-185" aria-hidden="true" tabindex="-1"></a>A nice example in R is <span class="in">`mean()`</span>. <span class="in">`mean()`</span> takes an argument, a numeric vector, and returns the average. <span class="in">`mean()`</span> also has a second argument, <span class="in">`na.rm=TRUE`</span>, that can tell it to ignore missing values (this is useful in our penguins dataset).</span>
-<span id="cb70-186"><a href="#cb70-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-187"><a href="#cb70-187" aria-hidden="true" tabindex="-1"></a>So, to compute the average bill depth, we can write the following code:</span>
-<span id="cb70-188"><a href="#cb70-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-191"><a href="#cb70-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-192"><a href="#cb70-192" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the average bill depth</span></span>
-<span id="cb70-193"><a href="#cb70-193" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(penguins<span class="sc">$</span>bill_depth_mm,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb70-194"><a href="#cb70-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-195"><a href="#cb70-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-196"><a href="#cb70-196" aria-hidden="true" tabindex="-1"></a>Hmm, that's a lot of decimal places... It would be nice to clean this up a bit by rounding off after a few decimals. Conveniently, R provides a <span class="in">`round()`</span> function that does just that! (it takes a second argument, digits, that tells it how many decimal places to round to).</span>
-<span id="cb70-197"><a href="#cb70-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-200"><a href="#cb70-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-201"><a href="#cb70-201" aria-hidden="true" tabindex="-1"></a><span class="co">#round the average value</span></span>
-<span id="cb70-202"><a href="#cb70-202" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(penguins<span class="sc">$</span>bill_depth_mm,<span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="at">digits=</span><span class="dv">2</span>)</span>
-<span id="cb70-203"><a href="#cb70-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-204"><a href="#cb70-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-205"><a href="#cb70-205" aria-hidden="true" tabindex="-1"></a>While it's nice to be able to strong functions together this way, that line is already looking kind of complicated. Is there an easier way to apply functions sequentially, one after the other? We'll return to this in a moment.</span>
-<span id="cb70-206"><a href="#cb70-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-207"><a href="#cb70-207" aria-hidden="true" tabindex="-1"></a>R supplies all sorts of functions that are useful for data analysis. For example, see if you can figure out how heavy the chonkiest penguin is.</span>
-<span id="cb70-208"><a href="#cb70-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-209"><a href="#cb70-209" aria-hidden="true" tabindex="-1"></a>**Tip**: The function for the finding the maximum value of a list/vector in R is <span class="in">`max()`</span></span>
-<span id="cb70-210"><a href="#cb70-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-211"><a href="#cb70-211" aria-hidden="true" tabindex="-1"></a>**Tip #2**: If you run into missing values, you can ignore them using the parameter <span class="in">`na.rm=TRUE`</span>. So <span class="in">`max(my_vector,na.rm=TRUE)`</span>.</span>
-<span id="cb70-212"><a href="#cb70-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-215"><a href="#cb70-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-216"><a href="#cb70-216" aria-hidden="true" tabindex="-1"></a><span class="co">#Find the maximum weight in the body_mass_g column</span></span>
-<span id="cb70-217"><a href="#cb70-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-218"><a href="#cb70-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-219"><a href="#cb70-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pipes</span></span>
-<span id="cb70-220"><a href="#cb70-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-221"><a href="#cb70-221" aria-hidden="true" tabindex="-1"></a>We already noticed that the code starts to look complicated once we have to start nesting functions, e.g. <span class="in">`round(mean(penguins$bill_depth_mm,na.rm=TRUE),digits=2)`</span>. This is pretty hard to read and figure out what's going on!</span>
-<span id="cb70-222"><a href="#cb70-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-223"><a href="#cb70-223" aria-hidden="true" tabindex="-1"></a>This motivates the intuition behind why a **pipe** operator <span class="in">`|&gt;`</span> (or alternatively <span class="in">`%&gt;%`</span>) is useful.</span>
-<span id="cb70-224"><a href="#cb70-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-225"><a href="#cb70-225" aria-hidden="true" tabindex="-1"></a>Pipes are just a way of bringing the main argument we supply to a function to the front of the operation. For example, to compute the mean of bill depth, we can write the following instead, using the pipe operator:</span>
-<span id="cb70-226"><a href="#cb70-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-229"><a href="#cb70-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-230"><a href="#cb70-230" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the mean using a pipe</span></span>
-<span id="cb70-231"><a href="#cb70-231" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>bill_depth_mm <span class="sc">|&gt;</span></span>
-<span id="cb70-232"><a href="#cb70-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb70-233"><a href="#cb70-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-234"><a href="#cb70-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-235"><a href="#cb70-235" aria-hidden="true" tabindex="-1"></a>This allows us to string functions together - basic as many as we want - in the order that we would like to do them. What's nice about this is that it makes the code much more legible, and it allows us to write the code in their intuitive order.</span>
-<span id="cb70-236"><a href="#cb70-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-237"><a href="#cb70-237" aria-hidden="true" tabindex="-1"></a>For example, rather than having to write the nested code above, where the <span class="in">`mean()`</span> function is nested within the <span class="in">`round()`</span> function, we can use the pipe operator to write the sequence of operations out in order, for much cleaner code - we can just read off the sequence of actions we're performing, in order!</span>
-<span id="cb70-238"><a href="#cb70-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-241"><a href="#cb70-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-242"><a href="#cb70-242" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>bill_depth_mm <span class="sc">|&gt;</span></span>
-<span id="cb70-243"><a href="#cb70-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb70-244"><a href="#cb70-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits=</span><span class="dv">2</span>)</span>
-<span id="cb70-245"><a href="#cb70-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-246"><a href="#cb70-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-247"><a href="#cb70-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Working with Data: Some key tidyverse verbs</span></span>
-<span id="cb70-248"><a href="#cb70-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-249"><a href="#cb70-249" aria-hidden="true" tabindex="-1"></a>In this section, we're going to become familiar with some of the key tidyverse "verbs": tidyverse functions for quickly and easily manipulating ("wrangling") data.</span>
-<span id="cb70-250"><a href="#cb70-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-251"><a href="#cb70-251" aria-hidden="true" tabindex="-1"></a>There are many of these functions, but for know, we'll get to know the following key verbs:</span>
-<span id="cb70-252"><a href="#cb70-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-253"><a href="#cb70-253" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>pull()  </span>
-<span id="cb70-254"><a href="#cb70-254" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>filter()</span>
-<span id="cb70-255"><a href="#cb70-255" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>mutate()</span>
-<span id="cb70-256"><a href="#cb70-256" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>summarize()</span>
-<span id="cb70-257"><a href="#cb70-257" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>group_by()</span>
-<span id="cb70-258"><a href="#cb70-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-259"><a href="#cb70-259" aria-hidden="true" tabindex="-1"></a>**NOTE:** Tidyverse functions often have very intuitive names, but always be sure to check and make sure you understand what they do by reading the documentation!</span>
-<span id="cb70-260"><a href="#cb70-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-261"><a href="#cb70-261" aria-hidden="true" tabindex="-1"></a>You can always get help on a given function by typing <span class="in">`?function_name`</span> (e.g., <span class="in">`?pull`</span>).</span>
-<span id="cb70-262"><a href="#cb70-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-263"><a href="#cb70-263" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pull</span></span>
+<span id="cb70-180"><a href="#cb70-180" aria-hidden="true" tabindex="-1"></a>We'll start with the concept of a function.</span>
+<span id="cb70-181"><a href="#cb70-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-182"><a href="#cb70-182" aria-hidden="true" tabindex="-1"></a>Just like in other programming languages, a function is a way to **do** something to a data object. It takes an argument (or a series of arguments) and returns a value.</span>
+<span id="cb70-183"><a href="#cb70-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-184"><a href="#cb70-184" aria-hidden="true" tabindex="-1"></a>A nice example in R is <span class="in">`mean()`</span>. <span class="in">`mean()`</span> takes an argument, a numeric vector, and returns the average. <span class="in">`mean()`</span> also has a second argument, <span class="in">`na.rm=TRUE`</span>, that can tell it to ignore missing values (this is useful in our penguins dataset).</span>
+<span id="cb70-185"><a href="#cb70-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-186"><a href="#cb70-186" aria-hidden="true" tabindex="-1"></a>So, to compute the average bill depth, we can write the following code:</span>
+<span id="cb70-187"><a href="#cb70-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-190"><a href="#cb70-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-191"><a href="#cb70-191" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the average bill depth</span></span>
+<span id="cb70-192"><a href="#cb70-192" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(penguins<span class="sc">$</span>bill_depth_mm,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb70-193"><a href="#cb70-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-194"><a href="#cb70-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-195"><a href="#cb70-195" aria-hidden="true" tabindex="-1"></a>Hmm, that's a lot of decimal places... It would be nice to clean this up a bit by rounding off after a few decimals. Conveniently, R provides a <span class="in">`round()`</span> function that does just that! (it takes a second argument, digits, that tells it how many decimal places to round to).</span>
+<span id="cb70-196"><a href="#cb70-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-199"><a href="#cb70-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-200"><a href="#cb70-200" aria-hidden="true" tabindex="-1"></a><span class="co">#round the average value</span></span>
+<span id="cb70-201"><a href="#cb70-201" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(penguins<span class="sc">$</span>bill_depth_mm,<span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="at">digits=</span><span class="dv">2</span>)</span>
+<span id="cb70-202"><a href="#cb70-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-203"><a href="#cb70-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-204"><a href="#cb70-204" aria-hidden="true" tabindex="-1"></a>While it's nice to be able to strong functions together this way, that line is already looking kind of complicated. Is there an easier way to apply functions sequentially, one after the other? We'll return to this in a moment.</span>
+<span id="cb70-205"><a href="#cb70-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-206"><a href="#cb70-206" aria-hidden="true" tabindex="-1"></a>R supplies all sorts of functions that are useful for data analysis. For example, see if you can figure out how heavy the chonkiest penguin is.</span>
+<span id="cb70-207"><a href="#cb70-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-208"><a href="#cb70-208" aria-hidden="true" tabindex="-1"></a>**Tip**: The function for the finding the maximum value of a list/vector in R is <span class="in">`max()`</span></span>
+<span id="cb70-209"><a href="#cb70-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-210"><a href="#cb70-210" aria-hidden="true" tabindex="-1"></a>**Tip #2**: If you run into missing values, you can ignore them using the parameter <span class="in">`na.rm=TRUE`</span>. So <span class="in">`max(my_vector,na.rm=TRUE)`</span>.</span>
+<span id="cb70-211"><a href="#cb70-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-214"><a href="#cb70-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-215"><a href="#cb70-215" aria-hidden="true" tabindex="-1"></a><span class="co">#Find the maximum weight in the body_mass_g column</span></span>
+<span id="cb70-216"><a href="#cb70-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-217"><a href="#cb70-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-218"><a href="#cb70-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pipes</span></span>
+<span id="cb70-219"><a href="#cb70-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-220"><a href="#cb70-220" aria-hidden="true" tabindex="-1"></a>We already noticed that the code starts to look complicated once we have to start nesting functions, e.g. <span class="in">`round(mean(penguins$bill_depth_mm,na.rm=TRUE),digits=2)`</span>. This is pretty hard to read and figure out what's going on!</span>
+<span id="cb70-221"><a href="#cb70-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-222"><a href="#cb70-222" aria-hidden="true" tabindex="-1"></a>This motivates the intuition behind why a **pipe** operator <span class="in">`|&gt;`</span> (or alternatively <span class="in">`%&gt;%`</span>) is useful.</span>
+<span id="cb70-223"><a href="#cb70-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-224"><a href="#cb70-224" aria-hidden="true" tabindex="-1"></a>Pipes are just a way of bringing the main argument we supply to a function to the front of the operation. For example, to compute the mean of bill depth, we can write the following instead, using the pipe operator:</span>
+<span id="cb70-225"><a href="#cb70-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-228"><a href="#cb70-228" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-229"><a href="#cb70-229" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the mean using a pipe</span></span>
+<span id="cb70-230"><a href="#cb70-230" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>bill_depth_mm <span class="sc">|&gt;</span></span>
+<span id="cb70-231"><a href="#cb70-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb70-232"><a href="#cb70-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-233"><a href="#cb70-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-234"><a href="#cb70-234" aria-hidden="true" tabindex="-1"></a>This allows us to string functions together - basic as many as we want - in the order that we would like to do them. What's nice about this is that it makes the code much more legible, and it allows us to write the code in their intuitive order.</span>
+<span id="cb70-235"><a href="#cb70-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-236"><a href="#cb70-236" aria-hidden="true" tabindex="-1"></a>For example, rather than having to write the nested code above, where the <span class="in">`mean()`</span> function is nested within the <span class="in">`round()`</span> function, we can use the pipe operator to write the sequence of operations out in order, for much cleaner code - we can just read off the sequence of actions we're performing, in order!</span>
+<span id="cb70-237"><a href="#cb70-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-240"><a href="#cb70-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-241"><a href="#cb70-241" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>bill_depth_mm <span class="sc">|&gt;</span></span>
+<span id="cb70-242"><a href="#cb70-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-243"><a href="#cb70-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits=</span><span class="dv">2</span>)</span>
+<span id="cb70-244"><a href="#cb70-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-245"><a href="#cb70-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-246"><a href="#cb70-246" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Working with Data: Some key tidyverse verbs</span></span>
+<span id="cb70-247"><a href="#cb70-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-248"><a href="#cb70-248" aria-hidden="true" tabindex="-1"></a>In this section, we're going to become familiar with some of the key tidyverse "verbs": tidyverse functions for quickly and easily manipulating ("wrangling") data.</span>
+<span id="cb70-249"><a href="#cb70-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-250"><a href="#cb70-250" aria-hidden="true" tabindex="-1"></a>There are many of these functions, but for know, we'll get to know the following key verbs:</span>
+<span id="cb70-251"><a href="#cb70-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-252"><a href="#cb70-252" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`pull()`</span></span>
+<span id="cb70-253"><a href="#cb70-253" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`filter()`</span></span>
+<span id="cb70-254"><a href="#cb70-254" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`mutate()`</span></span>
+<span id="cb70-255"><a href="#cb70-255" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`summarize()`</span></span>
+<span id="cb70-256"><a href="#cb70-256" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`group_by()`</span></span>
+<span id="cb70-257"><a href="#cb70-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-258"><a href="#cb70-258" aria-hidden="true" tabindex="-1"></a>**NOTE:** Tidyverse functions often have very intuitive names, but always be sure to check and make sure you understand what they do by reading the documentation!</span>
+<span id="cb70-259"><a href="#cb70-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-260"><a href="#cb70-260" aria-hidden="true" tabindex="-1"></a>You can always get help on a given function by typing <span class="in">`?function_name`</span> (e.g., <span class="in">`?pull`</span>).</span>
+<span id="cb70-261"><a href="#cb70-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-262"><a href="#cb70-262" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pull</span></span>
+<span id="cb70-263"><a href="#cb70-263" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-264"><a href="#cb70-264" aria-hidden="true" tabindex="-1"></a>Let's get to know our first verb: <span class="in">`pull()`</span>.</span>
 <span id="cb70-265"><a href="#cb70-265" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-266"><a href="#cb70-266" aria-hidden="true" tabindex="-1"></a>See its documentation <span class="co">[</span><span class="ot">here</span><span class="co">](https://dplyr.tidyverse.org/reference/pull.html)</span>.</span>
@@ -1803,8 +1811,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-319"><a href="#cb70-319" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-320"><a href="#cb70-320" aria-hidden="true" tabindex="-1"></a>Mini exercises:</span>
 <span id="cb70-321"><a href="#cb70-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-322"><a href="#cb70-322" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Can you filter the data to all of the male Gentoo penguins?</span>
-<span id="cb70-323"><a href="#cb70-323" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Can you compute the average bill length of Adelie penguins?</span>
+<span id="cb70-322"><a href="#cb70-322" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Can you filter the data to all of the male Gentoo penguins?</span>
+<span id="cb70-323"><a href="#cb70-323" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Can you compute the average bill length of Adelie penguins?</span>
 <span id="cb70-324"><a href="#cb70-324" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-327"><a href="#cb70-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb70-328"><a href="#cb70-328" aria-hidden="true" tabindex="-1"></a><span class="co">#filter to only male Gentoo penguins</span></span>
@@ -1965,13 +1973,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-503"><a href="#cb70-503" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-504"><a href="#cb70-504" aria-hidden="true" tabindex="-1"></a>The data contains the following columns:</span>
 <span id="cb70-505"><a href="#cb70-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-506"><a href="#cb70-506" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>experiment: the name of the experiment in the paper (1A or 1B)</span>
-<span id="cb70-507"><a href="#cb70-507" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>subject: the unique participant id</span>
-<span id="cb70-508"><a href="#cb70-508" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>condition: nameability condition (high or low)</span>
-<span id="cb70-509"><a href="#cb70-509" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>total_trial_num: the trial number (1-24)</span>
-<span id="cb70-510"><a href="#cb70-510" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>block_num: the block number (3 blocks of 8 trials each)</span>
-<span id="cb70-511"><a href="#cb70-511" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>image_name: the name of the stimulus to be categorized</span>
-<span id="cb70-512"><a href="#cb70-512" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>is_right: whether the response was correct (is_right=1) or incorrect (is_right=0)</span>
+<span id="cb70-506"><a href="#cb70-506" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>experiment: the name of the experiment in the paper (1A or 1B)</span>
+<span id="cb70-507"><a href="#cb70-507" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>subject: the unique participant id</span>
+<span id="cb70-508"><a href="#cb70-508" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>condition: nameability condition (high or low)</span>
+<span id="cb70-509"><a href="#cb70-509" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>total_trial_num: the trial number (1-24)</span>
+<span id="cb70-510"><a href="#cb70-510" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>block_num: the block number (3 blocks of 8 trials each)</span>
+<span id="cb70-511"><a href="#cb70-511" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>image_name: the name of the stimulus to be categorized</span>
+<span id="cb70-512"><a href="#cb70-512" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>is_right: whether the response was correct (is_right=1) or incorrect (is_right=0)</span>
 <span id="cb70-513"><a href="#cb70-513" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-514"><a href="#cb70-514" aria-hidden="true" tabindex="-1"></a>Is the data in tidy format? Why/ why not?</span>
 <span id="cb70-515"><a href="#cb70-515" aria-hidden="true" tabindex="-1"></a></span>
@@ -1982,81 +1990,84 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb70-520"><a href="#cb70-520" aria-hidden="true" tabindex="-1"></a>Why is it important to first summarize the data by participant? (tip: non-independence of observations)</span>
 <span id="cb70-521"><a href="#cb70-521" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-522"><a href="#cb70-522" aria-hidden="true" tabindex="-1"></a>To do so, we need to:</span>
-<span id="cb70-523"><a href="#cb70-523" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>filter the data to Experiment 1A</span>
-<span id="cb70-524"><a href="#cb70-524" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>group the data by condition (why?) and participant</span>
-<span id="cb70-525"><a href="#cb70-525" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>summarize the average accuracy</span>
-<span id="cb70-526"><a href="#cb70-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-529"><a href="#cb70-529" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-530"><a href="#cb70-530" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the average accuracy for each participant for Experiment 1</span></span>
-<span id="cb70-531"><a href="#cb70-531" aria-hidden="true" tabindex="-1"></a>subj_1a <span class="ot">&lt;-</span> nameability_data <span class="sc">|&gt;</span></span>
-<span id="cb70-532"><a href="#cb70-532" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(experiment <span class="sc">==</span> <span class="st">"1A"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb70-533"><a href="#cb70-533" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition,subject) <span class="sc">|&gt;</span></span>
-<span id="cb70-534"><a href="#cb70-534" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb70-535"><a href="#cb70-535" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy=</span><span class="fu">mean</span>(is_right)</span>
-<span id="cb70-536"><a href="#cb70-536" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb70-537"><a href="#cb70-537" aria-hidden="true" tabindex="-1"></a>subj_1a</span>
-<span id="cb70-538"><a href="#cb70-538" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-539"><a href="#cb70-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-540"><a href="#cb70-540" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.4. Plot the data</span></span>
-<span id="cb70-541"><a href="#cb70-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-544"><a href="#cb70-544" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-545"><a href="#cb70-545" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(subj_1a, <span class="fu">aes</span>(condition,accuracy,<span class="at">color=</span>condition,<span class="at">fill=</span>condition))<span class="sc">+</span></span>
-<span id="cb70-546"><a href="#cb70-546" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb70-547"><a href="#cb70-547" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_jitter()+</span></span>
-<span id="cb70-548"><a href="#cb70-548" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">"y"</span>,<span class="at">stackdir=</span><span class="st">"center"</span>)</span>
-<span id="cb70-549"><a href="#cb70-549" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-550"><a href="#cb70-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-551"><a href="#cb70-551" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.5. More advanced summarizing</span></span>
-<span id="cb70-552"><a href="#cb70-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-553"><a href="#cb70-553" aria-hidden="true" tabindex="-1"></a>What if I'm interested in how accuracy changes across blocks, again for Experiment 1A? Now, I can also group by <span class="in">`block_num`</span>.</span>
-<span id="cb70-554"><a href="#cb70-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-555"><a href="#cb70-555" aria-hidden="true" tabindex="-1"></a>In the code below, why do I first group by <span class="in">`subject`</span> and then by <span class="in">`block_num`</span>?</span>
-<span id="cb70-556"><a href="#cb70-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-559"><a href="#cb70-559" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-560"><a href="#cb70-560" aria-hidden="true" tabindex="-1"></a>subj_block_1a <span class="ot">&lt;-</span> nameability_data <span class="sc">|&gt;</span></span>
-<span id="cb70-561"><a href="#cb70-561" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(experiment <span class="sc">==</span> <span class="st">"1A"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb70-562"><a href="#cb70-562" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition,subject, block_num) <span class="sc">|&gt;</span></span>
-<span id="cb70-563"><a href="#cb70-563" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb70-564"><a href="#cb70-564" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy=</span><span class="fu">mean</span>(is_right)</span>
-<span id="cb70-565"><a href="#cb70-565" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb70-566"><a href="#cb70-566" aria-hidden="true" tabindex="-1"></a>subj_block_1a</span>
-<span id="cb70-567"><a href="#cb70-567" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-568"><a href="#cb70-568" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-569"><a href="#cb70-569" aria-hidden="true" tabindex="-1"></a>Finally, it would be helpful to use the participant-level compute the group-level means for each condition, along with error bars (to give a sense of variability).</span>
-<span id="cb70-570"><a href="#cb70-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-571"><a href="#cb70-571" aria-hidden="true" tabindex="-1"></a>Go through each line. Can you figure out what each one is doing?</span>
-<span id="cb70-572"><a href="#cb70-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-573"><a href="#cb70-573" aria-hidden="true" tabindex="-1"></a>Notes:</span>
-<span id="cb70-574"><a href="#cb70-574" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>we introduce a couple of new functions here:</span>
-<span id="cb70-575"><a href="#cb70-575" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`sd()`</span>: computes the standard deviation</span>
-<span id="cb70-576"><a href="#cb70-576" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`sqrt()`</span>: computes the square root</span>
-<span id="cb70-577"><a href="#cb70-577" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>we compute the standard error of the mean (<span class="in">`sem`</span>) using the following formula:</span>
-<span id="cb70-578"><a href="#cb70-578" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-579"><a href="#cb70-579" aria-hidden="true" tabindex="-1"></a>$SEM = \frac{SD}{\sqrt{N}}$</span>
-<span id="cb70-580"><a href="#cb70-580" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-583"><a href="#cb70-583" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-584"><a href="#cb70-584" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the overall group mean by condition and block</span></span>
-<span id="cb70-585"><a href="#cb70-585" aria-hidden="true" tabindex="-1"></a><span class="co">#also compute the standard error of the mean</span></span>
-<span id="cb70-586"><a href="#cb70-586" aria-hidden="true" tabindex="-1"></a>group_means_1a <span class="ot">&lt;-</span> subj_block_1a <span class="sc">|&gt;</span></span>
-<span id="cb70-587"><a href="#cb70-587" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition,block_num) <span class="sc">|&gt;</span></span>
-<span id="cb70-588"><a href="#cb70-588" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_correct =</span> <span class="fu">mean</span>(accuracy),</span>
-<span id="cb70-589"><a href="#cb70-589" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_correct =</span> <span class="fu">sd</span>(accuracy),</span>
-<span id="cb70-590"><a href="#cb70-590" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_obs =</span> <span class="fu">n</span>(),</span>
-<span id="cb70-591"><a href="#cb70-591" aria-hidden="true" tabindex="-1"></a>            <span class="at">sem =</span> sd_correct <span class="sc">/</span> <span class="fu">sqrt</span>(n_obs))</span>
-<span id="cb70-592"><a href="#cb70-592" aria-hidden="true" tabindex="-1"></a>group_means_1a</span>
-<span id="cb70-593"><a href="#cb70-593" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb70-594"><a href="#cb70-594" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-595"><a href="#cb70-595" aria-hidden="true" tabindex="-1"></a>Let's plot it!</span>
-<span id="cb70-596"><a href="#cb70-596" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-599"><a href="#cb70-599" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb70-600"><a href="#cb70-600" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(group_means_1a,<span class="fu">aes</span>(block_num,mean_correct,<span class="at">color=</span>condition))<span class="sc">+</span></span>
-<span id="cb70-601"><a href="#cb70-601" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean_correct<span class="sc">-</span>sem,<span class="at">ymax=</span>mean_correct<span class="sc">+</span>sem),<span class="at">width=</span><span class="dv">0</span>)<span class="sc">+</span></span>
-<span id="cb70-602"><a href="#cb70-602" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb70-603"><a href="#cb70-603" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb70-604"><a href="#cb70-604" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Block Number"</span>)<span class="sc">+</span></span>
-<span id="cb70-605"><a href="#cb70-605" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Average Proportion Correct"</span>)<span class="sc">+</span></span>
-<span id="cb70-606"><a href="#cb70-606" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
-<span id="cb70-607"><a href="#cb70-607" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-523"><a href="#cb70-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-524"><a href="#cb70-524" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>filter the data to Experiment 1A</span>
+<span id="cb70-525"><a href="#cb70-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-526"><a href="#cb70-526" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>group the data by condition (why?) and participant</span>
+<span id="cb70-527"><a href="#cb70-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-528"><a href="#cb70-528" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>summarize the average accuracy</span>
+<span id="cb70-529"><a href="#cb70-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-532"><a href="#cb70-532" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-533"><a href="#cb70-533" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the average accuracy for each participant for Experiment 1</span></span>
+<span id="cb70-534"><a href="#cb70-534" aria-hidden="true" tabindex="-1"></a>subj_1a <span class="ot">&lt;-</span> nameability_data <span class="sc">|&gt;</span></span>
+<span id="cb70-535"><a href="#cb70-535" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(experiment <span class="sc">==</span> <span class="st">"1A"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-536"><a href="#cb70-536" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition,subject) <span class="sc">|&gt;</span></span>
+<span id="cb70-537"><a href="#cb70-537" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb70-538"><a href="#cb70-538" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy=</span><span class="fu">mean</span>(is_right)</span>
+<span id="cb70-539"><a href="#cb70-539" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb70-540"><a href="#cb70-540" aria-hidden="true" tabindex="-1"></a>subj_1a</span>
+<span id="cb70-541"><a href="#cb70-541" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-542"><a href="#cb70-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-543"><a href="#cb70-543" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.4. Plot the data</span></span>
+<span id="cb70-544"><a href="#cb70-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-547"><a href="#cb70-547" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-548"><a href="#cb70-548" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(subj_1a, <span class="fu">aes</span>(condition,accuracy,<span class="at">color=</span>condition,<span class="at">fill=</span>condition))<span class="sc">+</span></span>
+<span id="cb70-549"><a href="#cb70-549" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb70-550"><a href="#cb70-550" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_jitter()+</span></span>
+<span id="cb70-551"><a href="#cb70-551" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">"y"</span>,<span class="at">stackdir=</span><span class="st">"center"</span>)</span>
+<span id="cb70-552"><a href="#cb70-552" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-553"><a href="#cb70-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-554"><a href="#cb70-554" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4.5. More advanced summarizing</span></span>
+<span id="cb70-555"><a href="#cb70-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-556"><a href="#cb70-556" aria-hidden="true" tabindex="-1"></a>What if I'm interested in how accuracy changes across blocks, again for Experiment 1A? Now, I can also group by <span class="in">`block_num`</span>.</span>
+<span id="cb70-557"><a href="#cb70-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-558"><a href="#cb70-558" aria-hidden="true" tabindex="-1"></a>In the code below, why do I first group by <span class="in">`subject`</span> and then by <span class="in">`block_num`</span>?</span>
+<span id="cb70-559"><a href="#cb70-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-562"><a href="#cb70-562" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-563"><a href="#cb70-563" aria-hidden="true" tabindex="-1"></a>subj_block_1a <span class="ot">&lt;-</span> nameability_data <span class="sc">|&gt;</span></span>
+<span id="cb70-564"><a href="#cb70-564" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(experiment <span class="sc">==</span> <span class="st">"1A"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-565"><a href="#cb70-565" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition,subject, block_num) <span class="sc">|&gt;</span></span>
+<span id="cb70-566"><a href="#cb70-566" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb70-567"><a href="#cb70-567" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy=</span><span class="fu">mean</span>(is_right)</span>
+<span id="cb70-568"><a href="#cb70-568" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb70-569"><a href="#cb70-569" aria-hidden="true" tabindex="-1"></a>subj_block_1a</span>
+<span id="cb70-570"><a href="#cb70-570" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-571"><a href="#cb70-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-572"><a href="#cb70-572" aria-hidden="true" tabindex="-1"></a>Finally, it would be helpful to use the participant-level compute the group-level means for each condition, along with error bars (to give a sense of variability).</span>
+<span id="cb70-573"><a href="#cb70-573" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-574"><a href="#cb70-574" aria-hidden="true" tabindex="-1"></a>Go through each line. Can you figure out what each one is doing?</span>
+<span id="cb70-575"><a href="#cb70-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-576"><a href="#cb70-576" aria-hidden="true" tabindex="-1"></a>Notes: we introduce a couple of new functions here:</span>
+<span id="cb70-577"><a href="#cb70-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-578"><a href="#cb70-578" aria-hidden="true" tabindex="-1"></a><span class="ss">-    </span><span class="in">`sd()`</span>: computes the standard deviation</span>
+<span id="cb70-579"><a href="#cb70-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-580"><a href="#cb70-580" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`sqrt()`</span>: computes the square root</span>
+<span id="cb70-581"><a href="#cb70-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-582"><a href="#cb70-582" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>we compute the standard error of the mean (<span class="in">`sem`</span>) using the following formula: $SEM = \frac{SD}{\sqrt{N}}$</span>
+<span id="cb70-583"><a href="#cb70-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-586"><a href="#cb70-586" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-587"><a href="#cb70-587" aria-hidden="true" tabindex="-1"></a><span class="co">#compute the overall group mean by condition and block</span></span>
+<span id="cb70-588"><a href="#cb70-588" aria-hidden="true" tabindex="-1"></a><span class="co">#also compute the standard error of the mean</span></span>
+<span id="cb70-589"><a href="#cb70-589" aria-hidden="true" tabindex="-1"></a>group_means_1a <span class="ot">&lt;-</span> subj_block_1a <span class="sc">|&gt;</span></span>
+<span id="cb70-590"><a href="#cb70-590" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition,block_num) <span class="sc">|&gt;</span></span>
+<span id="cb70-591"><a href="#cb70-591" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_correct =</span> <span class="fu">mean</span>(accuracy),</span>
+<span id="cb70-592"><a href="#cb70-592" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_correct =</span> <span class="fu">sd</span>(accuracy),</span>
+<span id="cb70-593"><a href="#cb70-593" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_obs =</span> <span class="fu">n</span>(),</span>
+<span id="cb70-594"><a href="#cb70-594" aria-hidden="true" tabindex="-1"></a>            <span class="at">sem =</span> sd_correct <span class="sc">/</span> <span class="fu">sqrt</span>(n_obs))</span>
+<span id="cb70-595"><a href="#cb70-595" aria-hidden="true" tabindex="-1"></a>group_means_1a</span>
+<span id="cb70-596"><a href="#cb70-596" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb70-597"><a href="#cb70-597" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-598"><a href="#cb70-598" aria-hidden="true" tabindex="-1"></a>Let's plot it!</span>
+<span id="cb70-599"><a href="#cb70-599" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-602"><a href="#cb70-602" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb70-603"><a href="#cb70-603" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(group_means_1a,<span class="fu">aes</span>(block_num,mean_correct,<span class="at">color=</span>condition))<span class="sc">+</span></span>
+<span id="cb70-604"><a href="#cb70-604" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean_correct<span class="sc">-</span>sem,<span class="at">ymax=</span>mean_correct<span class="sc">+</span>sem),<span class="at">width=</span><span class="dv">0</span>)<span class="sc">+</span></span>
+<span id="cb70-605"><a href="#cb70-605" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb70-606"><a href="#cb70-606" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb70-607"><a href="#cb70-607" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Block Number"</span>)<span class="sc">+</span></span>
+<span id="cb70-608"><a href="#cb70-608" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Average Proportion Correct"</span>)<span class="sc">+</span></span>
+<span id="cb70-609"><a href="#cb70-609" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb70-610"><a href="#cb70-610" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
