@@ -1,9 +1,9 @@
 #######################################################################################
 # Book settings
-title: Psych 750
-author: Gary Lupyan
-copyright: "2022. Some examples adapted from http://introtopython.org/"
-email: lupyan@wisc.edu
+title: Cogs 219
+author: Martin Zettersten
+copyright: "2025. Adapted from Gary Lupyan's https://psych750.github.io/"
+email: mzettersten@ucsd.edu
 logo                        : "favicon.png"  # A path to the book logo
 exclude_patterns            : ["README.md", _build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints"]
 
@@ -21,7 +21,7 @@ html:
   navbar_number_sections    : True  # Add a number to each section in your left navbar
   google_analytics_id       : ""  # A GA id that can be used to track book views.
   home_page_in_navbar       : false  # Whether to include your home page in the left Navigation Bar
-  baseurl                   : "https://psych750.github.io/"  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+  baseurl                   : "https://cogs219.github.io/"  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
   use_repository_button     : true
   use_edit_page_button      : false
   use_issues_button         : false
@@ -30,14 +30,14 @@ html:
 #######################################################################################
 # Launch button settings
 repository:
-  url                       : https://github.com/psych750/psych750.github.io  # The URL to your book's repository
+  url                       : https://github.com/COGS219/cogs219.github.io  # The URL to your book's repository
   branch                    : main  # Which branch of the repository should be used when creating links
 
 sphinx:
   config:
     html_extra_path: ['assets']
     html_theme_options:
-      repository_url: https://github.com/psych750/psych750.github.io
+      repository_url: https://github.com/COGS219/cogs219.github.io
       repository_branch: main
       launch_buttons: 
         binderhub_url: "https://mybinder.org"

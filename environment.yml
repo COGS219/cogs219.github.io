@@ -1,4 +1,4 @@
-name: psych750
+name:cogs219
 channels:
   - defaults
 dependencies:
@@ -7,4 +7,3 @@ dependencies:
   - jupyter
   - jupyterlab
   - pycodestyle
-prefix: /Users/glupyan/anaconda3/envs/psych750
