@@ -6,8 +6,8 @@ options:
 parts:
   - caption: Schedule
     chapters:
-    - file: notebooks/schedule
-      title: Week by week schedule
+    # - file: notebooks/schedule
+    #   title: Week by week schedule
     # - url: https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf
     #   title: Syllabus
     # - file: notebooks/submitting_assignments
@@ -16,12 +16,12 @@ parts:
     #   title: How to get solutions
     - file: notebooks/project_2023
       title: Project info
-  - caption: Installation instructions
-    chapters:
-    - file: notebooks/programming_environment_osx
-      title: Instructions for MacOS
-    - file: notebooks/programming_environment_windows
-      title: Instructions for Windows
+  # - caption: Installation instructions
+  #   chapters:
+  #   - file: notebooks/programming_environment_osx
+  #     title: Instructions for MacOS
+  #   - file: notebooks/programming_environment_windows
+  #     title: Instructions for Windows
   - caption: References
     chapters:
     - file: notebooks/Shell_reference
@@ -70,26 +70,26 @@ parts:
       title: Introduction to Tidyverse
     - file: notebooks/python_basics
       title: Python basics 
-    - file: notebooks/activity_print_pyramids
-      title: The first thinking exercise
-    - file: notebooks/activity_file_writing
-      title: Primer on writing files
-    - file: notebooks/activity_list_manip_vowels_1
-      title: Working with strings in lists
-    - file: notebooks/activity_dictionaries
-      title: A few dictionary activities
-    - file: notebooks/activity_trial_generation
-      title: Some more trial generation practice
-    - file: notebooks/activity_debugging
-      title: Debugging practice 1
-    - url: https://cogs219.github.io/knitted_Rmd/playing_around_gss.html
-      title: Basic Examples of GSS data wrangling
-    - file: notebooks/more_gss_practice
-      title: More dataviz practice with GSS
-    - file: notebooks/nltk_demo
-      title: NLTK demo
-    - file: notebooks/scraping
-      title: Webscraping demo and practice
+    # - file: notebooks/activity_print_pyramids
+    #   title: The first thinking exercise
+    # - file: notebooks/activity_file_writing
+    #   title: Primer on writing files
+    # - file: notebooks/activity_list_manip_vowels_1
+    #   title: Working with strings in lists
+    # - file: notebooks/activity_dictionaries
+    #   title: A few dictionary activities
+    # - file: notebooks/activity_trial_generation
+    #   title: Some more trial generation practice
+    # - file: notebooks/activity_debugging
+    #   title: Debugging practice 1
+    # - url: https://cogs219.github.io/knitted_Rmd/playing_around_gss.html
+    #   title: Basic Examples of GSS data wrangling
+    # - file: notebooks/more_gss_practice
+    #   title: More dataviz practice with GSS
+    # - file: notebooks/nltk_demo
+    #   title: NLTK demo
+    # - file: notebooks/scraping
+    #   title: Webscraping demo and practice
   # - caption: Exercises
   #   chapters:
   #   - file: notebooks/Exercise0-test
