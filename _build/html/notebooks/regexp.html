@@ -1,0 +1,1482 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Regular expressions &#8212; Psych 750</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css?v=f7f7574a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/regexp';</script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/regexp.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Classes" href="classes.html" />
+    <link rel="prev" title="Mutables, Immutables, and Object References" href="activity_reference_vs_value.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/favicon.png" class="logo__image only-light" alt="Psych 750 - Home"/>
+    <img src="../_static/favicon.png" class="logo__image only-dark pst-js-only" alt="Psych 750 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Schedule</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="schedule.html">Week by week schedule</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="submitting_assignments.html">Submitting assignments</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="project_2023.html">Project info</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation instructions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_osx.html">Instructions for MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_windows.html">Installation and setup for Windows</a></li>
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Shell_reference.html">Basic Linux commands</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Python_reference.html">Python reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Psychopy_reference.html">PsychoPy reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageMagick.html">ImageMagick/GraphicsMagick reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Self Study Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="var_string_num.html">Variables, Strings, and Numbers</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_basics.html">Lists - the basics</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="if_statements.html">If Statements</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introducing_functions.html">Introducing Functions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_comprehension.html">List Comprehension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_a.html">Review of Fundamentals A</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trial_generation.html">Randomization and Iteration</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">Handling Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_b.html">Review of Fundamentals B</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_basic_pandas_operations.html">Using Pandas to read/write CSV files.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="globbing_files.html">File access-Globbing and preloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_reference_vs_value.html">Mutable and immutable types</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">In class activities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python_basics.html">Python basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_print_pyramids.html">The first thinking exercise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_file_writing.html">Primer on writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_list_manip_vowels_1.html">Working with strings in lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_dictionaries.html">A few dictionary activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_trial_generation.html">Some more trial generation practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_debugging.html">Debugging practice 1</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">Basic Examples of GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_gss_practice.html">More dataviz practice with GSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nltk_demo.html">NLTK demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Webscraping demo and practice</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Exercise0-test.html">Exercise 0-Test assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise1-square.html">Exercise 1-Show a square and do stuff with it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise2-stroop.html">Exercise 2-A Stroop task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise3-extended-stroop.html">Exercise 3-Extending the Stroop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise4-more_modularized_stroop.html">Exercise 4-Modularization and speech recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise5-face-search.html">Exercise 5-Loading external files and mouse action!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise6-stroop_analysis.html">Exercise 6-Analyzing the Stroop data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise7-gss-wrangling.html">Exercise 7-Exploring the general social survey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise8-more-gss-wrangling.html">Exercise 8-More practice with GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise9-regexps.html">Exercise 9 - Practice with regular expressions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Exercise10-nltk.html">Exercise 10-Natural language processing with NLTK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise11-oop_circles.html">Exercise 11-Practice with object oriented programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/regexp.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/regexp.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regular expressions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-as-a-filter">Use as a filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-in-place-of-conditionals">Use in place of conditionals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#search-and-replace">Search and replace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-file-renaming">Batch file renaming</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regular-expressions">
+<h1>Regular expressions<a class="headerlink" href="#regular-expressions" title="Link to this heading">#</a></h1>
+<p>Regular expressions are an immensely powerful tool built into most modern computer languages. They are a type of formal grammar that allow you to match strings that match or mismatch a particular rule. <a class="reference external" href="http://www.rexegg.com/regex-uses.html">Common uses</a> include checking if user input conforms to a desired pattern (e.g., 3 numbers followed by two numbers, followed by 3 numbers), to all sorts of complicated search-replace operations both in text-files and, e.g., renaming files.</p>
+<p>There are <a class="reference external" href="https://www.amazon.com/Mastering-Regular-Expressions-Jeffrey-Friedl/dp/0596528124">entire books</a> written on regular expressions as well as <a class="reference external" href="https://www.regular-expressions.info/">comprehensive online references</a>. We’ll only concern ourselves with a few basics here.</p>
+<p><strong>Start by looking over the <a class="reference external" href="https://regexone.com/">first 10 lessons of this tutorial</a></strong> (they’re very quick), paying special attention to the sidebar on right, which I reproduce below.</p>
+<p>Now go to this snazzy <a class="reference external" href="https://regexr.com/">interactive regexp matcher</a> and play around with it to get a feel for the syntax.</p>
+<p>Then go through the rest of this notebook and make sure you understand why each regexp works in the way it does.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Syntax</p></th>
+<th class="head text-left"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>abc…</p></td>
+<td class="text-left"><p>Literal letters</p></td>
+</tr>
+<tr class="row-odd"><td><p>\d</p></td>
+<td class="text-left"><p>Any Digit</p></td>
+</tr>
+<tr class="row-even"><td><p>\D</p></td>
+<td class="text-left"><p>Any Non-digit character</p></td>
+</tr>
+<tr class="row-odd"><td><p>.</p></td>
+<td class="text-left"><p>Any single character</p></td>
+</tr>
+<tr class="row-even"><td><p>.</p></td>
+<td class="text-left"><p>Period (slash is an escape character)</p></td>
+</tr>
+<tr class="row-odd"><td><p>[abc]</p></td>
+<td class="text-left"><p>Only a, b, or c</p></td>
+</tr>
+<tr class="row-even"><td><p>[^abc]</p></td>
+<td class="text-left"><p>Not a, b, nor c</p></td>
+</tr>
+<tr class="row-odd"><td><p>[a-z]</p></td>
+<td class="text-left"><p>Characters a to z</p></td>
+</tr>
+<tr class="row-even"><td><p>[A-Z]</p></td>
+<td class="text-left"><p>Characters A to Z</p></td>
+</tr>
+<tr class="row-odd"><td><p>[0-9]</p></td>
+<td class="text-left"><p>Numbers 0 to 9</p></td>
+</tr>
+<tr class="row-even"><td><p>\w</p></td>
+<td class="text-left"><p>Any Alphanumeric character</p></td>
+</tr>
+<tr class="row-odd"><td><p>\W</p></td>
+<td class="text-left"><p>Any Non-alphanumeric character</p></td>
+</tr>
+<tr class="row-even"><td><p>{m}</p></td>
+<td class="text-left"><p>m Repetitions</p></td>
+</tr>
+<tr class="row-odd"><td><p>{m,n}</p></td>
+<td class="text-left"><p>m to n Repetitions</p></td>
+</tr>
+<tr class="row-even"><td><p>*</p></td>
+<td class="text-left"><p>Zero or more repetitions</p></td>
+</tr>
+<tr class="row-odd"><td><p>?</p></td>
+<td class="text-left"><p>Optional character (0 or 1)</p></td>
+</tr>
+<tr class="row-even"><td><p>+</p></td>
+<td class="text-left"><p>One or more repetitions</p></td>
+</tr>
+<tr class="row-odd"><td><p>\s</p></td>
+<td class="text-left"><p>Any Whitespace</p></td>
+</tr>
+<tr class="row-even"><td><p>\S</p></td>
+<td class="text-left"><p>Any Non-whitespace character</p></td>
+</tr>
+<tr class="row-odd"><td><p>^</p></td>
+<td class="text-left"><p>Start of string (or line for multiline matching)</p></td>
+</tr>
+<tr class="row-even"><td><p>$</p></td>
+<td class="text-left"><p>End of string (or line for multiline matching)</p></td>
+</tr>
+<tr class="row-odd"><td><p>(…)</p></td>
+<td class="text-left"><p>Capture Group (for capturing matches and backreference)</p></td>
+</tr>
+<tr class="row-even"><td><p>(a(bc))</p></td>
+<td class="text-left"><p>Capture Sub-group</p></td>
+</tr>
+<tr class="row-odd"><td><p>(.*)</p></td>
+<td class="text-left"><p>Capture all</p></td>
+</tr>
+<tr class="row-even"><td><p>(abc|def)</p></td>
+<td class="text-left"><p>Matches abc or def</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="use-as-a-filter">
+<h2>Use as a filter<a class="headerlink" href="#use-as-a-filter" title="Link to this heading">#</a></h2>
+<p>Let’s begin by reading in a file containing a bunch of words from the <a class="reference external" href="http://www.anc.org/">American National Corpus</a> that have a frequency of at least 9. Here’s a sample of what this file looks like.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>word	lemma	pos	freq
+the	the	DT	1081168
+of	of	IN	539793
+and	and	CC	466737
+to	to	TO	448519
+a	a	DT	406057
+in	in	IN	360853
+is	be	VBZ	192975
+</pre></div>
+</div>
+<p>For those unfamiliar with language lingo, English lemmas are basically the word-stems, e.g., the lemma of <em>cars</em> is <em>car</em>; the lemma of <em>walking</em> is <em>walk</em>. pos stands for <a class="reference external" href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html"><em>part of speech</em></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span> <span class="c1">#import the python regexp module</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://psych750.github.io/data/ANC-written-count_over9.txt&#39;</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;ISO-8859-1&quot;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]))[</span><span class="mi">1</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="si">}</span><span class="s2"> unique words&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We have 48316 unique words
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s use some regular expressions starting with simple ones, and moving on to every slightly more complicated ones.</p>
+<p>Grab words beginning with <em>q</em></p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^q&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;qualitatively&#39;,
+ &#39;quarterly&#39;,
+ &#39;quadrupled&#39;,
+ &#39;quotes&#39;,
+ &#39;qaida&#39;,
+ &#39;questionnaires&#39;,
+ &#39;qtls&#39;,
+ &#39;quibble&#39;,
+ &#39;quintana&#39;,
+ &#39;qin&#39;,
+ &#39;quilts&#39;,
+ &#39;quetzalcoatl&#39;,
+ &#39;qçí&#39;,
+ &#39;quadratic&#39;,
+ &#39;quartop&#39;,
+ &#39;quit&#39;,
+ &#39;querying&#39;,
+ &#39;qing&#39;,
+ &#39;qualities&#39;,
+ &#39;quartet&#39;,
+ &#39;qd&#39;,
+ &#39;quadruple&#39;,
+ &#39;quoting&#39;,
+ &#39;quso&#39;,
+ &#39;quixotic&#39;,
+ &#39;quiz&#39;,
+ &#39;quests&#39;,
+ &#39;queue&#39;,
+ &#39;qingdao&#39;,
+ &#39;qtc&#39;,
+ &#39;queried&#39;,
+ &#39;quai&#39;,
+ &#39;quantiles&#39;,
+ &#39;qassam&#39;,
+ &#39;quiescent&#39;,
+ &#39;quiche&#39;,
+ &#39;quietly&#39;,
+ &#39;quirky&#39;,
+ &#39;quarrel&#39;,
+ &#39;quincy&#39;,
+ &#39;quell&#39;,
+ &#39;quarter-century&#39;,
+ &#39;quadrants&#39;,
+ &#39;quick&#39;,
+ &#39;qspline&#39;,
+ &#39;quintessential&#39;,
+ &#39;quashed&#39;,
+ &#39;qaddafi&#39;,
+ &#39;quintanilla&#39;,
+ &#39;quiver&#39;,
+ &#39;queen&#39;,
+ &#39;quilting&#39;,
+ &#39;quantum&#39;,
+ &#39;quipped&#39;,
+ &#39;q-pna&#39;,
+ &#39;quill&#39;,
+ &#39;qualifying&#39;,
+ &#39;quick-edit&#39;,
+ &#39;quart&#39;,
+ &#39;qios&#39;,
+ &#39;quay&#39;,
+ &#39;quitting&#39;,
+ &#39;quagmire&#39;,
+ &#39;quickly&#39;,
+ &#39;qe&#39;,
+ &#39;quarterfinals&#39;,
+ &#39;quilt&#39;,
+ &#39;quenched&#39;,
+ &#39;quantities&#39;,
+ &#39;quartiles&#39;,
+ &#39;quantitate&#39;,
+ &#39;qtl&#39;,
+ &#39;quantitatively&#39;,
+ &#39;quran&#39;,
+ &#39;quarterfinal&#39;,
+ &#39;quickening&#39;,
+ &#39;quantitative&#39;,
+ &#39;quickness&#39;,
+ &#39;quine&#39;,
+ &#39;quaint&#39;,
+ &#39;qianlong&#39;,
+ &#39;quebec&#39;,
+ &#39;qualifications&#39;,
+ &#39;quickest&#39;,
+ &#39;quantified&#39;,
+ &#39;q&#39;,
+ &#39;quandary&#39;,
+ &#39;qutb&#39;,
+ &#39;quot&#39;,
+ &#39;qadir&#39;,
+ &#39;quote&#39;,
+ &#39;quarterback&#39;,
+ &#39;queasy&#39;,
+ &#39;quarterbacks&#39;,
+ &#39;qualified&#39;,
+ &#39;qt&#39;,
+ &#39;queries&#39;,
+ &#39;quintile&#39;,
+ &#39;quark&#39;,
+ &#39;qualifier&#39;,
+ &#39;quayle&#39;,
+ &#39;qeis&#39;,
+ &#39;qsp&#39;,
+ &#39;quail&#39;,
+ &#39;qida&#39;,
+ &#39;quad&#39;,
+ &#39;qpak&#39;,
+ &#39;quo&#39;,
+ &#39;qualms&#39;,
+ &#39;questionable&#39;,
+ &#39;quickie&#39;,
+ &#39;quartz&#39;,
+ &#39;quantify&#39;,
+ &#39;quotations&#39;,
+ &#39;quinone&#39;,
+ &#39;quarry&#39;,
+ &#39;quantity&#39;,
+ &#39;quindlen&#39;,
+ &#39;quantifying&#39;,
+ &#39;qur&#39;,
+ &#39;questioning&#39;,
+ &#39;qb&#39;,
+ &#39;quds&#39;,
+ &#39;quirks&#39;,
+ &#39;quarters&#39;,
+ &#39;quality&#39;,
+ &#39;qéåüåçäçöó&#39;,
+ &#39;québécois&#39;,
+ &#39;qureshi&#39;,
+ &#39;quadrangle&#39;,
+ &#39;quotable&#39;,
+ &#39;quadrant&#39;,
+ &#39;queues&#39;,
+ &#39;qu&#39;,
+ &#39;questions&#39;,
+ &#39;quickedit&#39;,
+ &#39;quenk&#39;,
+ &#39;qualcomm&#39;,
+ &#39;quasispecies&#39;,
+ &#39;quotation&#39;,
+ &#39;quixote&#39;,
+ &#39;quips&#39;,
+ &#39;quake&#39;,
+ &#39;quentin&#39;,
+ &#39;quid&#39;,
+ &#39;qa&#39;,
+ &#39;quaternary&#39;,
+ &#39;que&#39;,
+ &#39;quilted&#39;,
+ &#39;quantitated&#39;,
+ &#39;quackery&#39;,
+ &#39;quoted&#39;,
+ &#39;quantile&#39;,
+ &#39;qualifiers&#39;,
+ &#39;question&#39;,
+ &#39;quip&#39;,
+ &#39;qui&#39;,
+ &#39;qiaquick&#39;,
+ &#39;quite&#39;,
+ &#39;quasi&#39;,
+ &#39;quinta&#39;,
+ &#39;qus&#39;,
+ &#39;qrs&#39;,
+ &#39;qrna&#39;,
+ &#39;quality-of-life&#39;,
+ &#39;quizzes&#39;,
+ &#39;quakes&#39;,
+ &#39;queer&#39;,
+ &#39;qualitative&#39;,
+ &#39;québec&#39;,
+ &#39;quaker&#39;,
+ &#39;quixtar&#39;,
+ &#39;quirk&#39;,
+ &#39;quartops&#39;,
+ &#39;qua&#39;,
+ &#39;quack&#39;,
+ &#39;quintas&#39;,
+ &#39;quigley&#39;,
+ &#39;questioned&#39;,
+ &#39;quiet&#39;,
+ &#39;qualify&#39;,
+ &#39;quarreling&#39;,
+ &#39;quintiles&#39;,
+ &#39;quotas&#39;,
+ &#39;queensland&#39;,
+ &#39;question-and-answer&#39;,
+ &#39;quest&#39;,
+ &#39;quantitation&#39;,
+ &#39;qiagen&#39;,
+ &#39;quench&#39;,
+ &#39;qualifies&#39;,
+ &#39;quotient&#39;,
+ &#39;qio&#39;,
+ &#39;questionnaire&#39;,
+ &#39;quash&#39;,
+ &#39;quayside&#39;,
+ &#39;quibbles&#39;,
+ &#39;quieter&#39;,
+ &#39;questioner&#39;,
+ &#39;qaeda&#39;,
+ &#39;query&#39;,
+ &#39;quantifiable&#39;,
+ &#39;qol&#39;,
+ &#39;quits&#39;,
+ &#39;quinn&#39;,
+ &#39;quick-line&#39;,
+ &#39;quintet&#39;,
+ &#39;quarter&#39;,
+ &#39;quickened&#39;,
+ &#39;qatar&#39;,
+ &#39;quantification&#39;,
+ &#39;quarrels&#39;,
+ &#39;queens&#39;,
+ &#39;quota&#39;,
+ &#39;quidditch&#39;,
+ &#39;quicker&#39;,
+ &#39;quenching&#39;,
+ &#39;quecreek&#39;,
+ &#39;quarries&#39;,
+ &#39;qualification&#39;,
+ &#39;quinones&#39;,
+ &#39;quartets&#39;,
+ &#39;qwest&#39;,
+ &#39;quivering&#39;,
+ &#39;qp&#39;,
+ &#39;quaid&#39;,
+ &#39;qrt-pcr&#39;,
+ &#39;quays&#39;,
+ &#39;quinean&#39;,
+ &#39;quartile&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;l</span><span class="si">{1}</span><span class="s1">.+m</span><span class="si">{1}</span><span class="s1">.+n</span><span class="si">{1}</span><span class="s1">.+o</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;self-determination&#39;,
+ &#39;multimillion-dollar&#39;,
+ &#39;self-monitoring&#39;,
+ &#39;flamingo&#39;,
+ &#39;limoncello&#39;,
+ &#39;illumination&#39;,
+ &#39;filamentous&#39;,
+ &#39;complementation&#39;,
+ &#39;filamentation&#39;,
+ &#39;ultramicroextensions&#39;,
+ &#39;telecommunications&#39;,
+ &#39;flamingos&#39;,
+ &#39;supplementation&#39;,
+ &#39;multidimensional&#39;,
+ &#39;chloramphenicol&#39;,
+ &#39;elimination&#39;,
+ &#39;self-incrimination&#39;,
+ &#39;bloomington&#39;,
+ &#39;implementations&#39;,
+ &#39;flamenco&#39;,
+ &#39;implementation&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Grab all words begin with an <em>a</em> and end with an <em>i</em></p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^a\w+i$&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;armani&#39;,
+ &#39;avi&#39;,
+ &#39;alexei&#39;,
+ &#39;api&#39;,
+ &#39;accompli&#39;,
+ &#39;abdelghani&#39;,
+ &#39;assisi&#39;,
+ &#39;asci&#39;,
+ &#39;acini&#39;,
+ &#39;ami&#39;,
+ &#39;adlai&#39;,
+ &#39;arundhati&#39;,
+ &#39;aulaqi&#39;,
+ &#39;asahi&#39;,
+ &#39;ambani&#39;,
+ &#39;ascii&#39;,
+ &#39;alibi&#39;,
+ &#39;arabi&#39;,
+ &#39;ani&#39;,
+ &#39;ashkenazi&#39;,
+ &#39;afghani&#39;,
+ &#39;agassi&#39;,
+ &#39;abyssi&#39;,
+ &#39;amalfi&#39;,
+ &#39;anti&#39;,
+ &#39;alveoli&#39;,
+ &#39;antoni&#39;,
+ &#39;ajami&#39;,
+ &#39;agouti&#39;,
+ &#39;abi&#39;,
+ &#39;audi&#39;,
+ &#39;adi&#39;,
+ &#39;aci&#39;,
+ &#39;afi&#39;,
+ &#39;ali&#39;,
+ &#39;agnelli&#39;,
+ &#39;andrei&#39;,
+ &#39;alumni&#39;,
+ &#39;ari&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Grab all words that begin with an <em>a</em>, followed by 4-6 letters and and on an <em>i</em></p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^a\w{4,6}i$&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;armani&#39;,
+ &#39;alexei&#39;,
+ &#39;accompli&#39;,
+ &#39;assisi&#39;,
+ &#39;aulaqi&#39;,
+ &#39;ambani&#39;,
+ &#39;afghani&#39;,
+ &#39;agassi&#39;,
+ &#39;abyssi&#39;,
+ &#39;amalfi&#39;,
+ &#39;alveoli&#39;,
+ &#39;antoni&#39;,
+ &#39;agouti&#39;,
+ &#39;agnelli&#39;,
+ &#39;andrei&#39;,
+ &#39;alumni&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Grab words that start with a <em>b</em>, end on an <em>t</em>, and contain a <em>t</em> somewhere in the middle</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^b\w+t\w+t$&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;batshit&#39;,
+ &#39;baptist&#39;,
+ &#39;blatant&#39;,
+ &#39;bittersweet&#39;,
+ &#39;backstreet&#39;,
+ &#39;butaprost&#39;,
+ &#39;bartlett&#39;,
+ &#39;brightest&#39;,
+ &#39;blastocyst&#39;,
+ &#39;betterment&#39;,
+ &#39;bestest&#39;,
+ &#39;bittorrent&#39;,
+ &#39;butait&#39;,
+ &#39;bioterrorist&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Let’s say we want to exclude words that end on two <em>t</em>s.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;^b\w+t\w+[^tt]t$&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;batshit&#39;,
+ &#39;baptist&#39;,
+ &#39;blatant&#39;,
+ &#39;bittersweet&#39;,
+ &#39;backstreet&#39;,
+ &#39;butaprost&#39;,
+ &#39;brightest&#39;,
+ &#39;blastocyst&#39;,
+ &#39;betterment&#39;,
+ &#39;bestest&#39;,
+ &#39;bittorrent&#39;,
+ &#39;butait&#39;,
+ &#39;bioterrorist&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Let’s get all the words containing the vowels a, e, i, o, in that order</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;\w+a+\w+e+\w+i+\w+o+&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;characterization&#39;,
+ &#39;catheterization&#39;,
+ &#39;carvedilol&#39;,
+ &#39;cardiorespiratory&#39;,
+ &#39;compartmentalization&#39;,
+ &#39;categorization&#39;,
+ &#39;characterizations&#39;,
+ &#39;parameterization&#39;,
+ &#39;intraperitoneal&#39;,
+ &#39;chloramphenicol&#39;,
+ &#39;campesino&#39;,
+ &#39;intraperitoneally&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>You know that saying <a class="reference external" href="https://en.wikipedia.org/wiki/I_before_E_except_after_C">i before e except after c</a> (in which case it’s i after e, like <em>receive</em>). Let’s see how well this mnemonic holds up.</p>
+<p>Let’s find out how many words there are that have <em>ie</em> vs. <em>ei</em> in them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;ie words:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">([</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;ie&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;ei words:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">([</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;ei&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ie words: 1439
+ei words: 483
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s check what happens when we check for a ‘c’ preceding ie/ei</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;cie words:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">([</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;cie&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;cei words:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">([</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;cei&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cie words: 107
+cei words: 33
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are actually <em>more</em> words that violate the mnemonic than those that obey it!
+What are these words?</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;cie&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;btk-deficient&#39;,
+ &#39;prescience&#39;,
+ &#39;malignancies&#39;,
+ &#39;cross-species&#39;,
+ &#39;species-specific&#39;,
+ &#39;contingencies&#39;,
+ &#39;inconsistencies&#39;,
+ &#39;omniscient&#39;,
+ &#39;efficiencies&#39;,
+ &#39;consciences&#39;,
+ &#39;redundancies&#39;,
+ &#39;efficiency&#39;,
+ &#39;vacancies&#39;,
+ &#39;conspiracies&#39;,
+ &#39;efficiently&#39;,
+ &#39;inadequacies&#39;,
+ &#39;legacies&#39;,
+ &#39;pregnancies&#39;,
+ &#39;sucient&#39;,
+ &#39;delicacies&#39;,
+ &#39;glacier&#39;,
+ &#39;efficacies&#39;,
+ &#39;newscientist&#39;,
+ &#39;deficient&#39;,
+ &#39;bureaucracies&#39;,
+ &#39;prescient&#39;,
+ &#39;fancier&#39;,
+ &#39;coefficient&#39;,
+ &#39;bankruptcies&#39;,
+ &#39;scientific&#39;,
+ &#39;fancies&#39;,
+ &#39;conscientious&#39;,
+ &#39;agencies&#39;,
+ &#39;scientist&#39;,
+ &#39;pricier&#39;,
+ &#39;marcie&#39;,
+ &#39;ancients&#39;,
+ &#39;immunodeficiency&#39;,
+ &#39;conscience&#39;,
+ &#39;lucie&#39;,
+ &#39;insufficiency&#39;,
+ &#39;deficiency&#39;,
+ &#39;self-sufficiency&#39;,
+ &#39;policies&#39;,
+ &#39;suycient&#39;,
+ &#39;science-fiction&#39;,
+ &#39;concierge&#39;,
+ &#39;societal&#39;,
+ &#39;constituencies&#39;,
+ &#39;inefficiency&#39;,
+ &#39;inaccuracies&#39;,
+ &#39;currencies&#39;,
+ &#39;insufficient&#39;,
+ &#39;ancient&#39;,
+ &#39;society&#39;,
+ &#39;proficiency&#39;,
+ &#39;science&#39;,
+ &#39;scientists&#39;,
+ &#39;science-based&#39;,
+ &#39;saucier&#39;,
+ &#39;sufficiently&#39;,
+ &#39;quasispecies&#39;,
+ &#39;scientia&#39;,
+ &#39;neuroscientist&#39;,
+ &#39;dependencies&#39;,
+ &#39;biosciences&#39;,
+ &#39;fancied&#39;,
+ &#39;tendencies&#39;,
+ &#39;intricacies&#39;,
+ &#39;subspecies&#39;,
+ &#39;scientifically&#39;,
+ &#39;glaciers&#39;,
+ &#39;proficient&#39;,
+ &#39;energy-efficient&#39;,
+ &#39;species&#39;,
+ &#39;gracie&#39;,
+ &#39;scientology&#39;,
+ &#39;francie&#39;,
+ &#39;frequencies&#39;,
+ &#39;emergencies&#39;,
+ &#39;aberrancies&#39;,
+ &#39;candidacies&#39;,
+ &#39;inefficiencies&#39;,
+ &#39;sciences&#39;,
+ &#39;tumefaciens&#39;,
+ &#39;interspecies&#39;,
+ &#39;conscientiously&#39;,
+ &#39;insufficiently&#39;,
+ &#39;hacienda&#39;,
+ &#39;democracies&#39;,
+ &#39;financier&#39;,
+ &#39;coefficients&#39;,
+ &#39;financiers&#39;,
+ &#39;deficiencies&#39;,
+ &#39;prophecies&#39;,
+ &#39;inefficient&#39;,
+ &#39;unscientific&#39;,
+ &#39;competencies&#39;,
+ &#39;self-sufficient&#39;,
+ &#39;sufficiency&#39;,
+ &#39;neuroscience&#39;,
+ &#39;sufficient&#39;,
+ &#39;efficient&#39;,
+ &#39;potencies&#39;,
+ &#39;societies&#39;,
+ &#39;pharmacies&#39;,
+ &#39;discrepancies&#39;]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Here’s a tricky one. Let’s find words containing 4 <em>r</em>s (interspersed among other letters). One way to do this is to explicitly specify it… any character, r, any character, r.. etc. Like so..</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;\w*r+\w*r+\w*r+\w*r+\w*&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;counterterrorist&#39;,
+ &#39;cardiorespiratory&#39;,
+ &#39;extraterrestrials&#39;,
+ &#39;refrigerator&#39;,
+ &#39;extracurricular&#39;,
+ &#39;refrigerators&#39;,
+ &#39;grrrr&#39;,
+ &#39;extraterrestrial&#39;,
+ &#39;counterterrorism&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are two shortcomings to this approach. The first is that if we want 3 or 5 matches, we need to explicitly remove or add code rather than changing a single number-of-matches parameter. Another shortcoming is that hyphenated words are excluded. We can add hyphens by replacing <code class="docutils literal notranslate"><span class="pre">\w</span></code> with <code class="docutils literal notranslate"><span class="pre">[a-z\-]</span></code>, but that makes the expression even longer. Here’s a better solution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">curWord</span> <span class="k">for</span> <span class="n">curWord</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;([^r]*r[^r]*)</span><span class="si">{4}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">curWord</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;counter-terrorism&#39;,
+ &#39;counterterrorist&#39;,
+ &#39;cardiorespiratory&#39;,
+ &#39;extraterrestrials&#39;,
+ &#39;refrigerator&#39;,
+ &#39;reverse-transcribed&#39;,
+ &#39;reverse-transcription&#39;,
+ &#39;writer-director&#39;,
+ &#39;extracurricular&#39;,
+ &#39;antiretroviral-experienced&#39;,
+ &#39;refrigerators&#39;,
+ &#39;grrrr&#39;,
+ &#39;corporate-reform&#39;,
+ &#39;extraterrestrial&#39;,
+ &#39;counterterrorism&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s unpack that. We are matching a <a class="reference external" href="https://www.regular-expressions.info/refcapture.html">group</a> which is demarcated by parentheses. The group pattern is: not-an-r (0 or more times), an r, and then not-an-r (0 or more times). We want words that match this pattern exactly 4 times. That gives us all the words containing four <em>r</em>s and anything in between them (including nothing, hence <em>grrrr</em>)</p>
+</section>
+<section id="use-in-place-of-conditionals">
+<h2>Use in place of conditionals<a class="headerlink" href="#use-in-place-of-conditionals" title="Link to this heading">#</a></h2>
+<p>Let’s say we want to check whether an entered word is <em>color</em> or the British <em>colour</em>. We can do this with a conditional (<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">&quot;color&quot;</span> <span class="pre">or</span> <span class="pre">&quot;colour&quot;</span></code>), but we can also use regular expressions (which scale much better than conditionals). For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;colou?r&#39;</span><span class="p">,</span><span class="s1">&#39;The British like to colour their colors&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;colour&#39;, &#39;color&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unlike conditionals, this approach easily scales to, e.g., all cases where a non-initial ‘o’ is followed by either an ‘r’ or a ‘ur’. What regexp would match color/colour, favor/favour, humor/humour, neighbor/neighbour, (but not match or/our)?</p>
+<p>Here’s another example of a regexp using a series of disjunctions (OR statements) that matches “dog” and “cat” and “cag” and “cog” but not “got”. To get the matching string from the match object, use <code class="docutils literal notranslate"><span class="pre">.group()</span></code>, i.e., <code class="docutils literal notranslate"><span class="pre">variousWords.match('cat').group()</span></code> will return “cat”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variousWords</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[d|c][a|o][g|t]&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">variousWords</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">variousWords</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;dog&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">variousWords</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;cog&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">variousWords</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;cag&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">variousWords</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;got&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;re.Match object; span=(0, 3), match=&#39;cat&#39;&gt;
+&lt;re.Match object; span=(0, 3), match=&#39;dog&#39;&gt;
+&lt;re.Match object; span=(0, 3), match=&#39;cog&#39;&gt;
+&lt;re.Match object; span=(0, 3), match=&#39;cag&#39;&gt;
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here are some more examples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="c1">#will match any numbers</span>
+<span class="n">anyNums</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[0-9]+&#39;</span><span class="p">)</span>
+<span class="n">anyNums</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;There are 99 bottles of beer on the wall. 999....&#39;</span><span class="p">)</span> <span class="c1">#will return all matches</span>
+<span class="n">anyNums</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;There are 99 bottles of beer on the wall. 999....&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">()</span> <span class="c1">#will return just the first occurrence</span>
+
+<span class="c1">#two digit numbers from 00 to 59 or 80 to 89 </span>
+<span class="n">someNums</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[0-5][0-9]|[8][0-9]&#39;</span><span class="p">)</span>
+<span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">someNums</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s1">&#39;It will match 54, 52, and 88, but not 7 or 92 or any of the letters&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">someNums</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+<span class="n">matches</span>
+
+<span class="c1">#We don’t need to compile regular expressions using re.compile. but it speeds things up when using the same rule over a large corpus.</span>
+
+<span class="n">emailRegExGrouped</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;([\w.-]+)@([\w.-]+)&#39;</span><span class="p">)</span>
+<span class="c1">#the parenthesis allow us to access groups -- the first group corresponds to the first matched part (before the @). The second group to the domain (e.g., wisc.edu(</span>
+
+<span class="n">emailRegExGrouped</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;g.lupyan@gmail.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+<span class="p">(</span><span class="s1">&#39;g.lupyan&#39;</span><span class="p">,</span> <span class="s1">&#39;gmail.com&#39;</span><span class="p">)</span>
+
+<span class="n">emailRegExGrouped</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;g.lupyan@gmail.com lupyan@wisc.edu&#39;</span><span class="p">)</span>
+<span class="c1">#returns [(&#39;g.lupyan&#39;, &#39;gmail.com&#39;), (&#39;lupyan&#39;, &#39;wisc.edu&#39;)]</span>
+
+<span class="c1">#to get all the domains:</span>
+<span class="p">[</span><span class="n">email</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">emailRegExGrouped</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;g.lupyan@gmail.com lupyan@wisc.edu&#39;</span><span class="p">)]</span>
+<span class="c1">#returns [&#39;gmail.com&#39;, &#39;wisc.edu&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;gmail.com&#39;, &#39;wisc.edu&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="search-and-replace">
+<h2>Search and replace<a class="headerlink" href="#search-and-replace" title="Link to this heading">#</a></h2>
+<p>All good text editors allow you to use regular expressions in search and replace.
+A simple usage case is searching for lines that begin or end with a certain character sequence. To find lines that begin with “ab”, search for <code class="docutils literal notranslate"><span class="pre">^ab</span></code>. To find lines that end on <code class="docutils literal notranslate"><span class="pre">ies</span></code> search for <code class="docutils literal notranslate"><span class="pre">ies$</span></code>. If you’re trying to replace a string with some variant of the matched string, you’ll want to use capture groups.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to enable regular-expression search by clicking on .* button in the lower-left corner in Sublime text. or checking the appropriate box (sometimes labeled “Grep”) in other text editors</p>
+</div>
+<p>When using regular expressions in search/replace, it becomes useful to use matching groups.</p>
+<p>For example, suppose you want to replace the occurrences of the following strings, which occur at the start of each line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bdSubjCode_130</span>
+<span class="n">badSbjCode_131</span>
+<span class="n">baSubjCode_132</span>
+<span class="n">badSubjCode_133</span>
+<span class="n">badubjCode_134</span>
+<span class="n">BadSubjCode_135</span>
+</pre></div>
+</div>
+<p>with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MYSUBJCODE_130</span>
+<span class="n">MYSUBJCODE_131</span>
+<span class="n">MYSUBJCODE_132</span>
+<span class="n">MYSUBJCODE_133</span>
+<span class="n">MYSUBJCODE_134</span>
+<span class="n">MYSUBJCODE_135</span>
+</pre></div>
+</div>
+<p>You <em>could</em> manually do search replaces for each one. But if you have a hundred of these, that gets tedious fast and is a recipe for errors.</p>
+<p>Here’s a much better solution. Simply search for:</p>
+<p><code class="docutils literal notranslate"><span class="pre">(^\w+_)([0-9]+)</span></code></p>
+<p>and replace with</p>
+<p><code class="docutils literal notranslate"><span class="pre">MYSUBJCODE_\2</span></code></p>
+<p>The \2 refers to the second group, i.e., the number</p>
+<p>Here’s another example. Delete all the lines that start with some letters and end in ‘ing’:</p>
+<p>Search:
+<code class="docutils literal notranslate"><span class="pre">(^\w+ing).*</span></code>
+Replace with: nothing</p>
+<p>Now you can do another search and replace, searching for
+<code class="docutils literal notranslate"><span class="pre">\n+</span></code>
+and replacing with
+<code class="docutils literal notranslate"><span class="pre">\n</span></code>
+To get rid of multiple newlines that the first search/replace may have created.</p>
+</section>
+<section id="batch-file-renaming">
+<h2>Batch file renaming<a class="headerlink" href="#batch-file-renaming" title="Link to this heading">#</a></h2>
+<p>You can use what you’ve learned about regular expressions for manipulating not just actual text, but text used in file names. You can do this in straight-up Python using the <code class="docutils literal notranslate"><span class="pre">os</span></code> library, or by using GUI programs like <a class="reference external" href="https://mrrsoftware.com/namechanger/">NameChanger</a> (Mac),  or <a class="reference external" href="http://www.bulkrenameutility.co.uk/Main_Intro.php">Bulk Rename</a> (PC). These programs allow you to do batch renaming of files using simple search/replace (e.g., replace <code class="docutils literal notranslate"><span class="pre">_</span></code> with <code class="docutils literal notranslate"><span class="pre">-</span></code> as well as by using regular expressions for more complex changes!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-as-a-filter">Use as a filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-in-place-of-conditionals">Use in place of conditionals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#search-and-replace">Search and replace</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-file-renaming">Batch file renaming</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gary Lupyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022. Some examples adapted from http://introtopython.org/.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

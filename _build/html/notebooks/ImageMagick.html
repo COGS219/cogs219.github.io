@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ImageMagick basics &#8212; Psych 750</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css?v=f7f7574a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/ImageMagick';</script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/ImageMagick.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Variables, Strings, and Numbers" href="var_string_num.html" />
+    <link rel="prev" title="Psychopy reference" href="Psychopy_reference.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/favicon.png" class="logo__image only-light" alt="Psych 750 - Home"/>
+    <img src="../_static/favicon.png" class="logo__image only-dark pst-js-only" alt="Psych 750 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Schedule</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="schedule.html">Week by week schedule</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="submitting_assignments.html">Submitting assignments</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="project_2023.html">Project info</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation instructions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_osx.html">Instructions for MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_windows.html">Installation and setup for Windows</a></li>
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Shell_reference.html">Basic Linux commands</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Python_reference.html">Python reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Psychopy_reference.html">PsychoPy reference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ImageMagick/GraphicsMagick reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Self Study Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="var_string_num.html">Variables, Strings, and Numbers</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_basics.html">Lists - the basics</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="if_statements.html">If Statements</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introducing_functions.html">Introducing Functions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_comprehension.html">List Comprehension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_a.html">Review of Fundamentals A</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trial_generation.html">Randomization and Iteration</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">Handling Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_b.html">Review of Fundamentals B</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_basic_pandas_operations.html">Using Pandas to read/write CSV files.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="globbing_files.html">File access-Globbing and preloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_reference_vs_value.html">Mutable and immutable types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regexp.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">In class activities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python_basics.html">Python basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_print_pyramids.html">The first thinking exercise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_file_writing.html">Primer on writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_list_manip_vowels_1.html">Working with strings in lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_dictionaries.html">A few dictionary activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_trial_generation.html">Some more trial generation practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_debugging.html">Debugging practice 1</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">Basic Examples of GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_gss_practice.html">More dataviz practice with GSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nltk_demo.html">NLTK demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Webscraping demo and practice</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Exercise0-test.html">Exercise 0-Test assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise1-square.html">Exercise 1-Show a square and do stuff with it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise2-stroop.html">Exercise 2-A Stroop task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise3-extended-stroop.html">Exercise 3-Extending the Stroop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise4-more_modularized_stroop.html">Exercise 4-Modularization and speech recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise5-face-search.html">Exercise 5-Loading external files and mouse action!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise6-stroop_analysis.html">Exercise 6-Analyzing the Stroop data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise7-gss-wrangling.html">Exercise 7-Exploring the general social survey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise8-more-gss-wrangling.html">Exercise 8-More practice with GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise9-regexps.html">Exercise 9 - Practice with regular expressions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Exercise10-nltk.html">Exercise 10-Natural language processing with NLTK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise11-oop_circles.html">Exercise 11-Practice with object oriented programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/ImageMagick.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/ImageMagick.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ImageMagick basics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagemagick-documentation">ImageMagick Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagemagick-options">ImageMagick options</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resizing-images">Resizing images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-images-from-one-format-to-another">Converting images from one format to another</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trimming-borders">Trimming borders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overlaying-images">Overlaying images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-two-images">Combining two images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#borders">Borders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cropping">Cropping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shaving">Shaving</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masking-portions-of-an-image">Masking portions of an image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animating-a-series-of-images">Animating a series of images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-an-image-montage">Making an image montage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cutting-up-a-montage-of-images">Cutting up a montage of images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#face-mask-example">Face Mask Example</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="imagemagick-basics">
+<h1>ImageMagick basics<a class="headerlink" href="#imagemagick-basics" title="Link to this heading">#</a></h1>
+<section id="imagemagick-documentation">
+<h2>ImageMagick Documentation<a class="headerlink" href="#imagemagick-documentation" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="http://www.imagemagick.org/Usage/basics/">Basics</a></p>
+<p><a class="reference external" href="http://www.imagemagick.org/Usage/">Examples</a></p>
+<p><a class="reference external" href="http://www.imagemagick.org/Usage/annotating/">Examples of adding text to images.</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Adding text requires the ghostscript library which may not be installed on your
+machine.* Google for installation instructions.</p>
+</div>
+</section>
+<section id="imagemagick-options">
+<h2>ImageMagick options<a class="headerlink" href="#imagemagick-options" title="Link to this heading">#</a></h2>
+<p>To get a list of available options or settings use</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">identify</span> <span class="o">-</span><span class="nb">list</span> <span class="nb">list</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Align
+Alpha
+Boolean
+Cache
+Channel
+Class
+ClipPath
+Coder
+Color
+Colorspace
+Command
+Complex
+Compose
+Compress
+Configure
+DataType
+Debug
+Decoration
+Delegate
+Direction
+Dispose
+Distort
+Dither
+Endian
+Evaluate
+FillRule
+Filter
+Font
+Format
+Function
+Gravity
+Intensity
+Intent
+Interlace
+Interpolate
+Kernel
+Layers
+LineCap
+LineJoin
+List
+Locale
+LogEvent
+Log
+Magic
+Method
+Metric
+Mime
+Mode
+Morphology
+Module
+Noise
+Orientation
+PixelIntensity
+Policy
+PolicyDomain
+PolicyRights
+Preview
+Primitive
+QuantumFormat
+Resource
+SparseColor
+Statistic
+Storage
+Stretch
+Style
+Threshold
+Type
+Units
+Validate
+VirtualPixel
+</pre></div>
+</div>
+</div>
+</div>
+<section id="resizing-images">
+<h3>Resizing images<a class="headerlink" href="#resizing-images" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="http://www.imagemagick.org/Usage/resize/#resize">-resize</a> can be used
+with <a class="reference external" href="http://www.imagemagick.org/script/convert.php">convert</a> to change
+an image’s size. In this example the output resolution (200x200) is
+specified. <strong>NOTE: Resize will FIT the image into the requested size. It
+will NOT fill an image into a larger size (i.e., expand it) unless you
+use <a class="reference external" href="http://www.imagemagick.org/Usage/resize/#fill">the ^ flag</a></strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>image.png<span class="w"> </span>-resize<span class="w"> </span>200x200<span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>You can resize and change the file format in one go, by, e.g.,
+specifying output.jpg if you want the output to be a JPEG</p>
+<p>It’s also possible to resize images by a percentage, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>input.png<span class="w"> </span>-resize<span class="w"> </span><span class="m">125</span>%<span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>There are a lot of different options you can pass into
+<a class="reference external" href="http://www.imagemagick.org/Usage/resize/#resize">-resize</a>. ImageMagick
+calls these options geometry. You can read about more about the geometry
+arguments
+<a class="reference external" href="http://www.imagemagick.org/script/command-line-processing.php#geometry">here.</a></p>
+</section>
+<section id="converting-images-from-one-format-to-another">
+<h3>Converting images from one format to another<a class="headerlink" href="#converting-images-from-one-format-to-another" title="Link to this heading">#</a></h3>
+<p>Convert <code class="docutils literal notranslate"><span class="pre">fromThis.png</span></code> to a jpeg called <code class="docutils literal notranslate"><span class="pre">toThis.jpg</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>fromThis.png<span class="w"> </span>-format<span class="w"> </span>jpg<span class="w"> </span>toThis.jpg
+</pre></div>
+</div>
+<p>As with all ImageMagick commands if you want to apply a command to
+multiple files, use
+<a class="reference external" href="http://www.imagemagick.org/script/mogrify.php"><em>mogrify</em></a>. For example,
+to convert all the png files in the current directory to jpg:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mogrify<span class="w"> </span>-format<span class="w"> </span>jpg<span class="w"> </span>*.png
+</pre></div>
+</div>
+</section>
+<section id="trimming-borders">
+<h3>Trimming borders<a class="headerlink" href="#trimming-borders" title="Link to this heading">#</a></h3>
+<p>A handy command to get rid of (trim) borders around an image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>input.png<span class="w"> </span>-trim<span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>See <a class="reference external" href="http://www.imagemagick.org/Usage/crop/#trim">here</a> for more info on
+using this command</p>
+</section>
+<section id="overlaying-images">
+<h3>Overlaying images<a class="headerlink" href="#overlaying-images" title="Link to this heading">#</a></h3>
+<p>This will overlay image1.png onto image2.png.
+<a class="reference external" href="http://www.imagemagick.org/script/command-line-options.php?#gravity">-gravity</a>
+will set the relative position the source image relative to the
+destination image</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>composite<span class="w"> </span>-gravity<span class="w"> </span>center<span class="w"> </span>image1.png<span class="w"> </span>image2.png<span class="w"> </span>output.png
+</pre></div>
+</div>
+</section>
+<section id="combining-two-images">
+<h3>Combining two images<a class="headerlink" href="#combining-two-images" title="Link to this heading">#</a></h3>
+<p>Use <a class="reference external" href="http://www.imagemagick.org/script/command-line-options.php#append">-append</a>
+to combine images from top to bottom.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>image1.png<span class="w"> </span>image2.png<span class="w"> </span>image3.png<span class="w"> </span>-append<span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>If you want to combine images from left-to-right use +append.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>image1.png<span class="w"> </span>image2.png<span class="w"> </span>image3.png<span class="w"> </span>+append<span class="w"> </span>output.png
+</pre></div>
+</div>
+</section>
+<section id="borders">
+<h3>Borders<a class="headerlink" href="#borders" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="http://www.imagemagick.org/script/command-line-options.php#bordercolor">-bordercolor</a>
+must precede
+<a class="reference external" href="http://www.imagemagick.org/script/command-line-options.php#border">-border</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>input.png<span class="w"> </span>-bordercolor<span class="w"> </span>color<span class="w"> </span>-border<span class="w"> </span>geometry<span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>This would add a blue border that’s 1% of the image width and height.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>input.png<span class="w"> </span>-bordercolor<span class="w"> </span>blue<span class="w"> </span>-border<span class="w"> </span><span class="m">1</span>%<span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>This will add a blue 50 pixel-wide border</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>input.png<span class="w"> </span>-bordercolor<span class="w"> </span>blue<span class="w"> </span>-border<span class="w"> </span><span class="m">50</span><span class="w"> </span>output.png
+</pre></div>
+</div>
+</section>
+<section id="cropping">
+<h3>Cropping<a class="headerlink" href="#cropping" title="Link to this heading">#</a></h3>
+<p>Using convert you can use the -crop setting along with
+<a class="reference external" href="http://www.imagemagick.org/script/command-line-processing.php#geometry">geometry</a>
+arguments to crop images. You can crop images by height, width, specific
+x-y offsets. For more in depth examples, read
+<a class="reference external" href="http://www.imagemagick.org/Usage/crop/">here.</a></p>
+<p>For example, this command would split the image along the width into 2
+files.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>image.png<span class="w"> </span>-crop<span class="w"> </span><span class="s1">&#39;50%x100&#39;</span><span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>This command would split the image into 4 files. Here the 50% geometry
+argument is applied to both width and height of the image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>image.png<span class="w"> </span>-crop<span class="w"> </span><span class="s1">&#39;50%&#39;</span><span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>This command is equivalent to the above snippet.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>image.png<span class="w"> </span>-crop<span class="w"> </span><span class="s1">&#39;50%x50%&#39;</span><span class="w"> </span>output.png
+</pre></div>
+</div>
+</section>
+<section id="shaving">
+<h3>Shaving<a class="headerlink" href="#shaving" title="Link to this heading">#</a></h3>
+<p>For reasons I don’t understand, there doesn’t seem to be a way to crop
+a certain number of pixels from the left and right sides or the
+top/bottom sides with the crop operator. Shave to the rescue:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>shaveMe.png<span class="w"> </span>-shave<span class="w"> </span>10x40
+</pre></div>
+</div>
+<p>will crop (shave) 10 pixels from the left, 10 pixels from the right, 40
+pixels from the top and 40 pixels from the bottom.</p>
+<p>As with all ImageMagick commands, you can apply it to multiple files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mogrify<span class="w"> </span>-shave<span class="w"> </span>10x40<span class="w"> </span>*_left*png
+</pre></div>
+</div>
+</section>
+<section id="masking-portions-of-an-image">
+<h3>Masking portions of an image<a class="headerlink" href="#masking-portions-of-an-image" title="Link to this heading">#</a></h3>
+<p>You can use composite and a mask image to created a masked image.</p>
+<p>The general command is.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>composite<span class="w"> </span>source.png<span class="w"> </span>destination.png<span class="w"> </span>mask.png<span class="w"> </span>output.png
+</pre></div>
+</div>
+<p>You can read more about using mask images and composite
+<a class="reference external" href="http://www.imagemagick.org/Usage/compose/#mask_trans">here.</a></p>
+</section>
+<section id="animating-a-series-of-images">
+<h3>Animating a series of images<a class="headerlink" href="#animating-a-series-of-images" title="Link to this heading">#</a></h3>
+<p>Inside a directory containing png files numbered in the appropriate
+order:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>-delay<span class="w"> </span><span class="m">20</span><span class="w"> </span>-loop<span class="w"> </span><span class="m">0</span><span class="w"> </span>*.png<span class="w">  </span>animateIt.gif
+</pre></div>
+</div>
+</section>
+<section id="making-an-image-montage">
+<h3>Making an image montage<a class="headerlink" href="#making-an-image-montage" title="Link to this heading">#</a></h3>
+<p>This command will tile a bunch of pictures in the current directory into
+a single image file (also known as making a contact sheet for those
+familiar with photo terminology).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>montage<span class="w"> </span>*.jpg<span class="w"> </span>-geometry<span class="w"> </span>+30+20<span class="w"> </span>montage.jpg
+</pre></div>
+</div>
+<p>The images will be 30 pixels apart horizontally and 20 pixels apart
+vertically.</p>
+<p>Want to enforce a certain number of rows/columns?</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>montage<span class="w"> </span>*.jpg<span class="w"> </span>-geometry<span class="w"> </span>+30+20<span class="w"> </span>-tile<span class="w"> </span>3x4<span class="w"> </span>montage.jpg
+</pre></div>
+</div>
+<p>This will make 3 columns and 4 rows. If you have more than 12 pictures,
+several montage images will be created: montage-0, montage-1 etc.</p>
+<p>Here is a contact sheet with filenames and image dimensions written
+below each file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>montage<span class="w"> </span>*.png<span class="w"> </span>-geometry<span class="w"> </span>+30+20<span class="w"> </span>-tile<span class="w"> </span>3x4<span class="w"> </span>-set<span class="w"> </span>label<span class="w"> </span><span class="s1">&#39;%f\n%wx%h&#39;</span><span class="w"> </span>-pointsize<span class="w"> </span><span class="m">30</span><span class="w"> </span>montage.jpg
+</pre></div>
+</div>
+<p><a class="reference external" href="http://www.imagemagick.org/Usage/montage/#settings">See here</a> for more
+examples</p>
+</section>
+<section id="cutting-up-a-montage-of-images">
+<h3>Cutting up a montage of images<a class="headerlink" href="#cutting-up-a-montage-of-images" title="Link to this heading">#</a></h3>
+<p>This come in handy. Say you have what an image montage like
+<a class="reference external" href="http://www.foundalis.com/res/bps/bongard/p045.htm">this</a> or like
+<a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Table_katakana.svg/2000px-Table_katakana.svg.png">this</a>
+and you want to cut it up into individual files. You can do lots of
+copy/pastes/saves, but what a pain. There’s a better way.</p>
+<p>As an example, let me show you what I did in an actual experiment I ran
+using some stimulus materials I got from Stan Dehaene that looked like
+this:</p>
+<p><img alt="" src="notebooks/images/Geometry-Equilateraltriangle.png" /></p>
+<p>What I want to do is to separate each image into a separate file and
+name the file sequentially, filename_0, filename_1, etc. Here’s the
+recipe:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>Geometry-Equilateraltriangle.png<span class="w"> </span>-crop<span class="w"> </span>+0+40<span class="w"> </span>temp.png
+convert<span class="w"> </span>temp.png<span class="w"> </span>-crop<span class="w"> </span>+0-90<span class="w"> </span>Geometry-Equilateraltriangle_cropped.png
+convert<span class="w"> </span>Geometry-Equilateraltriangle_cropped.png<span class="w"> </span>-crop<span class="w"> </span>3x2@<span class="w"> </span>+repage<span class="w"> </span>Geometry-Equilateraltriangle_%d.png
+convert<span class="w"> </span>*_<span class="o">[</span><span class="m">1</span>-5<span class="o">]</span>*png<span class="w"> </span>-trim<span class="w"> </span>Geometry-Equilateraltriangle-trimmed_%d.png
+</pre></div>
+</div>
+<p>The first line gets rid of the top 40 pixels. The second line gets rid
+of the bottom 90. The third line divides the image into 6 pieces: 3
+columns, 2 rows, and writes the pieces to
+Geometry-Equilateraltriangle_0.png,
+Geometry-Equilateraltriangle_1.png, etc. The last line gets rid of the
+white border around the resulting files (think about why we had to wait
+until the end to do this trimming).</p>
+</section>
+<section id="face-mask-example">
+<h3>Face Mask Example<a class="headerlink" href="#face-mask-example" title="Link to this heading">#</a></h3>
+<p>With the mask (mask.png) and composite we’ll be able to take the face
+images and mask out everything but the face.</p>
+<p>We’ll be working with these images.</p>
+<p><img alt="" src="../_images/Face1.png" />
+<img alt="" src="../_images/Face2.png" />
+<img alt="" src="../_images/Face3.png" />
+<img alt="" src="../_images/Mask.png" /></p>
+<p>First we’ll get the size of the face image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>identify<span class="w"> </span>-format<span class="w"> </span><span class="s2">&quot;%wx%h&quot;</span><span class="w"> </span>face1.png
+</pre></div>
+</div>
+<p>Then create a blue background image of the same size with a black border.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>-size<span class="w"> </span>128x156<span class="w"> </span>xc:blue<span class="w"> </span>-bordercolor<span class="w"> </span>black<span class="w"> </span>-border<span class="w"> </span><span class="m">5</span>%<span class="w"> </span>background.png
+</pre></div>
+</div>
+<p>Using a mask that’s been previously created we’ll combine these images for a final image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>composite<span class="w"> </span>face1.png<span class="w"> </span>background.png<span class="w"> </span>mask.png<span class="w"> </span>masked_face.png
+</pre></div>
+</div>
+<p>Or you could make a mask with ImageMagick</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>convert<span class="w"> </span>-size<span class="w"> </span>128x156<span class="w"> </span>xc:black<span class="w"> </span>-fill<span class="w"> </span>white<span class="w"> </span>-draw<span class="w"> </span><span class="s2">&quot;ellipse 64.5,91 37,53.5 0,360&quot;</span><span class="w"> </span>draw_ellipse.png
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagemagick-documentation">ImageMagick Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagemagick-options">ImageMagick options</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resizing-images">Resizing images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-images-from-one-format-to-another">Converting images from one format to another</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trimming-borders">Trimming borders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overlaying-images">Overlaying images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-two-images">Combining two images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#borders">Borders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cropping">Cropping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shaving">Shaving</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#masking-portions-of-an-image">Masking portions of an image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#animating-a-series-of-images">Animating a series of images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-an-image-montage">Making an image montage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cutting-up-a-montage-of-images">Cutting up a montage of images</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#face-mask-example">Face Mask Example</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gary Lupyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022. Some examples adapted from http://introtopython.org/.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

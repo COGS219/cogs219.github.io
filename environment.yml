@@ -1,0 +1,10 @@
+name: psych750
+channels:
+  - defaults
+dependencies:
+  - pip
+  - python=3.8
+  - jupyter
+  - jupyterlab
+  - pycodestyle
+prefix: /Users/glupyan/anaconda3/envs/psych750

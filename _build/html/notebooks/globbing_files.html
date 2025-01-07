@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Preloading files &#8212; Psych 750</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css?v=f7f7574a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/globbing_files';</script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/globbing_files.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mutables, Immutables, and Object References" href="activity_reference_vs_value.html" />
+    <link rel="prev" title="Basic Pandas Operations" href="activity_basic_pandas_operations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/favicon.png" class="logo__image only-light" alt="Psych 750 - Home"/>
+    <img src="../_static/favicon.png" class="logo__image only-dark pst-js-only" alt="Psych 750 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Schedule</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="schedule.html">Week by week schedule</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="submitting_assignments.html">Submitting assignments</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="project_2023.html">Project info</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation instructions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_osx.html">Instructions for MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_windows.html">Installation and setup for Windows</a></li>
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Shell_reference.html">Basic Linux commands</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Python_reference.html">Python reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Psychopy_reference.html">PsychoPy reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageMagick.html">ImageMagick/GraphicsMagick reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Self Study Guides</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="var_string_num.html">Variables, Strings, and Numbers</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_basics.html">Lists - the basics</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="if_statements.html">If Statements</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introducing_functions.html">Introducing Functions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_comprehension.html">List Comprehension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_a.html">Review of Fundamentals A</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trial_generation.html">Randomization and Iteration</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">Handling Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_b.html">Review of Fundamentals B</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_basic_pandas_operations.html">Using Pandas to read/write CSV files.</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">File access-Globbing and preloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_reference_vs_value.html">Mutable and immutable types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regexp.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">In class activities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python_basics.html">Python basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_print_pyramids.html">The first thinking exercise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_file_writing.html">Primer on writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_list_manip_vowels_1.html">Working with strings in lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_dictionaries.html">A few dictionary activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_trial_generation.html">Some more trial generation practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_debugging.html">Debugging practice 1</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">Basic Examples of GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_gss_practice.html">More dataviz practice with GSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nltk_demo.html">NLTK demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Webscraping demo and practice</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Exercise0-test.html">Exercise 0-Test assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise1-square.html">Exercise 1-Show a square and do stuff with it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise2-stroop.html">Exercise 2-A Stroop task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise3-extended-stroop.html">Exercise 3-Extending the Stroop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise4-more_modularized_stroop.html">Exercise 4-Modularization and speech recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise5-face-search.html">Exercise 5-Loading external files and mouse action!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise6-stroop_analysis.html">Exercise 6-Analyzing the Stroop data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise7-gss-wrangling.html">Exercise 7-Exploring the general social survey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise8-more-gss-wrangling.html">Exercise 8-More practice with GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise9-regexps.html">Exercise 9 - Practice with regular expressions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Exercise10-nltk.html">Exercise 10-Natural language processing with NLTK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise11-oop_circles.html">Exercise 11-Practice with object oriented programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/globbing_files.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/globbing_files.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Preloading files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grabbing-globbing-all-the-files-in-a-directory">Grabbing (globbing) all the files in a directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preloading-images-into-memory">Preloading images into memory</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="preloading-files">
+<h1>Preloading files<a class="headerlink" href="#preloading-files" title="Link to this heading">#</a></h1>
+<p>It is generally a good idea to load your external stimuli (images, movies, sounds) into memory prior to presenting them. This helps ensure greater precision in display times. (One exception is if you are loading many 1000s of images in which case you may want to preload them in batches – this won’t be an issue for us).</p>
+<p>One effective approach is to have all your stimuli in one directory (e.g., <code class="docutils literal notranslate"><span class="pre">stimuli</span></code>) and then just load all the files in that directory into memory at the start of the experiment. The trick is to load them in a way that allows you easy access.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, a few useful functions for managing directories and file paths. For more info, see <code class="docutils literal notranslate"><span class="pre">help(os.path)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span> <span class="c1">#what&#39;s my current directory?</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span> <span class="c1">#make a new subdirectory called data. If it already exists, raise a `FileExistsError`` </span>
+<span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;already exists&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span> <span class="c1">#check if a path (a directory or filename) exists</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">&#39;stimuli/visual/&#39;</span><span class="p">))</span> <span class="c1">#creating a longer path</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="s1">&#39;/stimuli/visual/lamp.jpg&#39;</span><span class="p">)</span> <span class="c1"># get just the filename part of a path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/glupyan/gitRepos/psych750_resources/starter_code/activity_debugging_experiments
+already exists
+/Users/glupyan/gitRepos/psych750_resources/starter_code/activity_debugging_experiments/stimuli/visual/
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;lamp.jpg&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="grabbing-globbing-all-the-files-in-a-directory">
+<h2>Grabbing (globbing) all the files in a directory<a class="headerlink" href="#grabbing-globbing-all-the-files-in-a-directory" title="Link to this heading">#</a></h2>
+<p>With these preliminaries out of the way, we can now combine them with <code class="docutils literal notranslate"><span class="pre">os.glob()</span></code>
+First, please <a class="reference external" href="https://github.com/psych750/activity_debugging_experiments">clone this repository</a>.</p>
+<p>Now <code class="docutils literal notranslate"><span class="pre">cd</span></code> into it. Inside will be a copy of this notebook. Open it inside VSCode. This will ensure that the current working directory is the new repository.</p>
+<p>The code below grabs all the files that meet your criteria Confused by the ‘*’ syntax? Those are wildcards – a key part of navigating around a file system – <a class="reference external" href="https://linuxhint.com/bash_wildcard_tutorial/">see more here</a> if you need a refresher.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="n">all_pics</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;images/*png&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">all_pics</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span> <span class="c1"># printing just the first 10 for brevity</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;images/duck.png&#39;, &#39;images/dog.png&#39;, &#39;images/spoon.png&#39;, &#39;images/horse.png&#39;, &#39;images/mushroom.png&#39;, &#39;images/doorknob.png&#39;, &#39;images/watch.png&#39;, &#39;images/nut.png&#39;, &#39;images/sled.png&#39;, &#39;images/rabbit.png&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pics_beginning_with_a</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;images/a*png&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pics_beginning_with_a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;images/ashtray.png&#39;, &#39;images/arm.png&#39;, &#39;images/accordion.png&#39;, &#39;images/artichoke.png&#39;, &#39;images/arrow.png&#39;, &#39;images/ant.png&#39;, &#39;images/asparagus.png&#39;, &#39;images/apple.png&#39;, &#39;images/airplane.png&#39;, &#39;images/axe.png&#39;, &#39;images/anchor.png&#39;, &#39;images/alligator.png&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s get just the filename part of the path</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">just_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">all_pics</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">just_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;003mT_90_60.jpg&#39;, &#39;004wF_90_60.jpg&#39;, &#39;003mA_90_60.jpg&#39;, &#39;001mW_90_60.jpg&#39;, &#39;005mU_90_60.jpg&#39;, &#39;003wN_90_60.jpg&#39;, &#39;002mE_90_60.jpg&#39;, &#39;005wW_90_60.jpg&#39;, &#39;001wU_90_60.jpg&#39;, &#39;002wT_90_60.jpg&#39;, &#39;004wU_90_60.jpg&#39;, &#39;002mN_90_60.jpg&#39;, &#39;002wA_90_60.jpg&#39;, &#39;005mF_90_60.jpg&#39;, &#39;003wE_90_60.jpg&#39;, &#39;004mW_90_60.jpg&#39;, &#39;001wF_90_60.jpg&#39;, &#39;005mA_90_60.jpg&#39;, &#39;002wF_90_60.jpg&#39;, &#39;003mU_90_60.jpg&#39;, &#39;005wN_90_60.jpg&#39;, &#39;005mT_90_60.jpg&#39;, &#39;003wW_90_60.jpg&#39;, &#39;001wA_90_60.jpg&#39;, &#39;001mN_90_60.jpg&#39;, &#39;004mE_90_60.jpg&#39;, &#39;001wT_90_60.jpg&#39;, &#39;002wU_90_60.jpg&#39;, &#39;004mN_90_60.jpg&#39;, &#39;003mF_90_60.jpg&#39;, &#39;004wA_90_60.jpg&#39;, &#39;004wT_90_60.jpg&#39;, &#39;001mE_90_60.jpg&#39;, &#39;002mW_90_60.jpg&#39;, &#39;005wE_90_60.jpg&#39;, &#39;001mU_90_60.jpg&#39;, &#39;005mW_90_60.jpg&#39;, &#39;002wE_90_60.jpg&#39;, &#39;003mN_90_60.jpg&#39;, &#39;005wU_90_60.jpg&#39;, &#39;004mF_90_60.jpg&#39;, &#39;001wW_90_60.jpg&#39;, &#39;003wA_90_60.jpg&#39;, &#39;003wT_90_60.jpg&#39;, &#39;004wW_90_60.jpg&#39;, &#39;001mF_90_60.jpg&#39;, &#39;003mE_90_60.jpg&#39;, &#39;002mA_90_60.jpg&#39;, &#39;005wF_90_60.jpg&#39;, &#39;002wN_90_60.jpg&#39;, &#39;004mU_90_60.jpg&#39;, &#39;002mT_90_60.jpg&#39;, &#39;004wE_90_60.jpg&#39;, &#39;001mT_90_60.jpg&#39;, &#39;001wN_90_60.jpg&#39;, &#39;001mA_90_60.jpg&#39;, &#39;003mW_90_60.jpg&#39;, &#39;005wT_90_60.jpg&#39;, &#39;005mN_90_60.jpg&#39;, &#39;003wU_90_60.jpg&#39;, &#39;005wA_90_60.jpg&#39;, &#39;002mF_90_60.jpg&#39;, &#39;005mE_90_60.jpg&#39;, &#39;002wW_90_60.jpg&#39;, &#39;004mT_90_60.jpg&#39;, &#39;001wE_90_60.jpg&#39;, &#39;003wF_90_60.jpg&#39;, &#39;004mA_90_60.jpg&#39;, &#39;004wN_90_60.jpg&#39;, &#39;002mU_90_60.jpg&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preloading-images-into-memory">
+<h2>Preloading images into memory<a class="headerlink" href="#preloading-images-into-memory" title="Link to this heading">#</a></h2>
+<p>Now that we’ve seen how to grab a list of files, let’s use this to preload them into memory and then access the psychopy objects we’ve created. Below is a basic version of a useful helper function <code class="docutils literal notranslate"><span class="pre">load_files()</span></code> that does just that. A more flexible version with some bells and whistles (e.g., it works for both images and audio files) is available <a class="reference external" href="https://psych750.github.io/notebooks/Psychopy_reference.html#preloading-image-and-audio-files">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psychopy</span><span class="w"> </span><span class="kn">import</span> <span class="n">visual</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">basic_load_files</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span><span class="n">extension</span><span class="p">,</span><span class="n">win</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">restriction</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Loads all the pictures (or narrowed by the restriction argumnt) in the provided directory.</span>
+<span class="sd">    Need to pass in the Psychopy window (win) object so that it can be used for loading them in.</span>
+<span class="sd">    Returns a dictionary with references to the loaded images</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span><span class="n">restriction</span><span class="o">+</span><span class="n">extension</span><span class="p">))</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#initialize fileMatrix  as a dict because it&#39;ll be accessed by file names (picture names, sound names)</span>
+    <span class="k">for</span> <span class="n">cur_file</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+        <span class="n">stim_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cur_file</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#just the filename without the extension</span>
+        <span class="n">stim</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">ImageStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">cur_file</span><span class="p">,</span><span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">interpolate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">images</span><span class="p">[</span><span class="n">stim_filename</span><span class="p">]</span> <span class="o">=</span> <span class="n">stim</span>
+ 
+    <span class="k">return</span> <span class="n">images</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Window</span><span class="p">([</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;pix&#39;</span><span class="p">)</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">basic_load_files</span><span class="p">(</span><span class="s1">&#39;images/&#39;</span><span class="p">,</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-04 22:48:45.112 python[22343:1846768] Warning: Expected min height of view: (&lt;NSPopoverTouchBarItemButton: 0x7f98320b2990&gt;) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-10-04 22:48:45.113 python[22343:1846768] Warning: Expected min height of view: (&lt;NSButton: 0x7f98320e8ed0&gt;) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-10-04 22:48:45.116 python[22343:1846768] Warning: Expected min height of view: (&lt;NSPopoverTouchBarItemButton: 0x7f98326681b0&gt;) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-10-04 22:48:45.118 python[22343:1846768] Warning: Expected min height of view: (&lt;NSPopoverTouchBarItemButton: 0x7f9832681600&gt;) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now to show an image, we can simply use the returned dictionary!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="s1">&#39;duck&#39;</span><span class="p">]))</span> <span class="c1"># notice the type</span>
+<span class="n">images</span><span class="p">[</span><span class="s1">&#39;duck&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;psychopy.visual.image.ImageStim&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grabbing-globbing-all-the-files-in-a-directory">Grabbing (globbing) all the files in a directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preloading-images-into-memory">Preloading images into memory</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gary Lupyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022. Some examples adapted from http://introtopython.org/.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

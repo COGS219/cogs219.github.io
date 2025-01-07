@@ -1,0 +1,1178 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Webscraping with Beautiful Soup &#8212; Psych 750</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css?v=f7f7574a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/scraping';</script>
+    <link rel="canonical" href="https://psych750.github.io/notebooks/scraping.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercise 0 - Test assignment" href="Exercise0-test.html" />
+    <link rel="prev" title="Intro to NLTK" href="nltk_demo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/favicon.png" class="logo__image only-light" alt="Psych 750 - Home"/>
+    <img src="../_static/favicon.png" class="logo__image only-dark pst-js-only" alt="Psych 750 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Schedule</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="schedule.html">Week by week schedule</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="submitting_assignments.html">Submitting assignments</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="project_2023.html">Project info</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation instructions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_osx.html">Instructions for MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="programming_environment_windows.html">Installation and setup for Windows</a></li>
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Shell_reference.html">Basic Linux commands</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Python_reference.html">Python reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Psychopy_reference.html">PsychoPy reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageMagick.html">ImageMagick/GraphicsMagick reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Self Study Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="var_string_num.html">Variables, Strings, and Numbers</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_basics.html">Lists - the basics</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="if_statements.html">If Statements</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introducing_functions.html">Introducing Functions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_comprehension.html">List Comprehension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_a.html">Review of Fundamentals A</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trial_generation.html">Randomization and Iteration</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">Handling Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_b.html">Review of Fundamentals B</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_basic_pandas_operations.html">Using Pandas to read/write CSV files.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="globbing_files.html">File access-Globbing and preloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_reference_vs_value.html">Mutable and immutable types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regexp.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">In class activities</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python_basics.html">Python basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_print_pyramids.html">The first thinking exercise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_file_writing.html">Primer on writing files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_list_manip_vowels_1.html">Working with strings in lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_dictionaries.html">A few dictionary activities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_trial_generation.html">Some more trial generation practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_debugging.html">Debugging practice 1</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">Basic Examples of GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_gss_practice.html">More dataviz practice with GSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nltk_demo.html">NLTK demo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Webscraping demo and practice</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Exercise0-test.html">Exercise 0-Test assignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise1-square.html">Exercise 1-Show a square and do stuff with it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise2-stroop.html">Exercise 2-A Stroop task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise3-extended-stroop.html">Exercise 3-Extending the Stroop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise4-more_modularized_stroop.html">Exercise 4-Modularization and speech recognition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise5-face-search.html">Exercise 5-Loading external files and mouse action!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise6-stroop_analysis.html">Exercise 6-Analyzing the Stroop data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise7-gss-wrangling.html">Exercise 7-Exploring the general social survey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise8-more-gss-wrangling.html">Exercise 8-More practice with GSS data wrangling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise9-regexps.html">Exercise 9 - Practice with regular expressions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Exercise10-nltk.html">Exercise 10-Natural language processing with NLTK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exercise11-oop_circles.html">Exercise 11-Practice with object oriented programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/psych750/psych750.github.io/main?urlpath=tree/notebooks/scraping.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/scraping.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Webscraping with Beautiful Soup</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-heading-names-in-a-wikipedia-article">Get heading names in a Wikipedia article</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-current-temperature-in-madison">Get current temperature in Madison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-using-the-newspaper-package">Example of using the newspaper package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lots-of-examples-and-pre-written-code-out-there">Lots of examples and pre-written code out there!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-it-s-your-turn">Now it’s your turn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-weather">More weather</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#billboard-100">Billboard 100</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="webscraping-with-beautiful-soup">
+<h1>Webscraping with Beautiful Soup<a class="headerlink" href="#webscraping-with-beautiful-soup" title="Link to this heading">#</a></h1>
+<p>This notebook shows off some basic capabilities. of the <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> webscraping package. And here’s a handy <a class="reference external" href="https://whatacold.io/blog/2021-12-05-beautifulsoup4-cheatsheet/">cheat sheet</a>.</p>
+<p>Why is it called “Beautiful Soup”? If you <a class="reference external" href="https://groups.google.com/g/beautifulsoup/c/nCOB_U4HqRc?pli=1">google it</a>, you’ll be told that it’s because of “tag soup” or something like thatnonsense. But here’s a <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/">hint</a>. See that picture? That’s your <a class="reference external" href="https://www.youtube.com/watch?v=FWxFsJUlBbw">answer</a>.</p>
+<section id="get-heading-names-in-a-wikipedia-article">
+<h2>Get heading names in a Wikipedia article<a class="headerlink" href="#get-heading-names-in-a-wikipedia-article" title="Link to this heading">#</a></h2>
+<p>Let’s begin by automatically grabbing The Simpsons character names from the <em>Simpson Family</em> <a class="reference external" href="https://en.wikipedia.org/wiki/Simpson_family">Wikipedia page</a>. Looking at the wiki article, we see that the character names are part of a bulleted list (produced by the html <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> tag. Furthermore, they’re bolded. Using this we can do the following:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://en.wikipedia.org/wiki/Simpson_family&quot;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">headline</span> <span class="ow">in</span> <span class="n">soup</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span> <span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">}):</span>
+    <span class="n">topics</span> <span class="o">=</span> <span class="n">headline</span><span class="o">.</span><span class="n">find_next</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span> <span class="c1">#ul is bulletpoints; b is bold</span>
+    <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* Herbert &quot;Herb&quot; Powell
+* Abbey
+* Chet Simpson
+* Dr. Simpson
+* Stanley Simpson
+*  Uncle Tyrone Simpson 
+* Great-Aunt Hortense Simpson
+* Hugo Simpson
+* Mabel Simpson
+* Hiram Simpson
+* Virgil
+* Virgil Simpson
+* Eliza Simpson
+* Milford Van Houten
+* Van Houten
+* Abraham Simpson
+* Grampa&#39;s parents
+* Orville J. Simpson
+* Yuma Hickman
+* Cyrus Simpson
+* Rita LaFleur
+* Amber Simpson
+* Bill Simpson
+* Great Uncle Boris
+* Mother Shabubu/Cousin Frank/Francine
+* &quot;Sideshow Bob&quot; Terwilliger
+* Lionel Hutz
+* Troy McClure
+* Disco Stu
+* Grampa Simpson
+* &quot;Fat Tony&quot; D&#39;Amico
+* &quot;Sideshow Bob&quot; Terwilliger
+* Lionel Hutz
+* Troy McClure
+* Disco Stu
+* Grampa Simpson
+* &quot;Fat Tony&quot; D&#39;Amico
+* &quot;Sideshow Bob&quot; Terwilliger
+* Lionel Hutz
+* Troy McClure
+* Disco Stu
+* Grampa Simpson
+* &quot;Fat Tony&quot; D&#39;Amico
+* &quot;Sideshow Bob&quot; Terwilliger
+* Lionel Hutz
+* Troy McClure
+* Disco Stu
+* Grampa Simpson
+* &quot;Fat Tony&quot; D&#39;Amico
+* &quot;Sideshow Bob&quot; Terwilliger
+* Lionel Hutz
+* Troy McClure
+* Disco Stu
+* Grampa Simpson
+* &quot;Fat Tony&quot; D&#39;Amico
+* &quot;Sideshow Bob&quot; Terwilliger
+* Lionel Hutz
+* Troy McClure
+* Disco Stu
+* Grampa Simpson
+* &quot;Fat Tony&quot; D&#39;Amico
+* Gladys Gurney
+* Great-Uncle Hubert
+* Dot
+* Lou Gurney
+* Uncle Arthur Bouvier
+* Meaux and Genevieve Bouvier
+* Santa&#39;s Little Helper
+* Santa&#39;s Little Helper
+* Snowball
+* Snowball I
+* Snowball II
+* Plopper
+* Princess
+* Stampy
+* Chirpy Boy
+* Bart Junior
+* Pinchy
+* Mojo
+* Strangles
+* Pokey
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>There are some false alarms, but it works pretty well! You might wonder whether this is too much trouble to go through just to get the Simpsons characters. But of course the identical code will work on pretty much <em>any</em> wiki article. …an the approach can be used on any webpage. And that’s really the point.</p>
+</section>
+<section id="get-current-temperature-in-madison">
+<h2>Get current temperature in Madison<a class="headerlink" href="#get-current-temperature-in-madison" title="Link to this heading">#</a></h2>
+<p>Let’s look at another example showing how we can grab a particular piece of information from a webpage: the current temperature. I’ll walk you through what’s going on here in class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://weather.com/weather/today/l/USWI0411:1:US&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">results</span><span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;CurrentConditions--tempValue--MHmYY&#39;</span><span class="p">})</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getText</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54°
+</pre></div>
+</div>
+</div>
+</div>
+<p>(This is about as simple as it gets). This approach scales (and that’s the point!). If we want to get the temperature of a 100 different cities, just load the appropriate URLs and iterate through them.</p>
+</section>
+<section id="example-of-using-the-newspaper-package">
+<h2>Example of using the newspaper package<a class="headerlink" href="#example-of-using-the-newspaper-package" title="Link to this heading">#</a></h2>
+<p>There’s an enormous infrastructure for web scraping with lots of codebases for common tasks, e.g., scraping <a class="reference external" href="https://newspaper.readthedocs.io/en/latest/">newspapers3k</a> for scraping online news. Let’s do a quick demo of this one.</p>
+<p>First install the package using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">newspaper3k</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">newspaper</span><span class="w"> </span><span class="kn">import</span> <span class="n">Article</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.cnn.com/2022/11/30/world/black-hole-devours-star-scn/index.html&quot;</span>
+<span class="n">article</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">article</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
+<span class="n">article</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">authors</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">publish_date</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span> <span class="c1">#first 1000 chars</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;newspaper.article.Article object at 0x7fb1a6fdb8e0&gt;
+[&#39;Ashley Strickland&#39;]
+2022-11-30 00:00:00
+Sign up for CNN’s Wonder Theory science newsletter. Explore the universe with news on fascinating discoveries, scientific advancements and more.
+
+CNN —
+
+An incredibly bright flash that appeared in the night sky in February was the result of a star straying too close to a supermassive black hole, meeting its untimely end there as it was ripped to shreds.
+
+But the rare cosmic event actually occurred 8.5 billion light years away from Earth, when the universe was just a third of its current age — and it has created more questions than answers.
+
+The signal from the luminous explosion, known as AT 2022cmc, was first picked up by the Zwicky Transient Facility at the California Institute of Technology’s Palomar Observatory on February 11.
+
+This graphic shows how a tidal disruption event might look in space. Carl Knox/OzGrav/Swinburne University of Technology
+
+When a star is torn apart by a black hole’s gravitational tidal forces, it’s known as a tidal disruption event. Astronomers have observe
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also grab images associated with it. Let’s grab the URL of the head image and then download it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">top_image</span><span class="p">)</span>
+<span class="n">raw_img</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">article</span><span class="o">.</span><span class="n">top_image</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1">#display.Image(raw_img) # this will work when you render the notebook locally, but not when it&#39;s uploaded to github as we do here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://media.cnn.com/api/v1/images/stellar/prod/221130121224-01-black-hole-tidal-disruption-event.jpg?c=16x9&amp;q=w_800,c_fill
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="top_image" src="https://media.cnn.com/api/v1/images/stellar/prod/221130121224-01-black-hole-tidal-disruption-event.jpg" /></p>
+</section>
+<section id="lots-of-examples-and-pre-written-code-out-there">
+<h2>Lots of examples and pre-written code out there!<a class="headerlink" href="#lots-of-examples-and-pre-written-code-out-there" title="Link to this heading">#</a></h2>
+<p>Here’s a nice step by step tutorial  example of a script that uses BeautifulSoup to <a class="reference external" href="https://proxiesapi-com.medium.com/scraping-google-scholar-with-python-and-beautifulsoup-850cbdfedbcf">scrape data from google scholar</a>.</p>
+<p>For an especially creative example of scraping, check out <a class="reference external" href="https://erikbern.com/2017/02/01/language-pitch.html">this blog post by Erik Bern</a> which bulk downloads pronunciations of words in various languages to examine whether there are consistent differences in pitch (fundamental frequency) between languages (Sounds like Finnish is Lowwww).</p>
+</section>
+<section id="now-it-s-your-turn">
+<h2>Now it’s your turn<a class="headerlink" href="#now-it-s-your-turn" title="Link to this heading">#</a></h2>
+<section id="more-weather">
+<h3>More weather<a class="headerlink" href="#more-weather" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Get the current temperature in Madison, from Wundergound:
+<code class="docutils literal notranslate"><span class="pre">https://www.wunderground.com/weather/us/wi/madison</span></code></p></li>
+</ul>
+<ul class="simple">
+<li><p>Get the forecasted low and high temperatures for the day from the same site (it’s displayed above the current temperature)</p></li>
+</ul>
+</section>
+<section id="billboard-100">
+<h3>Billboard 100<a class="headerlink" href="#billboard-100" title="Link to this heading">#</a></h3>
+<p>Let’s do another one. Here’s an example of scraping the top songs of 2022 from the <em>Billboard 100</em> site</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.billboard.com/charts/year-end/2022/hot-100-songs/&#39;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;c-title&#39;</span><span class="p">})</span>
+<span class="k">for</span> <span class="n">placement</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">placement</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">result</span><span class="o">.</span><span class="n">getText</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">placement</span><span class="o">+</span><span class="mi">1</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">:</span> <span class="c1">#avoids some junk at the end</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 Heat Waves
+2 As It Was
+3 Stay
+4 Easy On Me
+5 Shivers
+6 First Class
+7 Big Energy
+8 Ghost
+9 Super Gremlin
+10 Cold Heart (PNAU Remix)
+11 Wait For U
+12 About Damn Time
+13 Bad Habits
+14 Thats What I Want
+15 Enemy
+16 Industry Baby
+17 abcdefu
+18 Need To Know
+19 Wasted On You
+20 Me Porto Bonito
+21 Woman
+22 Titi Me Pregunto
+23 Running Up That Hill (A Deal With God)
+24 We Don&#39;t Talk About Bruno
+25 Late Night Talking
+26 I Like You (A Happier Song)
+27 You Proof
+28 Bad Habit
+29 Sunroof
+30 One Right Now
+31 Good 4 U
+32 Numb Little Bug
+33 Jimmy Cooks
+34 &#39;Til You Can&#39;t
+35 Fancy Like
+36 The Kind Of Love We Make
+37 I Ain&#39;t Worried
+38 Break My Soul
+39 Something In The Orange
+40 Save Your Tears
+41 Smokin Out The Window
+42 Levitating
+43 In A Minute
+44 Moscow Mule
+45 You Right
+46 She Had Me At Heads Carolina
+47 Vegas
+48 Pushin P
+49 Buy Dirt
+50 I Hate U
+51 Boyfriend
+52 Glimpse Of Us
+53 Surface Pressure
+54 Fall In Love
+55 Love Nwantiti (Ah Ah Ah)
+56 Super Freaky Girl
+57 Hrs And Hrs
+58 Sand In My Boots
+59 MAMIII
+60 Knife Talk
+61 AA
+62 Sweetest Pie
+63 Provenza
+64 Essence
+65 All I Want For Christmas Is You
+66 Bam Bam
+67 5 Foot 9
+68 Get Into It (Yuh)
+69 Efecto
+70 Rock And A Hard Place
+71 Doin&#39; This
+72 Oh My God
+73 Better Days
+74 Meet Me At Our Spot
+75 Fingers Crossed
+76 All Too Well (Taylor&#39;s Version)
+77 Party
+78 Despues de La Playa
+79 You Should Probably Leave
+80 Rockin&#39; Around The Christmas Tree
+81 Broadway Girls
+82 Take My Name
+83 What Happened To Virgil
+84 Puffin On Zootiez
+85 Like I Love Country Music
+86 Jingle Bell Rock
+87 Ojitos Lindos
+88 Trouble With A Heartbreak
+89 A Holly Jolly Christmas
+90 Kiss Me More
+91 She Likes It
+92 Never Say Never
+93 Damn Strait
+94 She&#39;s All I Wanna Be
+95 Last Night Lonely
+96 Flower Shops
+97 To The Moon!
+98 Unholy
+99 One Mississippi
+100 Circles Around This Town
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Can you figure out how to get the <strong>artists</strong> instead?</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-heading-names-in-a-wikipedia-article">Get heading names in a Wikipedia article</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-current-temperature-in-madison">Get current temperature in Madison</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-using-the-newspaper-package">Example of using the newspaper package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lots-of-examples-and-pre-written-code-out-there">Lots of examples and pre-written code out there!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#now-it-s-your-turn">Now it’s your turn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-weather">More weather</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#billboard-100">Billboard 100</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gary Lupyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022. Some examples adapted from http://introtopython.org/.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
