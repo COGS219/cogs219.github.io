@@ -1,10 +1,8 @@
 # COGS 219: Programming for Behavioral Sciences
 
-Welcome to COGS 219! This is a hands-on class that focuses on programming tools for building experiments and analyzing data. This course is designed for students with minimal programming experience, but the exercises and projects can scale such that you will be able to challenge yourself even if you are an experienced programmer. Syllabus is <a class="reference external" href="https://github.com/psych750/resources/blob/main/syllabus/programming_dataScience_fa23.pdf">here</a>, but all the info you need about what’s happening each week will be on this site.
+Welcome to COGS 219! 
 
-A unique aspect of this course is that I will be teaching programming fundamentals within a context of psychological experiments. Instead of doing [arbitrary]( https://github.com/py-study-group/beginner-friendly-programming-exercises/blob/master/exercises.md) [exercises](https://pynative.com/python-basic-exercise-for-beginners/), many of the exercises you'll be doing will be in the service of implementing fully-operational experiments that create proper trial lists, display stimuli, collect responses, and write the results in a ready-to-analyze form. If you are a PhD student familiar with experimental design, you will learn some best practices. If you are a masters student in the data-science program and not planning on running your own studies, you will learn about common behavioral paradigms at the same time as you learn to code. 
-
-We will mostly use Python 3, but will take excursions into R for data-wrangling and to ensure that you are comfortable with other programming environments. In addition to teaching programming fundamentals, you'll get experience with data wrangling, web scraping, numerical simulations, natural language processing, and get comfortable reviewing, using and adapting other people's code.
+This course is targeted at PhD students in the cognitive and behavioral sciences and will introduce you to state-of-the-art “tools of the trade” for doing experimental work. The course will provide a hands-on introduction to modern tools for conducting experiments and working with data. This course is ideal for students who are interested in developing skills in experimental research and building their data science toolkit. In short, we will cover things that I wish someone had taught me when I was starting out in graduate school.
 
 Here are some things this class is designed to do:
 
