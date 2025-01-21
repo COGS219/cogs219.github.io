@@ -451,7 +451,7 @@
 </li>
 <li><p>pause for 2 seconds using psychopy’s <a class="reference external" href="https://psychopy.org/api/core.html"><code class="docutils literal notranslate"><span class="pre">core</span></code></a> functions for controlling timing</p></li>
 </ul>
-<p>** Drawing and Flipping Visual Stimuli **</p>
+<p><strong>Drawing and Flipping Visual Stimuli</strong></p>
 <p>When you first use <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> to draw a stimulus to the window, it is not displayed right away. Instead, psychopy allows us to draw as many visual stimuli to a particular display as we like, but does not update what is shown to participants until we use <code class="docutils literal notranslate"><span class="pre">win.flip()</span></code> to flip or refresh the window. This might seem overly complicated at first, but it turns out to be a really useful feature because it gives us a lot of precise control over when exactly a particular visual stimulus is shown (basically, drawing is “slow”, flipping is quick and can be timed to other things).</p>
 <p>One way to visualize this is to imagine that the window has two layers, a front and a back. The front is what the participants see. When we use <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> to draw a stimulus, we “paint” that stimulus to the back of the window, so it is not visible to participants. Then once we’ve drawn to our heart’s content, we flip the window over so the back is visible to participants.</p>
 </section>
@@ -495,15 +495,8 @@
 </section>
 <section id="collect-a-keyboard-response">
 <h2>Collect a Keyboard Response<a class="headerlink" href="#collect-a-keyboard-response" title="Link to this heading">#</a></h2>
-<p>Next, let’s collect a keyboard response from participants. We want participants to press the key “b” if they see a blue circle, and “o” if they see an orange circle.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>````{tip}
-The key functions to accept keyboard input are event.getKeys() and event.waitKeys(). Look at how these functions are defined at the [psychopy API web page](https://psychopy.org/api/event.html) or by typing `help(function name)`, e.g., `help(event.getKeys)` after importing `event`
-```{note}
-getKeys checks if a certain key has been entered since the last call to getKeys, e.g., if an &#39;s&#39; was pressed, `event.getKeys([&#39;s&#39;])` will become True. event.waitKeys() waits until a certain key (or any key) was pressed. 
-```
-````
-</pre></div>
-</div>
+<p>Next, let’s collect a keyboard response from participants. We want participants to press the key “b” if they see a blue circle, and “o” if they see an orange circle.
+<code class="docutils literal notranslate"><span class="pre">{tip}</span>&#160;&#160;&#160;&#160; <span class="pre">The</span> <span class="pre">key</span> <span class="pre">functions</span> <span class="pre">to</span> <span class="pre">accept</span> <span class="pre">keyboard</span> <span class="pre">input</span> <span class="pre">are</span> <span class="pre">event.getKeys()</span> <span class="pre">and</span> <span class="pre">event.waitKeys().</span> <span class="pre">Look</span> <span class="pre">at</span> <span class="pre">how</span> <span class="pre">these</span> <span class="pre">functions</span> <span class="pre">are</span> <span class="pre">defined</span> <span class="pre">at</span> <span class="pre">the</span> <span class="pre">[psychopy</span> <span class="pre">API</span> <span class="pre">web</span> <span class="pre">page](https://psychopy.org/api/event.html)</span> <span class="pre">or</span> <span class="pre">by</span> <span class="pre">typing</span> <span class="pre">`help(function</span> <span class="pre">name)`,</span> <span class="pre">e.g.,</span> <span class="pre">`help(event.getKeys)`</span> <span class="pre">after</span> <span class="pre">importing</span> <span class="pre">`event`</span>&#160;&#160;&#160;&#160; <span class="pre">```{note}</span>&#160;&#160;&#160;&#160; <span class="pre">getKeys</span> <span class="pre">checks</span> <span class="pre">if</span> <span class="pre">a</span> <span class="pre">certain</span> <span class="pre">key</span> <span class="pre">has</span> <span class="pre">been</span> <span class="pre">entered</span> <span class="pre">since</span> <span class="pre">the</span> <span class="pre">last</span> <span class="pre">call</span> <span class="pre">to</span> <span class="pre">getKeys,</span> <span class="pre">e.g.,</span> <span class="pre">if</span> <span class="pre">an</span> <span class="pre">'s'</span> <span class="pre">was</span> <span class="pre">pressed,</span> <span class="pre">`event.getKeys(['s'])`</span> <span class="pre">will</span> <span class="pre">become</span> <span class="pre">True.</span> <span class="pre">event.waitKeys()</span> <span class="pre">waits</span> <span class="pre">until</span> <span class="pre">a</span> <span class="pre">certain</span> <span class="pre">key</span> <span class="pre">(or</span> <span class="pre">any</span> <span class="pre">key)</span> <span class="pre">was</span> <span class="pre">pressed.</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">```</span>&#160;&#160;&#160;&#160; </code></p>
 <p>Below, we use <code class="docutils literal notranslate"><span class="pre">event.waitKeys()</span></code> to pause everything until a participant presses either ‘b’ or ‘o’. WE’ll use this code to replace the <code class="docutils literal notranslate"><span class="pre">core.wait(2)</span></code> line after each of our stimuli are shown. Then</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -628,12 +621,11 @@ getKeys checks if a certain key has been entered since the last call to getKeys,
 <p>To add one more element, let’s add an instruction for each trial.</p>
 <p>Below each circle, we want to show the following instruction:
 “Press b if the circle is blue and o if the circle is orange.”</p>
-<p>We can ccomplish this using the <a class="reference external" href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">visual.TextStim()</a> class in psychopy.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Notice in the code below that we can draw multiple stimuli to the screen. In fact, we can draw as many as we like! This is really useful for creating layered/ more complex visual displays. Just bear in mind that items are drawn in order (so sometimes an item can obscure another item!).
+<p>We can accomplish this using the <a class="reference external" href="https://psychopy.org/api/visual/textstim.html#psychopy.visual.TextStim">visual.TextStim()</a> class in psychopy.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```{tip}
+Notice in the code below that we can draw multiple stimuli to the screen. In fact, we can draw as many as we like! This is really useful for creating layered/ more complex visual displays. Just bear in mind that items are drawn in order (so sometimes an item can obscure another item!).
+```
 </pre></div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -689,11 +681,10 @@ getKeys checks if a certain key has been entered since the last call to getKeys,
 </section>
 <section id="explore-on-your-own">
 <h2>Explore on your own!<a class="headerlink" href="#explore-on-your-own" title="Link to this heading">#</a></h2>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Each time you make a change, re-run your code to see if it worked! The more changes you make before testing, the more chances there are for an error to slip in, and then it can get harder to figure out why something isn&#39;t working. Running your code frequently after small changes is a good way to get comfortable editing code as you start to get familiar with the concepts and syntax.
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```{tip}
+Each time you make a change, re-run your code to see if it worked! The more changes you make before testing, the more chances there are for an error to slip in, and then it can get harder to figure out why something isn&#39;t working. Running your code frequently after small changes is a good way to get comfortable editing code as you start to get familiar with the concepts and syntax.
+```
 </pre></div>
-</div>
 </div>
 <ol class="arabic simple">
 <li><p>Change the color(s) of the circles.</p></li>
@@ -706,15 +697,14 @@ getKeys checks if a certain key has been entered since the last call to getKeys,
 <li><p>If they respond correctly (e.g., “b” for blue), present text reading: “That was correct!”</p></li>
 <li><p>If they respond incorrectly (e.g., “o” for blue), present text reading: “Sorry, that was incorrect!”</p></li>
 </ul>
-<ol class="arabic simple" start="6">
-<li><p>The repository includes some Pokemon images. Can you figure out how to display them?</p></li>
-</ol>
+<ol class="arabic" start="6">
+<li><p>The repository includes some Pokemon images. Can you figure out how to display them?</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Check out the [`visual.ImageStim()`](https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim) class
-</pre></div>
+<p>Check out the <a class="reference external" href="https://psychopy.org/api/visual/imagestim.html#psychopy.visual.ImageStim"><code class="docutils literal notranslate"><span class="pre">visual.ImageStim()</span></code></a> class</p>
 </div>
-</div>
+</li>
+</ol>
 </section>
 </section>
 
