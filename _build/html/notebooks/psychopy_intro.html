@@ -458,17 +458,39 @@
 <section id="show-an-orange-circle-after-the-blue-circle">
 <h2>Show an orange circle after the blue circle<a class="headerlink" href="#show-an-orange-circle-after-the-blue-circle" title="Link to this heading">#</a></h2>
 <p>Next, let’s add a second trial where we show an orange circle.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```{tip}
-Test yourself: Which property of `visual.Circle()` controls the color of the circle?
-```
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">psychopy</span><span class="w"> </span><span class="kn">import</span> <span class="n">visual</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">core</span> <span class="c1"># import the bits of PsychoPy we&#39;ll need for this walkthrough</span>
 
+<span class="c1">#open a window</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Window</span><span class="p">([</span><span class="mi">600</span><span class="p">,</span><span class="mi">600</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;pix&#39;</span><span class="p">,</span> <span class="n">checkTiming</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
 
-```{note}
-The key codes for right and left arrows in PsychoPy are simply &#39;right&#39; and &#39;left&#39;
+<span class="c1">#create a blue circle</span>
+<span class="n">blue_circle</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span><span class="n">fillColor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+
+<span class="c1">#create an orange circle</span>
+<span class="n">orange_circle</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span><span class="n">fillColor</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+
+<span class="c1">#show the blue circle</span>
+<span class="c1">#first, draw the blue circle to the back buffer of the window</span>
+<span class="c1">#this means that the blue circle won&#39;t be displayed right away</span>
+<span class="n">blue_circle</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="c1">#then &quot;flip&quot; the window to show what you just drew</span>
+<span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+<span class="c1">#wait 2 seconds</span>
+<span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="c1">#draw the orange circle</span>
+<span class="n">orange_circle</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+<span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="n">win</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1">#close the window</span>
+<span class="n">core</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span> <span class="c1">#quit out of the program</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
+</div>
 </div>
 </section>
 <section id="collect-a-keyboard-response">
@@ -485,10 +507,9 @@ getKeys checks if a certain key has been entered since the last call to getKeys,
 <p>Below, we use <code class="docutils literal notranslate"><span class="pre">event.waitKeys()</span></code> to pause everything until a participant presses either ‘b’ or ‘o’. WE’ll use this code to replace the <code class="docutils literal notranslate"><span class="pre">core.wait(2)</span></code> line after each of our stimuli are shown. Then</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#wait until the participant presses one of the keys from the key list</span>
-<span class="n">key_pressed</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">waitKeys</span><span class="p">(</span><span class="n">keyList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">])</span>
-<span class="c1">#once they press one of those keys, print it out and flip the window (why?)</span>
-<span class="k">if</span> <span class="n">key_pressed</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">key_pressed</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">waitKeys</span><span class="p">(</span><span class="n">keyList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">])</span> <span class="c1"># wait until the participant presses one of the keys from the key list</span>
+
+<span class="k">if</span> <span class="n">key_pressed</span><span class="p">:</span> <span class="c1"># once they press one of those keys, print it out and flip the window (why?)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">key_pressed</span><span class="p">)</span>
     <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
 </pre></div>
@@ -505,6 +526,9 @@ getKeys checks if a certain key has been entered since the last call to getKeys,
 
 <span class="c1">#create a blue circle</span>
 <span class="n">blue_circle</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span><span class="n">fillColor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+
+<span class="c1">#create an orange circle</span>
+<span class="n">orange_circle</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Circle</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span><span class="n">fillColor</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
 
 <span class="c1">#show the blue circle</span>
 <span class="c1">#first, draw the blue circle to the back buffer of the window</span>
