@@ -1,6 +1,6 @@
 format: jb-book
 root: index
-title: Psych 750
+title: Cogs 219
 options:
   numbered: true
 parts:
@@ -70,6 +70,8 @@ parts:
       title: Introduction to Tidyverse
     - file: notebooks/python_basics
       title: Python basics 
+    - file: notebooks/psychopy_intro
+      title: Intro to PsychoPy 
     # - file: notebooks/activity_print_pyramids
     #   title: The first thinking exercise
     # - file: notebooks/activity_file_writing
