@@ -66,7 +66,6 @@
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Let’s warm up them neurons" href="activity_print_pyramids.html" />
     <link rel="prev" title="Classes" href="classes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -165,21 +164,7 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Schedule</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="schedule.html">Week by week schedule</a></li>
 <li class="toctree-l1"><a class="reference internal" href="project_2023.html">Project info</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Installation instructions</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="programming_environment_osx.html">Instructions for MacOS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="programming_environment_windows.html">Installation and setup for Windows</a></li>
-
-
-
-
-
-
-
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
@@ -223,18 +208,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">In class activities</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference external" href="https://psych750.github.io/knitted_Rmd/intro_to_tidyverse.html">Introduction to Tidyverse</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/intro_to_tidyverse.html">Introduction to Tidyverse</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Python basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="activity_print_pyramids.html">The first thinking exercise</a></li>
-<li class="toctree-l1"><a class="reference internal" href="activity_file_writing.html">Primer on writing files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="activity_list_manip_vowels_1.html">Working with strings in lists</a></li>
-<li class="toctree-l1"><a class="reference internal" href="activity_dictionaries.html">A few dictionary activities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="activity_trial_generation.html">Some more trial generation practice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="activity_debugging.html">Debugging practice 1</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://psych750.github.io/knitted_Rmd/playing_around_gss.html">Basic Examples of GSS data wrangling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="more_gss_practice.html">More dataviz practice with GSS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nltk_demo.html">NLTK demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scraping.html">Webscraping demo and practice</a></li>
 </ul>
 
     </div>
@@ -429,7 +404,7 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="python-essentials-to-get-you-started">
 <h1>Python essentials to get you started<a class="headerlink" href="#python-essentials-to-get-you-started" title="Link to this heading">#</a></h1>
-<p>This notebook is designed to familiarize you with some basic programming constructs before the start of actual instruction. If you’ve coded before, this will show you how stuff you already know are implemented in the Python programming language. If you’ve never coded before, you’ll probably be a bit confused. Don’t worry! The class hasn’t started yet!</p>
+<p>This notebook is designed to familiarize you with some basic programming constructs. If you’ve coded before, this will show you how stuff you already know are implemented in the Python programming language.</p>
 <section id="variable-types-and-assignments">
 <h2>Variable types and assignments<a class="headerlink" href="#variable-types-and-assignments" title="Link to this heading">#</a></h2>
 <p>Variables are the building blocks of programs. You tell a compute what to do largely by maniulating the values of variables. Variables come in different types such as <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">boolean</span></code>, and <code class="docutils literal notranslate"><span class="pre">float</span></code>. Because Python is what’s called a dynamically typed language, you don’t have to declare the type of variable before assigning a value to it. For example, let’s look at these 6 (very badly named) variables.</p>
@@ -511,9 +486,9 @@ var_6 =  &lt;class &#39;str&#39;&gt;
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">/Users/glupyan/gitRepos/psych750.github.io/notebooks/python_basics.ipynb Cell 10</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
-      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/glupyan/gitRepos/psych750.github.io/notebooks/python_basics.ipynb#X12sZmlsZQ%3D%3D?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding 3 to var_2 gets us &quot;</span><span class="p">,</span> <span class="n">var_2</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
-<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/glupyan/gitRepos/psych750.github.io/notebooks/python_basics.ipynb#X12sZmlsZQ%3D%3D?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding 3 to var_3 gets us &quot;</span><span class="p">,</span> <span class="n">var_3</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding 3 to var_2 gets us &quot;</span><span class="p">,</span> <span class="n">var_2</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Adding 3 to var_3 gets us &quot;</span><span class="p">,</span> <span class="n">var_3</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="ne">TypeError</span>: can only concatenate str (not &quot;int&quot;) to str
 </pre></div>
@@ -738,13 +713,18 @@ pig
 </div>
 </div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>If all you need to do is to execute some command a certain number of times, there’s a Python convention to use <code class="docutils literal notranslate"><span class="pre">_</span></code> as a throwaway index variable, for example, let’s generate 5 random integers between 1-10:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">:::{</span><span class="n">tip</span><span class="p">}</span>
+<span class="n">If</span> <span class="nb">all</span> <span class="n">you</span> <span class="n">need</span> <span class="n">to</span> <span class="n">do</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">some</span> <span class="n">command</span> <span class="n">a</span> <span class="n">certain</span> <span class="n">number</span> <span class="n">of</span> <span class="n">times</span><span class="p">,</span> <span class="n">there</span><span class="s1">&#39;s a Python convention to use `_` as a throwaway index variable, for example, let&#39;</span><span class="n">s</span> <span class="n">generate</span> <span class="mi">5</span> <span class="n">random</span> <span class="n">integers</span> <span class="n">between</span> <span class="mi">1</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="err">```</span>
+<span class="p">:::</span>
 </pre></div>
+</div>
 </div>
 </div>
 </section>
