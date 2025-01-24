@@ -30,6 +30,10 @@ parts:
       title: Introduction to ggplot 1
     - url: https://cogs219.github.io/knitted_Rmd/ggplot_inclass_step2.html
       title: Introduction to ggplot 2
+    - url: https://cogs219.github.io/knitted_Rmd/data_vis_within_subjects.html
+      title: Within-Subjects Effects Vignette
+    - url: https://cogs219.github.io/knitted_Rmd/nest_map.html
+      title: Nest & Map Vignette
   - caption: Programming in PsychoPy
     chapters:
     - file: notebooks/python_basics
