@@ -22,6 +22,20 @@ parts:
   #     title: Instructions for MacOS
   #   - file: notebooks/programming_environment_windows
   #     title: Instructions for Windows
+  - caption: Visualizing Data with R
+    chapters:
+    - url: https://cogs219.github.io/knitted_Rmd/intro_to_tidyverse.html
+      title: Introduction to Tidyverse
+    - url: https://cogs219.github.io/knitted_Rmd/ggplot_inclass_step1.html
+      title: Introduction to ggplot 1
+    - url: https://cogs219.github.io/knitted_Rmd/ggplot_inclass_step2.html
+      title: Introduction to ggplot 2
+  - caption: Programming in PsychoPy
+    chapters:
+    - file: notebooks/python_basics
+      title: Python basics 
+    - file: notebooks/psychopy_intro
+      title: Intro to PsychoPy
   - caption: References
     chapters:
     - file: notebooks/Shell_reference
@@ -64,14 +78,8 @@ parts:
       title: Regular Expressions
     - file: notebooks/classes
       title: Object Oriented Programming
-  - caption: In class activities
-    chapters:
-    - url: https://cogs219.github.io/knitted_Rmd/intro_to_tidyverse.html
-      title: Introduction to Tidyverse
-    - file: notebooks/python_basics
-      title: Python basics 
-    - file: notebooks/psychopy_intro
-      title: Intro to PsychoPy 
+#  - caption: In class activities
+#    chapters:
     # - file: notebooks/activity_print_pyramids
     #   title: The first thinking exercise
     # - file: notebooks/activity_file_writing
