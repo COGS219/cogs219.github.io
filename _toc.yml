@@ -40,6 +40,8 @@ parts:
       title: Python basics 
     - file: notebooks/psychopy_intro
       title: Intro to PsychoPy
+    - file: notebooks/square_exercise
+      title: Square Exercise
   - caption: References
     chapters:
     - file: notebooks/Shell_reference
