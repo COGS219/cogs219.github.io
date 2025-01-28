@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Exercise 6 - Exploring the Stroop adjustment data &#8212; Cogs 219</title>
+    <title>Exercise - Make a square and play with it &#8212; Cogs 219</title>
   
   
   
@@ -61,11 +61,13 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Exercise6-stroop_analysis';</script>
-    <link rel="canonical" href="https://cogs219.github.io/notebooks/Exercise6-stroop_analysis.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/square_exercise';</script>
+    <link rel="canonical" href="https://cogs219.github.io/notebooks/square_exercise.html" />
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Linux commands" href="Shell_reference.html" />
+    <link rel="prev" title="Intro to PsychoPy" href="psychopy_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -116,8 +118,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -176,10 +176,10 @@
 <li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/nest_map.html">Nest &amp; Map Vignette</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Programming in PsychoPy</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="python_basics.html">Python basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="psychopy_intro.html">Intro to PsychoPy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="square_exercise.html">Square Exercise</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Square Exercise</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
@@ -279,7 +279,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/COGS219/cogs219.github.io/main?urlpath=tree/notebooks/Exercise6-stroop_analysis.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/COGS219/cogs219.github.io/main?urlpath=tree/notebooks/square_exercise.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -310,7 +310,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/Exercise6-stroop_analysis.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/square_exercise.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -386,7 +386,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Exercise 6 - Exploring the Stroop adjustment data</h1>
+    <h1>Exercise - Make a square and play with it</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -396,11 +396,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4">Part 4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-graphing">Part 5 - Graphing!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-questions">Exercise questions</a></li>
 </ul>
             </nav>
         </div>
@@ -412,68 +408,83 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="exercise-6-exploring-the-stroop-adjustment-data">
-<h1>Exercise 6 - Exploring the Stroop adjustment data<a class="headerlink" href="#exercise-6-exploring-the-stroop-adjustment-data" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://classroom.github.com/a/-aEGgchE">Accept the exercise</a></p>
-<p>Because you’ll submitting a continuous notebook (rather than developing a program) for this exercise, there’s no need to have multiple tags. I encourage you though to make regular commits as you’re working on the assignment. The final commit should be tagged <code class="docutils literal notranslate"><span class="pre">Exercise_6_done</span></code> and have a single notebook called exercise_6.Rmd that has clearly titled chunks (see starter code). Insert additional chunks as you see fit. Make sure you push <em>all</em> the files in your working directory to the repository, not just the Rmd file. This will help us run your code. To help us grade quickly, make sure to also include a knitted .html file.</p>
-<a class="reference internal image-reference" href="../_images/knitting_to_html.jpg"><img alt="Knitting to HTML" class="align-center" src="../_images/knitting_to_html.jpg" style="width: 360px;" /></a>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Open your notebook using the included .Rproj file. If you don’t, you’ll likely be in the wrong working directory and will have trouble loading the data using the starter code.</p>
-</div>
-<hr class="docutils" />
-<section id="part-1">
-<h2>Part 1<a class="headerlink" href="#part-1" title="Link to this heading">#</a></h2>
-<p>Inside the data subfolder are individual data files. Each file has a column header and is comma-delimitted. We need to read them into a single R dataframe (<code class="docutils literal notranslate"><span class="pre">dat</span></code>).  The starter code provides a way for you to read all these files into a single R data-frame. I would also like you to practice doing this by concatenating all the files in your shell. See <a class="reference external" href="https://psych750.github.io/notebooks/Shell_reference.html#combine-concatenate-two-or-more-files-and-write-the-output-to-another-file">here</a> for how to concatenate multiple files into one (the only slightly tricky part is what to do about the column headers).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>R has (too!) many functions for reading in CSV files. Some of them are much slower than others and should be avoided if you’re reading in lots of large files. See <a class="reference external" href="https://stackoverflow.com/questions/11433432/how-to-import-multiple-csv-files-at-once">here</a> for a discussion and time comparison of the different functions. Different functions also have different column-type defaults (e.g., reading in a column containing text-strings as factors vs. character vectors).</p>
-</div>
-<p>To show that you’ve understood how to do file concatenation in the shell, please add in the commands you used in the indicated place in the R notebook and write an aggregated_data.csv file into a aggregated_data directory that contains the output of your shell command(s). This file should be pushed along with the rest of your submission.</p>
-</section>
-<section id="part-2">
-<h2>Part 2<a class="headerlink" href="#part-2" title="Link to this heading">#</a></h2>
-<p>Compute correct RTs only</p>
-<p>Whenever we look at RTs, we don’t want to mix together RTs from correct and incorrect responses. Subset your data-frame to include only the correct responses. From now on, use this subsetted dataframe.</p>
-</section>
-<section id="part-3">
-<h2>Part 3<a class="headerlink" href="#part-3" title="Link to this heading">#</a></h2>
-<p>Provide the code that answers the question in the approprite block in the starter .Rmd file</p>
-<ol class="arabic simple">
-<li><p>What are the group RT means for congruent and incongruent trials?</p></li>
-<li><p>What are the group means for congruent and incongruent broken down for the 2 <code class="docutils literal notranslate"><span class="pre">prop_incongruent</span></code> conditions?</p></li>
-<li><p>Write code that lists all the subj_codes whose overall accuracies are less than one (i.e., less than 100%)</p></li>
-</ol>
-</section>
-<section id="part-4">
-<h2>Part 4<a class="headerlink" href="#part-4" title="Link to this heading">#</a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">pivot_wider()</span></code> to generate a data-frame containing separate the mean congruent and incongruent trials of each subject, and use mutate() to create an <code class="docutils literal notranslate"><span class="pre">incongruence_cost</span></code> column that is the difference between RTs on incongruent and congruent trials (incongruent-congruent). Sort it so that the subjects with the largest incongruent costs are listed first</p>
-<p>It should look something like this:</p>
-<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>   subj_code       congruent incongruent incongruence_cost
-   &lt;fct&gt;               &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;
- madisonherrmann      715.       1010.             295. 
- acart3r              766.       1018.             252. 
- lsmithbecker         555.        794.             328. 
-...
+  <section class="tex2jax_ignore mathjax_ignore" id="exercise-make-a-square-and-play-with-it">
+<h1>Exercise - Make a square and play with it<a class="headerlink" href="#exercise-make-a-square-and-play-with-it" title="Link to this heading">#</a></h1>
+<p>Fork the repository for <a class="reference external" href="https://github.com/COGS219/activities/square_exercise">this exercise</a>.</p>
+<p>Once you fork or clone the repository, you’ll see a file with the starter code. This is the file you will edit and add to as we work through the walkthrough. For reference, the code is reproduced below.</p>
+<p>This starter code will show a blue square for half a second (500 ms) and then exit out of the program.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psychopy</span><span class="w"> </span><span class="kn">import</span> <span class="n">visual</span><span class="p">,</span><span class="n">event</span><span class="p">,</span><span class="n">core</span> <span class="c1"># import the bits of PsychoPy we&#39;ll need for this exercise</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Window</span><span class="p">([</span><span class="mi">400</span><span class="p">,</span><span class="mi">400</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;pix&#39;</span><span class="p">)</span> <span class="c1">#open a window</span>
+<span class="n">square</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">fillColor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span> <span class="c1">#create a Rectangle type object with certain parameters</span>
+<span class="n">square</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c1">#draw the square to the screen buffer</span>
+<span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span> <span class="c1">#make the buffer visible, i.e., show what&#39;s been drawn to it</span>
+<span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span> <span class="c1">#pause for half a second (i.e., 500 ms)</span>
+<span class="n">win</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1">#close the window -- don&#39;t need this if you&#39;re running this as a separate file</span>
+<span class="n">core</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span> <span class="c1">#quit out of the program -- don&#39;t need this if you&#39;re running this as a separate file</span>
 </pre></div>
 </div>
-<p><strong>Bonus (1 pt)</strong></p>
-<p>A larger incongruence cost may come from people being really fasts on the congruent trials, really slow on incongruent trials, or both. Write some code to determine which of these three possibilities are true in these data.</p>
-<p>Now let’s see if the incongruence advantage is different between the 25% and 50% incongruence conditions.
-Use <code class="docutils literal notranslate"><span class="pre">pivot_wider()</span></code> again, but this time to get separate incongruence advantage columns for the .25 and .50 prop_incongruent conditions.</p>
-</section>
-<section id="part-5-graphing">
-<h2>Part 5 - Graphing!<a class="headerlink" href="#part-5-graphing" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Generate a graph showing how the incongruent cost varies by prop_incongruent (hint: use a line graph, not bars!)</p></li>
-<li><p>Generate a graph showing how the incongruent cost varies by orientation. What are you seeing?</p></li>
-<li><p>Figure out an easy-to-interpret way of showing <em>both</em> the effect of orientation and the effect of prop_incongruent on the congruency advantage (i.e., incongruency cost).</p></li>
-<li><p>Show how the incongruent cost varies with trial number. Is it getting larger? Smaller? Is the trend similar for the 25% nd 50% prop_incongruent condition?</p></li>
-</ol>
+</div>
+</div>
+<p><strong>Go through each line of the code above and understand what each line does.</strong></p>
+<p>Then spend the next 20 minutes in class working through these parts.</p>
+<section id="exercise-questions">
+<h2>Exercise questions<a class="headerlink" href="#exercise-questions" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Good practice could be to make a commit for each change you make and name the commit based on the question number, e.g. question_1.</p>
+</div>
+<ol class="arabic">
+<li><p>Make the square red instead of blue</p></li>
+<li><p>Make the square appear for 1.5 secs.</p></li>
+<li><p>Show a red square for 1 second, then switch it to blue and show it for 1 second</p></li>
+<li><p>Show the following sequence: blue, red, blue, red, blue, red. Each color square should appear for 1 s with a 50 ms blank screen in the middle.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Don’t get hung up on specific measures like “incongruence cost”. It may be that a single number per subject is the best way to visualize the effect of trial-type, but perhaps not! It may well be that the best way to visualize it by plotting both congruent and incongruent trials for each subject so you can better see the effect of various conditions by their effect on the slope!  Think about the meaning of the graph. Is it answering the posed question in the simplest/clearest way possible?</p>
+<p>Use a list and loop through it! Do not copy/paste the same chunk of code multiple times.</p>
 </div>
+</li>
+<li><p>Show a red square for 1 sec and then change its orientation by 45-deg and show it for another 1 sec.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To change the orientation by a certain degree-value use square.setOri(value) where <code class="docutils literal notranslate"><span class="pre">value</span></code> is the new orientation.</p>
+</div>
+</li>
+<li><p>Now make a square rotate continuously, approximately one full revolution (360 degrees) per second (if you’re not sure how to approach the timing, don’t worry too much about getting the time exactly right, focus on getting the rectangle to spin continuously)</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To increase orientation use <code class="docutils literal notranslate"><span class="pre">square.ori</span> <span class="pre">+=</span> <span class="pre">value</span></code> where <code class="docutils literal notranslate"><span class="pre">value</span></code> is the value by which to increase the
+orientation.</p>
+</div>
+</li>
+<li><p>Make a rotating square stop rotating when you press the ‘s’ key</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To accept keyboard input, use event.getKeys() and event.waitKeys(). Look at how these functions are defined at the <a class="reference external" href="https://psychopy.org/api/event.html">psychopy API web page</a> or by typing <code class="docutils literal notranslate"><span class="pre">help(function</span> <span class="pre">name)</span></code>, e.g., <code class="docutils literal notranslate"><span class="pre">help(event.getKeys)</span></code> after importing <code class="docutils literal notranslate"><span class="pre">event</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>getKeys checks if a certain key has been entered since the last call to getKeys, e.g., if an ‘s’ was pressed, <code class="docutils literal notranslate"><span class="pre">event.getKeys(['s'])</span></code> will become True. event.waitKeys() waits until a certain key (or any key) was pressed.</p>
+</div>
+</div>
+</li>
+<li><p>Make a square stop rotating when you press ‘s’ and then start rotating again when you press ‘r’. Your code should keep running, rotating the square and stopping it whenever you press the <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code> keys. Include a check for a <code class="docutils literal notranslate"><span class="pre">q</span></code> key which, when received, should quit the program.</p></li>
+<li><p>Display a blue square and increase its width (making it a rectangle) by 10 pixels whenever the user presses the left-arrow key. Decrease the width by 10 pixels when the user presses the right-arrow key</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The key codes for right and left arrows in PsychoPy are simply ‘right’ and ‘left’</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To change the width use <code class="docutils literal notranslate"><span class="pre">square.size</span> <span class="pre">+=</span> <span class="pre">[x,y]</span></code> where <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are the values by which you want to change
+the size. x is the width; y is the height.</p>
+</div>
+</li>
+<li><p>Show <em>two</em> rotating squares simultaneously, one left of center rotating clockwise, the other right of center, rotating counterclockwise. This is a little tricky. The squares should be visible at the same time and should not flash.</p></li>
+</ol>
 </section>
 </section>
 
@@ -518,11 +529,7 @@ Use <code class="docutils literal notranslate"><span class="pre">pivot_wider()</
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4">Part 4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-5-graphing">Part 5 - Graphing!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-questions">Exercise questions</a></li>
 </ul>
   </nav></div>
 
