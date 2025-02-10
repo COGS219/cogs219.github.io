@@ -411,13 +411,11 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="psychopy-assignment-the-stroop-effect">
 <h1>Psychopy Assignment: The stroop effect<a class="headerlink" href="#psychopy-assignment-the-stroop-effect" title="Link to this heading">#</a></h1>
+<p>To work on this assignment, please create a GitHub folder called <code class="docutils literal notranslate"><span class="pre">stroop-experiment</span></code> and create a .py file called <code class="docutils literal notranslate"><span class="pre">stroop.py</span></code> using the starter code below.</p>
+<p>Then, for each task, please create (at least) one separate GitHub commit so that I can see your history of updating your code base.</p>
+<p>Solution code is provided beneath each exercise, but I encourage you to first try to figure out the code and experiment a bit at each step yourself, knowing that you can always “check” the correct answer at any point. The more you practice actually trying to generate (and type out) the code, the more effective the assignment will be at building your psychopy skills.</p>
 <p>In this exercise we’ll put some of what we’ve learned so far together into an simple experiment demonstrating the <a href="https://en.wikipedia.org/wiki/Stroop_effect/" target="_blank">Stroop Effect</a>. We’ll gradually build this codebase out into a full experiment.</p>
-<div class="cell tag_remove-output tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
@@ -450,30 +448,459 @@
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <p>Once you’ve successfully run this code and understand what all the lines do, proceed to the following exercises.</p>
 <section id="psychopy-assignment-tasks">
 <h2>Psychopy Assignment Tasks<a class="headerlink" href="#psychopy-assignment-tasks" title="Link to this heading">#</a></h2>
-<ol class="arabic">
-<li><p>Create a fixation cross using a TextStim object <code class="docutils literal notranslate"><span class="pre">visual.TextStim</span></code> set text to “+” and color to “black” and height to 15. Make the fixation cross appear for 500 ms before each color word, and disappear right before the color word appears.</p></li>
+<ol class="arabic simple">
+<li><p>Create a fixation cross using a TextStim object <code class="docutils literal notranslate"><span class="pre">visual.TextStim</span></code> set text to “+” and color to “black” and height to 15. Make the fixation cross appear for 500 ms before each color word, and disappear right before the color word appears, with another 500 ms inter-stimulus interval between the fixation cross and the word.</p></li>
+</ol>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#add fixation cross to the top of the script (before the while loop)</span>
+<span class="n">fixation</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#new while loop</span>
+<span class="c1">#add fixation cross</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">cur_stim</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stimuli</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">instruction</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">fixation</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">instruction</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">instruction</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">instruction</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>    
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.15</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">getKeys</span><span class="p">([</span><span class="s1">&#39;q&#39;</span><span class="p">]):</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Use the <a href="https://www.psychopy.org/coder/codeStimuli.html" target="_blank">autoDraw</a> functionality to automatically draw the <code class="docutils literal notranslate"><span class="pre">instruction</span></code> for every window flip. This simplifies the code above quite a bit!</p></li>
+</ol>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#add autoDraw to instruction</span>
+<span class="n">instruction</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Press the first letter of the ink color&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">200</span><span class="p">],</span><span class="n">autoDraw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#new while loop</span>
+<span class="c1">#remove instruction.draw() since this is now automatically drawn!</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">cur_stim</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stimuli</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">fixation</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>   
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.15</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">getKeys</span><span class="p">([</span><span class="s1">&#39;q&#39;</span><span class="p">]):</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<ol class="arabic" start="3">
 <li><p>Rather than cycling throught the colors, use <code class="docutils literal notranslate"><span class="pre">event.waitKeys()</span></code> to wait for a response (e.g., “o” for “orange”).  Your script should only accept ‘r’, ‘o’, ‘y’, ‘g’, ‘b’ (the first letter of each color) and – to make testing easier for you – ‘q’ for quit.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Make sure your code has just the functionality it needs, e.g., for part 2, you don’t need <code class="docutils literal notranslate"><span class="pre">event.getKeys(['q'])</span></code></p>
 </div>
 </li>
-<li><p>Compute the reaction times – the time it takes to respond from when the color word appears, to when the user presses a key, in milleconds (e.g., .8 secs should show up as 800). Store these in a list called <code class="docutils literal notranslate"><span class="pre">RTs</span></code>. (<a class="reference external" href="http://www.psychopy.org/api/core.html">Use psychopy timers</a>)</p>
+</ol>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define valid response keys to the top of the script (before the while loop)</span>
+<span class="n">valid_response_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;q&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#add event.waitKeys to the while loop</span>
+<span class="c1">#replace the event.getKeys call with a check of whether the key pressed is a &#39;q&#39;</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">cur_stim</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stimuli</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">fixation</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">key_pressed</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">waitKeys</span><span class="p">(</span><span class="n">keyList</span><span class="o">=</span><span class="n">valid_response_keys</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<ol class="arabic" start="4">
+<li><p>Compute the reaction times – the time it takes to respond from when the color word appears, to when the user presses a key, in milleconds (e.g., .8 secs should show up as 800). Store these in a list called <code class="docutils literal notranslate"><span class="pre">RTs</span></code>. (<a href="http://www.psychopy.org/api/core.html" target="_blank">Use psychopy timers</a>)</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Append each reaction time to the <code class="docutils literal notranslate"><span class="pre">RTs</span></code> list after every response</p>
 </div>
 <p>Print the list to verify that the reaction times are correct (e.g., if you take approx 1 second to respond, is it recording 1000?). Your submitted code should have this print statement.</p>
 </li>
+</ol>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#update to while loop portion</span>
+<span class="n">RTs</span><span class="o">=</span><span class="p">[]</span> <span class="c1">#set RT list</span>
+<span class="n">response_timer</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span> <span class="c1"># set response timer clock</span>
+<span class="n">key_pressed</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#initializing this for later</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">cur_stim</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stimuli</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">fixation</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">response_timer</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># immediately after win.flip(), reset clock to measure RT</span>
+    <span class="n">key_pressed</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">waitKeys</span><span class="p">(</span><span class="n">keyList</span><span class="o">=</span><span class="n">valid_response_keys</span><span class="p">)</span>
+    <span class="n">RTs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">response_timer</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#add an RT to the list, rounded to the nearest millisecond</span>
+
+    <span class="k">if</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">RTs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<ol class="arabic simple" start="5">
 <li><p>Now let’s implement some feedback. If the user responded correctly, do nothing. If the user responded incorrectly, show “Incorrect” in black letters and add a 1s time delay before going on to the next trial.</p></li>
-<li><p>Now, instead of waiting for a response forever, let’s implement a timeout. Show accuracy feedback as before, show “Too slow” if the user takes more than 1.5 secs to respond.</p></li>
+</ol>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add a new feedback TextStim before the while loop</span>
+<span class="n">feedback_incorrect</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;INCORRECT&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_remove-output tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#add feedback after collecting the response and RT</span>
+<span class="k">if</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">cur_stim</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="c1">#correct response</span>
+    <span class="k">pass</span>
+<span class="k">elif</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+    <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">feedback_incorrect</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Now, instead of waiting for a response forever, let’s implement a timeout. Show accuracy feedback as before, show “Too slow” if the user takes more than 2 secs to respond.</p></li>
+</ol>
+<div class="cell tag_remove-output tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#add &#39;too slow&#39; feedback before the while loop</span>
+<span class="n">feedback_too_slow</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;TOO SLOW&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_remove-output tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#full while loop</span>
+<span class="n">RTs</span><span class="o">=</span><span class="p">[]</span> <span class="c1">#set RT list</span>
+<span class="n">response_timer</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span> <span class="c1"># set response timer clock</span>
+<span class="n">key_pressed</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#need to initialize this for later</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">cur_stim</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stimuli</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">cur_stim</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">fixation</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>  
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">response_timer</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># immediately after win.flip(), reset clock to measure RT</span>
+    <span class="n">key_pressed</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">waitKeys</span><span class="p">(</span><span class="n">keyList</span><span class="o">=</span><span class="n">valid_response_keys</span><span class="p">,</span><span class="n">maxWait</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># maximum wait time of 2 s</span>
+    <span class="c1"># add feedback</span>
+    <span class="c1"># if key_pressed is still FALSE/ no response was registered, present too slow feedback</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">key_pressed</span><span class="p">:</span>
+        <span class="n">feedback_too_slow</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">cur_stim</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="c1">#elif statement</span>
+        <span class="c1">#correct response</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">feedback_incorrect</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">RTs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">response_timer</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#add an RT to the list, rounded to the nearest millisecond</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<ol class="arabic simple" start="7">
 <li><p>Introduce <em>incongruent</em> trials by showing words in the “wrong” color, e.g., “yellow” printed in green. To do this, define a function called <code class="docutils literal notranslate"><span class="pre">make_incongruent()</span></code> which takes in a color as an argument and returns one of the other colors in <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> that’s different from the one being passed in. Then set the color word’s color to this new value, thereby creating an incongruent trial.</p></li>
 </ol>
+<div class="cell tag_remove-output tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define a function to make colors incongurent</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_incongruent</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+    <span class="n">possible_incongruent_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">stimulus</span> <span class="k">for</span> <span class="n">stimulus</span> <span class="ow">in</span> <span class="n">stimuli</span> <span class="k">if</span> <span class="n">stimulus</span> <span class="o">!=</span> <span class="n">color</span><span class="p">]</span>
+    <span class="n">incongruent_color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_incongruent_colors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">incongruent_color</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#update how the text and color are set for the key stimulus</span>
+<span class="n">cur_word</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stimuli</span><span class="p">)</span> <span class="c1">#notice the change in variable name now that we have congruent and incongruent trials</span>
+<span class="n">trial_type</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">trial_types</span><span class="p">)</span> <span class="c1">#we&#39;re just going to randomly pick the trial type (so it&#39;s 50/50 congruent/incongruent)</span>
+
+<span class="n">word_stim</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">cur_word</span><span class="p">)</span> <span class="c1">#set text</span>
+<span class="k">if</span> <span class="n">trial_type</span> <span class="o">==</span> <span class="s1">&#39;incongruent&#39;</span><span class="p">:</span>
+    <span class="n">cur_color</span> <span class="o">=</span> <span class="n">make_incongruent</span><span class="p">(</span><span class="n">cur_word</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">cur_color</span> <span class="o">=</span> <span class="n">cur_word</span>
+<span class="c1">#notice that at this point cur_color is the color we&#39;re gonna set the word to. </span>
+<span class="c1">#It&#39;s taking into account the trial type </span>
+<span class="n">word_stim</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">cur_color</span><span class="p">)</span> <span class="c1">#set color</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="8">
+<li><p><strong>CHECKPOINT</strong></p></li>
+</ol>
+<p>The full code should now look like the code below.</p>
+<div class="cell tag_hide-input tag_remove-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psychopy</span><span class="w"> </span><span class="kn">import</span> <span class="n">visual</span><span class="p">,</span><span class="n">event</span><span class="p">,</span><span class="n">core</span><span class="p">,</span><span class="n">gui</span>
+
+<span class="n">stimuli</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+<span class="n">valid_response_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;q&#39;</span><span class="p">]</span>
+<span class="n">trial_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;congruent&#39;</span><span class="p">,</span><span class="s1">&#39;incongruent&#39;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_incongruent</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+    <span class="n">possible_incongruent_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">stimulus</span> <span class="k">for</span> <span class="n">stimulus</span> <span class="ow">in</span> <span class="n">stimuli</span> <span class="k">if</span> <span class="n">stimulus</span> <span class="o">!=</span> <span class="n">color</span><span class="p">]</span>
+    <span class="n">incongruent_color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_incongruent_colors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">incongruent_color</span>
+
+<span class="n">win</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Window</span><span class="p">([</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;pix&#39;</span><span class="p">,</span><span class="n">checkTiming</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">placeholder</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">fillColor</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lineWidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">word_stim</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">instruction</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Press the first letter of the ink color&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">200</span><span class="p">],</span><span class="n">autoDraw</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#add fixation cross</span>
+<span class="n">fixation</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">)</span>
+<span class="c1"># add a new feedback TextStim before the while loop</span>
+<span class="n">feedback_incorrect</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;INCORRECT&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">feedback_too_slow</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;TOO SLOW&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">RTs</span><span class="o">=</span><span class="p">[]</span> <span class="c1">#set RT list</span>
+<span class="n">response_timer</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span> <span class="c1"># set response timer clock</span>
+<span class="n">key_pressed</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#need to initialize this for later</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+    <span class="n">cur_word</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">stimuli</span><span class="p">)</span> <span class="c1">#notice the change in variable name now that we have congruent and incongruent trials</span>
+    <span class="n">trial_type</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">trial_types</span><span class="p">)</span> <span class="c1">#we&#39;re just going to randomly pick the trial type (so it&#39;s 50/50 congruent/incongruent)</span>
+
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">cur_word</span><span class="p">)</span> <span class="c1">#set text</span>
+    <span class="k">if</span> <span class="n">trial_type</span> <span class="o">==</span> <span class="s1">&#39;incongruent&#39;</span><span class="p">:</span>
+        <span class="n">cur_color</span> <span class="o">=</span> <span class="n">make_incongruent</span><span class="p">(</span><span class="n">cur_word</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cur_color</span> <span class="o">=</span> <span class="n">cur_word</span>
+    <span class="c1">#notice that at this point cur_color is the color we&#39;re gonna set the word to. </span>
+    <span class="c1">#It&#39;s taking into account the trial type </span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">cur_color</span><span class="p">)</span> <span class="c1">#set color</span>
+
+    <span class="c1">#show fixation</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">fixation</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+
+    <span class="c1">#short inter stimulus interval</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+
+    <span class="c1">#draw word stimulus</span>
+    <span class="n">placeholder</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">word_stim</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+    <span class="c1">#get response</span>
+    <span class="n">response_timer</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1"># immediately after win.flip(), reset clock to measure RT</span>
+    <span class="n">key_pressed</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">waitKeys</span><span class="p">(</span><span class="n">keyList</span><span class="o">=</span><span class="n">valid_response_keys</span><span class="p">,</span><span class="n">maxWait</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># maximum wait time of 2 s</span>
+    <span class="n">RTs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">response_timer</span><span class="o">.</span><span class="n">getTime</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#add an RT to the list, rounded to the nearest millisecond</span>
+
+    <span class="c1"># add feedback</span>
+    <span class="c1"># if key_pressed is still FALSE/ no response was registered, present too slow feedback</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">key_pressed</span><span class="p">:</span>
+        <span class="n">feedback_too_slow</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">cur_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="c1"># now</span>
+        <span class="c1">#correct response</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">key_pressed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">feedback_incorrect</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">RTs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 </section>
 
