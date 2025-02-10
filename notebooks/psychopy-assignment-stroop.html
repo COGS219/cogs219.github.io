@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Exercise 2: The stroop effect &#8212; Cogs 219</title>
+    <title>Psychopy Assignment: The stroop effect &#8212; Cogs 219</title>
   
   
   
@@ -387,7 +387,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Exercise 2: The stroop effect</h1>
+    <h1>Psychopy Assignment: The stroop effect</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -397,7 +397,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-parts">Exercise 2 parts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psychopy-assignment-tasks">Psychopy Assignment Tasks</a></li>
 </ul>
             </nav>
         </div>
@@ -409,11 +409,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="exercise-2-the-stroop-effect">
-<h1>Exercise 2: The stroop effect<a class="headerlink" href="#exercise-2-the-stroop-effect" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://classroom.github.com/a/_b1h8m8l">Accept the exercise</a></p>
-<p>In this exercise we’ll put some of what we’ve learned so far together into an simple experiment demonstrating the <a class="reference external" href="https://en.wikipedia.org/wiki/Stroop_effect">The Stroop Effect</a>. Then we’ll gradually build this codebase out into a full experiment and implement some snazzy things like speech recognition.</p>
-<div class="cell tag_remove-output docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="psychopy-assignment-the-stroop-effect">
+<h1>Psychopy Assignment: The stroop effect<a class="headerlink" href="#psychopy-assignment-the-stroop-effect" title="Link to this heading">#</a></h1>
+<p>In this exercise we’ll put some of what we’ve learned so far together into an simple experiment demonstrating the <a class="reference external" href="https://en.wikipedia.org/wiki/Stroop_effect">The Stroop Effect</a>. We’ll gradually build this codebase out into a full experiment.</p>
+<div class="cell tag_remove-output tag_toggle docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
@@ -422,7 +421,7 @@
 
 <span class="n">stimuli</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
 
-<span class="n">win</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Window</span><span class="p">([</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;pix&#39;</span><span class="p">)</span>
+<span class="n">win</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Window</span><span class="p">([</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;pix&#39;</span><span class="p">,</span><span class="n">checkTiming</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">placeholder</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">fillColor</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span><span class="n">lineColor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lineWidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">word_stim</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">instruction</span> <span class="o">=</span> <span class="n">visual</span><span class="o">.</span><span class="n">TextStim</span><span class="p">(</span><span class="n">win</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Press the first letter of the ink color&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">200</span><span class="p">])</span>
@@ -448,8 +447,8 @@
 </div>
 </div>
 <p>Once you’ve successfully run this code and understand what all the lines do, proceed to the following exercises.</p>
-<section id="exercise-2-parts">
-<h2>Exercise 2 parts<a class="headerlink" href="#exercise-2-parts" title="Link to this heading">#</a></h2>
+<section id="psychopy-assignment-tasks">
+<h2>Psychopy Assignment Tasks<a class="headerlink" href="#psychopy-assignment-tasks" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><p>Create a fixation cross using a TextStim object <code class="docutils literal notranslate"><span class="pre">visual.TextStim</span></code> set text to “+” and color to “black” and height to 15. Make the fixation cross appear for 500 ms before each color word, and disappear right before the color word appears.</p></li>
 <li><p>Rather than cycling throught the colors, use <code class="docutils literal notranslate"><span class="pre">event.waitKeys()</span></code> to wait for a response (e.g., “o” for “orange”).  Your script should only accept ‘r’, ‘o’, ‘y’, ‘g’, ‘b’ (the first letter of each color) and – to make testing easier for you – ‘q’ for quit.</p>
@@ -513,7 +512,7 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-parts">Exercise 2 parts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psychopy-assignment-tasks">Psychopy Assignment Tasks</a></li>
 </ul>
   </nav></div>
 
