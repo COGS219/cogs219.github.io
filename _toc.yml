@@ -34,6 +34,10 @@ parts:
       title: Within-Subjects Effects Vignette
     - url: https://cogs219.github.io/knitted_Rmd/nest_map.html
       title: Nest & Map Vignette
+    - url: https://cogs219.github.io/knitted_Rmd/building_intuitions_mixed_effects.html
+      title: Building Mixed-Effects Intuitions
+    - url: https://cogs219.github.io/knitted_Rmd/intro_mixed_effects.html
+      title: Introduction to Mixed-Effects Models
   - caption: Programming in PsychoPy
     chapters:
     - file: notebooks/python_basics
