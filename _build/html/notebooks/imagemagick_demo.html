@@ -1,0 +1,1351 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ImageMagick in Python &#8212; Cogs 219</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/book.css?v=f7f7574a" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/imagemagick_demo';</script>
+    <link rel="canonical" href="https://cogs219.github.io/notebooks/imagemagick_demo.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/favicon.png" class="logo__image only-light" alt="Cogs 219 - Home"/>
+    <img src="../_static/favicon.png" class="logo__image only-dark pst-js-only" alt="Cogs 219 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Schedule</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="project_2023.html">Project info</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Visualizing Data with R</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/intro_to_tidyverse.html">Introduction to Tidyverse</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/ggplot_inclass_step1.html">Introduction to ggplot 1</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/ggplot_inclass_step2.html">Introduction to ggplot 2</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/data_vis_within_subjects.html">Within-Subjects Effects Vignette</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/nest_map.html">Nest &amp; Map Vignette</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/building_intuitions_mixed_effects.html">Building Mixed-Effects Intuitions</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://cogs219.github.io/knitted_Rmd/intro_mixed_effects.html">Introduction to Mixed-Effects Models</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Programming in PsychoPy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python_basics.html">Python basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="psychopy_intro.html">Intro to PsychoPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="square_exercise.html">Square Exercise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="psychopy-assignment-stroop.html">PsychoPy Assignment - Stroop Task</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Shell_reference.html">Basic Linux commands</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Python_reference.html">Python reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Psychopy_reference.html">PsychoPy reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ImageMagick.html">ImageMagick/GraphicsMagick reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Self Study Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="var_string_num.html">Variables, Strings, and Numbers</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_basics.html">Lists - the basics</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="if_statements.html">If Statements</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="dictionaries.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introducing_functions.html">Introducing Functions</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="list_comprehension.html">List Comprehension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_a.html">Review of Fundamentals A</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trial_generation.html">Randomization and Iteration</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://docs.python.org/3.7/tutorial/errors.html">Handling Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="review_of_fundamentals_b.html">Review of Fundamentals B</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_basic_pandas_operations.html">Using Pandas to read/write CSV files.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="globbing_files.html">File access-Globbing and preloading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="activity_reference_vs_value.html">Mutable and immutable types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regexp.html">Regular Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="nltk_demo.html">NLTK demo</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/COGS219/cogs219.github.io/main?urlpath=tree/notebooks/imagemagick_demo.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/imagemagick_demo.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ImageMagick in Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-out-running-an-image-magick-command">Test out running an image magick command</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="imagemagick-in-python">
+<h1>ImageMagick in Python<a class="headerlink" href="#imagemagick-in-python" title="Link to this heading">#</a></h1>
+<p>Before you start, make sure to download ImageMagick: <a class="reference external" href="https://imagemagick.org/index.php">https://imagemagick.org/index.php</a>.</p>
+<p>The following code is just to demonstrate how you can use ImageMagick by executing shell commands through Python. This is especially useful if you’d like to e.g. loop through a lot of commands or images.</p>
+<section id="test-out-running-an-image-magick-command">
+<h2>Test out running an image magick command<a class="headerlink" href="#test-out-running-an-image-magick-command" title="Link to this heading">#</a></h2>
+<p>First, collect all of the original image files in a repository.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">cur_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">path_to_images</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span><span class="s2">&quot;images&quot;</span><span class="p">,</span><span class="s2">&quot;image_magick&quot;</span><span class="p">,</span><span class="s2">&quot;original_images&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">path_to_images</span><span class="p">)</span>
+
+<span class="c1">#get all of the files</span>
+<span class="n">image_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path_to_images</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image_files</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images
+[&#39;31_150.jpg&#39;, &#39;21_150.jpg&#39;, &#39;13_100_R.jpg&#39;, &#39;8_0.jpg&#39;, &#39;18_100.jpg&#39;, &#39;43_150.jpg&#39;, &#39;16_0.jpg&#39;, &#39;7_50_R.jpg&#39;, &#39;6_50_R.jpg&#39;, &#39;4_150_R.jpg&#39;, &#39;21_50_R.jpg&#39;, &#39;20_50_R.jpg&#39;, &#39;45_100.jpg&#39;, &#39;42_0_R.jpg&#39;, &#39;26_100_R.jpg&#39;, &#39;32_0.jpg&#39;, &#39;40_150_R.jpg&#39;, &#39;48_100_R.jpg&#39;, &#39;6_50.jpg&#39;, &#39;32_100_R.jpg&#39;, &#39;30_0_R.jpg&#39;, &#39;20_0_R.jpg&#39;, &#39;27_100.jpg&#39;, &#39;37_100.jpg&#39;, &#39;13_50.jpg&#39;, &#39;11_100.jpg&#39;, &#39;16_0_R.jpg&#39;, &#39;48_0.jpg&#39;, &#39;16_150_R.jpg&#39;, &#39;28_150.jpg&#39;, &#39;38_150.jpg&#39;, &#39;15_50_R.jpg&#39;, &#39;5_0_R.jpg&#39;, &#39;14_50_R.jpg&#39;, &#39;30_0.jpg&#39;, &#39;2_100.jpg&#39;, &#39;37_50.jpg&#39;, &#39;23_150_R.jpg&#39;, &#39;4_150.jpg&#39;, &#39;1_100_R.jpg&#39;, &#39;9_150_R.jpg&#39;, &#39;29_0_R.jpg&#39;, &#39;29_50.jpg&#39;, &#39;39_0_R.jpg&#39;, &#39;14_0.jpg&#39;, &#39;29_0.jpg&#39;, &#39;25_50.jpg&#39;, &#39;45_100_R.jpg&#39;, &#39;17_150.jpg&#39;, &#39;46_50.jpg&#39;, &#39;37_150_R.jpg&#39;, &#39;10_0.jpg&#39;, &#39;41_50_R.jpg&#39;, &#39;2_150_R.jpg&#39;, &#39;10_100.jpg&#39;, &#39;40_50_R.jpg&#39;, &#39;20_100_R.jpg&#39;, &#39;17_0_R.jpg&#39;, &#39;28_150_R.jpg&#39;, &#39;4_0_R.jpg&#39;, &#39;34_100_R.jpg&#39;, &#39;3_100.jpg&#39;, &#39;46_150_R.jpg&#39;, &#39;11_50.jpg&#39;, &#39;39_150.jpg&#39;, &#39;29_150.jpg&#39;, &#39;38_0_R.jpg&#39;, &#39;39_50.jpg&#39;, &#39;28_0_R.jpg&#39;, &#39;15_100_R.jpg&#39;, &#39;44_50.jpg&#39;, &#39;27_50.jpg&#39;, &#39;5_150.jpg&#39;, &#39;16_150.jpg&#39;, &#39;34_0.jpg&#39;, &#39;35_50.jpg&#39;, &#39;36_50_R.jpg&#39;, &#39;37_50_R.jpg&#39;, &#39;48_50.jpg&#39;, &#39;36_0.jpg&#39;, &#39;25_150_R.jpg&#39;, &#39;20_150.jpg&#39;, &#39;30_150.jpg&#39;, &#39;7_100_R.jpg&#39;, &#39;42_150.jpg&#39;, &#39;39_100_R.jpg&#39;, &#39;31_150_R.jpg&#39;, &#39;19_100.jpg&#39;, &#39;43_100_R.jpg&#39;, &#39;18_100_R.jpg&#39;, &#39;10_150_R.jpg&#39;, &#39;44_100.jpg&#39;, &#39;43_0_R.jpg&#39;, &#39;4_50.jpg&#39;, &#39;21_0_R.jpg&#39;, &#39;31_0_R.jpg&#39;, &#39;8_50.jpg&#39;, &#39;36_100.jpg&#39;, &#39;26_100.jpg&#39;, &#39;12_0.jpg&#39;, &#39;46_50_R.jpg&#39;, &#39;31_0.jpg&#39;, &#39;47_50_R.jpg&#39;, &#39;1_100.jpg&#39;, &#39;6_0_R.jpg&#39;, &#39;31_50.jpg&#39;, &#39;40_50.jpg&#39;, &#39;15_0_R.jpg&#39;, &#39;12_100_R.jpg&#39;, &#39;23_50.jpg&#39;, &#39;12_100.jpg&#39;, &#39;41_150_R.jpg&#39;, &#39;14_150.jpg&#39;, &#39;28_0.jpg&#39;, &#39;33_100_R.jpg&#39;, &#39;48_0_R.jpg&#39;, &#39;15_50.jpg&#39;, &#39;5_150_R.jpg&#39;, &#39;31_50_R.jpg&#39;, &#39;30_50_R.jpg&#39;, &#39;19_50.jpg&#39;, &#39;15_0.jpg&#39;, &#39;27_100_R.jpg&#39;, &#39;7_150.jpg&#39;, &#39;17_0.jpg&#39;, &#39;40_150.jpg&#39;, &#39;9_0.jpg&#39;, &#39;8_100.jpg&#39;, &#39;32_150.jpg&#39;, &#39;22_150.jpg&#39;, &#39;17_150_R.jpg&#39;, &#39;24_100.jpg&#39;, &#39;34_100.jpg&#39;, &#39;33_0_R.jpg&#39;, &#39;23_0_R.jpg&#39;, &#39;44_100_R.jpg&#39;, &#39;36_150_R.jpg&#39;, &#39;22_150_R.jpg&#39;, &#39;33_0.jpg&#39;, &#39;8_150_R.jpg&#39;, &#39;41_0_R.jpg&#39;, &#39;46_100.jpg&#39;, &#39;35_100_R.jpg&#39;, &#39;2_50.jpg&#39;, &#39;47_150_R.jpg&#39;, &#39;41_150.jpg&#39;, &#39;18_50_R.jpg&#39;, &#39;19_50_R.jpg&#39;, &#39;23_150.jpg&#39;, &#39;33_150.jpg&#39;, &#39;1_50_R.jpg&#39;, &#39;3_150_R.jpg&#39;, &#39;37_0.jpg&#39;, &#39;9_100.jpg&#39;, &#39;29_150_R.jpg&#39;, &#39;21_100_R.jpg&#39;, &#39;26_50_R.jpg&#39;, &#39;27_50_R.jpg&#39;, &#39;35_100.jpg&#39;, &#39;25_100.jpg&#39;, &#39;22_0_R.jpg&#39;, &#39;13_0.jpg&#39;, &#39;32_0_R.jpg&#39;, &#39;40_0_R.jpg&#39;, &#39;14_100_R.jpg&#39;, &#39;47_100.jpg&#39;, &#39;30_150_R.jpg&#39;, &#39;38_100_R.jpg&#39;, &#39;21_50.jpg&#39;, &#39;42_50.jpg&#39;, &#39;42_100_R.jpg&#39;, &#39;7_0_R.jpg&#39;, &#39;12_50_R.jpg&#39;, &#39;13_50_R.jpg&#39;, &#39;14_0_R.jpg&#39;, &#39;13_100.jpg&#39;, &#39;33_50.jpg&#39;, &#39;11_0.jpg&#39;, &#39;24_150_R.jpg&#39;, &#39;6_100_R.jpg&#39;, &#39;48_150.jpg&#39;, &#39;15_150.jpg&#39;, &#39;35_0.jpg&#39;, &#39;6_150.jpg&#39;, &#39;11_150_R.jpg&#39;, &#39;17_50.jpg&#39;, &#39;19_100_R.jpg&#39;, &#39;41_0.jpg&#39;, &#39;24_100_R.jpg&#39;, &#39;6_150_R.jpg&#39;, &#39;28_50.jpg&#39;, &#39;10_150.jpg&#39;, &#39;36_50.jpg&#39;, &#39;47_50.jpg&#39;, &#39;48_50_R.jpg&#39;, &#39;42_150_R.jpg&#39;, &#39;3_150.jpg&#39;, &#39;39_0.jpg&#39;, &#39;30_100_R.jpg&#39;, &#39;39_100.jpg&#39;, &#39;38_150_R.jpg&#39;, &#39;24_50.jpg&#39;, &#39;29_100.jpg&#39;, &#39;3_0.jpg&#39;, &#39;2_0_R.jpg&#39;, &#39;12_50.jpg&#39;, &#39;11_100_R.jpg&#39;, &#39;5_100.jpg&#39;, &#39;19_150_R.jpg&#39;, &#39;16_100.jpg&#39;, &#39;11_0_R.jpg&#39;, &#39;20_0.jpg&#39;, &#39;22_0.jpg&#39;, &#39;3_100_R.jpg&#39;, &#39;29_100_R.jpg&#39;, &#39;21_150_R.jpg&#39;, &#39;37_0_R.jpg&#39;, &#39;27_0_R.jpg&#39;, &#39;20_100.jpg&#39;, &#39;42_50_R.jpg&#39;, &#39;30_100.jpg&#39;, &#39;43_50_R.jpg&#39;, &#39;42_100.jpg&#39;, &#39;47_100_R.jpg&#39;, &#39;45_0_R.jpg&#39;, &#39;1_0.jpg&#39;, &#39;19_150.jpg&#39;, &#39;7_50.jpg&#39;, &#39;35_150_R.jpg&#39;, &#39;18_0_R.jpg&#39;, &#39;14_150_R.jpg&#39;, &#39;44_150.jpg&#39;, &#39;36_150.jpg&#39;, &#39;26_150.jpg&#39;, &#39;43_0.jpg&#39;, &#39;35_50_R.jpg&#39;, &#39;34_50_R.jpg&#39;, &#39;26_0_R.jpg&#39;, &#39;36_0_R.jpg&#39;, &#39;5_50.jpg&#39;, &#39;31_100.jpg&#39;, &#39;21_100.jpg&#39;, &#39;17_100_R.jpg&#39;, &#39;18_150.jpg&#39;, &#39;9_50.jpg&#39;, &#39;47_0.jpg&#39;, &#39;43_100.jpg&#39;, &#39;16_50_R.jpg&#39;, &#39;44_0_R.jpg&#39;, &#39;17_50_R.jpg&#39;, &#39;45_150.jpg&#39;, &#39;22_100_R.jpg&#39;, &#39;19_0_R.jpg&#39;, &#39;8_100_R.jpg&#39;, &#39;26_0.jpg&#39;, &#39;36_100_R.jpg&#39;, &#39;28_50_R.jpg&#39;, &#39;29_50_R.jpg&#39;, &#39;5_0.jpg&#39;, &#39;27_150.jpg&#39;, &#39;44_150_R.jpg&#39;, &#39;37_150.jpg&#39;, &#39;12_150_R.jpg&#39;, &#39;11_150.jpg&#39;, &#39;26_50.jpg&#39;, &#39;19_0.jpg&#39;, &#39;45_50.jpg&#39;, &#39;7_0.jpg&#39;, &#39;38_50.jpg&#39;, &#39;28_100.jpg&#39;, &#39;34_50.jpg&#39;, &#39;38_100.jpg&#39;, &#39;4_50_R.jpg&#39;, &#39;5_50_R.jpg&#39;, &#39;24_0.jpg&#39;, &#39;2_150.jpg&#39;, &#39;3_0_R.jpg&#39;, &#39;22_50_R.jpg&#39;, &#39;23_50_R.jpg&#39;, &#39;4_100.jpg&#39;, &#39;5_100_R.jpg&#39;, &#39;45_0.jpg&#39;, &#39;27_150_R.jpg&#39;, &#39;33_150_R.jpg&#39;, &#39;10_50.jpg&#39;, &#39;17_100.jpg&#39;, &#39;41_100_R.jpg&#39;, &#39;10_0_R.jpg&#39;, &#39;43_150_R.jpg&#39;, &#39;46_0_R.jpg&#39;, &#39;39_150_R.jpg&#39;, &#39;9_50_R.jpg&#39;, &#39;41_100.jpg&#39;, &#39;8_50_R.jpg&#39;, &#39;31_100_R.jpg&#39;, &#39;25_100_R.jpg&#39;, &#39;23_100.jpg&#39;, &#39;33_100.jpg&#39;, &#39;34_0_R.jpg&#39;, &#39;11_50_R.jpg&#39;, &#39;7_150_R.jpg&#39;, &#39;10_50_R.jpg&#39;, &#39;24_0_R.jpg&#39;, &#39;23_0.jpg&#39;, &#39;9_150.jpg&#39;, &#39;8_0_R.jpg&#39;, &#39;35_150.jpg&#39;, &#39;25_150.jpg&#39;, &#39;42_0.jpg&#39;, &#39;47_150.jpg&#39;, &#39;1_50.jpg&#39;, &#39;18_150_R.jpg&#39;, &#39;10_100_R.jpg&#39;, &#39;14_50.jpg&#39;, &#39;46_100_R.jpg&#39;, &#39;38_0.jpg&#39;, &#39;34_150_R.jpg&#39;, &#39;3_50_R.jpg&#39;, &#39;2_50_R.jpg&#39;, &#39;2_100_R.jpg&#39;, &#39;20_150_R.jpg&#39;, &#39;13_150.jpg&#39;, &#39;28_100_R.jpg&#39;, &#39;40_0.jpg&#39;, &#39;18_50.jpg&#39;, &#39;48_100.jpg&#39;, &#39;30_50.jpg&#39;, &#39;12_0_R.jpg&#39;, &#39;25_50_R.jpg&#39;, &#39;24_50_R.jpg&#39;, &#39;21_0.jpg&#39;, &#39;15_100.jpg&#39;, &#39;22_50.jpg&#39;, &#39;6_100.jpg&#39;, &#39;1_0_R.jpg&#39;, &#39;2_0.jpg&#39;, &#39;15_150_R.jpg&#39;, &#39;41_50.jpg&#39;, &#39;1_150.jpg&#39;, &#39;25_0.jpg&#39;, &#39;6_0.jpg&#39;, &#39;16_100_R.jpg&#39;, &#39;16_50.jpg&#39;, &#39;18_0.jpg&#39;, &#39;12_150.jpg&#39;, &#39;13_0_R.jpg&#39;, &#39;43_50.jpg&#39;, &#39;14_100.jpg&#39;, &#39;37_100_R.jpg&#39;, &#39;38_50_R.jpg&#39;, &#39;20_50.jpg&#39;, &#39;39_50_R.jpg&#39;, &#39;45_150_R.jpg&#39;, &#39;44_0.jpg&#39;, &#39;7_100.jpg&#39;, &#39;32_50.jpg&#39;, &#39;23_100_R.jpg&#39;, &#39;1_150_R.jpg&#39;, &#39;9_100_R.jpg&#39;, &#39;47_0_R.jpg&#39;, &#39;46_0.jpg&#39;, &#39;45_50_R.jpg&#39;, &#39;40_100.jpg&#39;, &#39;44_50_R.jpg&#39;, &#39;13_150_R.jpg&#39;, &#39;8_150.jpg&#39;, &#39;32_100.jpg&#39;, &#39;22_100.jpg&#39;, &#39;25_0_R.jpg&#39;, &#39;35_0_R.jpg&#39;, &#39;32_150_R.jpg&#39;, &#39;24_150.jpg&#39;, &#39;4_0.jpg&#39;, &#39;34_150.jpg&#39;, &#39;40_100_R.jpg&#39;, &#39;48_150_R.jpg&#39;, &#39;3_50.jpg&#39;, &#39;9_0_R.jpg&#39;, &#39;27_0.jpg&#39;, &#39;32_50_R.jpg&#39;, &#39;33_50_R.jpg&#39;, &#39;4_100_R.jpg&#39;, &#39;46_150.jpg&#39;, &#39;26_150_R.jpg&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, execute the desired image magick command on all of the images you collected (e.g. using a for loop).</p>
+<p>Resize images:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define a target path</span>
+<span class="n">path_to_resized_images</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span><span class="s2">&quot;images&quot;</span><span class="p">,</span><span class="s2">&quot;image_magick&quot;</span><span class="p">,</span><span class="s2">&quot;resized_images&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">image_name</span> <span class="ow">in</span> <span class="n">image_files</span><span class="p">:</span>
+    <span class="c1">#full path to original image</span>
+    <span class="n">old_image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_images</span><span class="p">,</span> <span class="n">image_name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">old_image_path</span><span class="p">)</span>
+    <span class="n">new_image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_resized_images</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">image_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;_resized.jpg&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">new_image_path</span><span class="p">)</span>
+    <span class="n">magick_command</span> <span class="o">=</span> <span class="s1">&#39;magick &#39;</span><span class="o">+</span><span class="n">old_image_path</span> <span class="o">+</span> <span class="s1">&#39; -resize 25% &#39;</span><span class="o">+</span> <span class="n">new_image_path</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">magick_command</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Crop Images: Split the images down the middle (50% width, 100% height)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define a target path</span>
+<span class="n">path_to_cropped_images</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span><span class="s2">&quot;images&quot;</span><span class="p">,</span><span class="s2">&quot;image_magick&quot;</span><span class="p">,</span><span class="s2">&quot;split_images&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">image_name</span> <span class="ow">in</span> <span class="n">image_files</span><span class="p">:</span>
+    <span class="c1">#full path to original image</span>
+    <span class="n">old_image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_images</span><span class="p">,</span> <span class="n">image_name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">old_image_path</span><span class="p">)</span>
+    <span class="n">new_image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_cropped_images</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">image_name</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;_split.jpg&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">new_image_path</span><span class="p">)</span>
+    <span class="n">magick_command</span> <span class="o">=</span> <span class="s2">&quot;magick &quot;</span><span class="o">+</span><span class="n">old_image_path</span> <span class="o">+</span> <span class="s2">&quot; -crop &#39;50</span><span class="si">%x</span><span class="s2">100%&#39; &quot;</span><span class="o">+</span> <span class="n">new_image_path</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">magick_command</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/36_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/36_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/29_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/29_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/19_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/19_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/5_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/5_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/17_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/17_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/31_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/31_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/11_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/11_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/42_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/42_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/10_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/10_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/28_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/28_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/30_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/30_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/21_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/21_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/2_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/2_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/15_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/15_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/41_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/41_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/6_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/6_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/16_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/16_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/18_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/18_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/12_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/12_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/43_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/43_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/14_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/14_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/37_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/37_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/38_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/38_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/20_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/20_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/39_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/39_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/7_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/7_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/23_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/23_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/1_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/1_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/47_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/47_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/45_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/45_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/44_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/44_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/13_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/13_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/8_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/8_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/22_100.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/22_100_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/25_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/25_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/35_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/35_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/24_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/24_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/34_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/34_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/40_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/40_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/48_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/48_150_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/3_50.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/3_50_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/9_0_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/9_0_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/27_0.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/27_0_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/32_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/32_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/33_50_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/33_50_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/4_100_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/4_100_R_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/46_150.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/46_150_split.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/original_images/26_150_R.jpg
+/Users/martincz/GitHub/COGS219/cogs219.github.io/notebooks/images/image_magick/split_images/26_150_R_split.jpg
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-out-running-an-image-magick-command">Test out running an image magick command</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Martin Zettersten
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025. Adapted from Gary Lupyan&#39;s https://psych750.github.io/.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
