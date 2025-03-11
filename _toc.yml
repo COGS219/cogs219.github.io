@@ -38,6 +38,8 @@ parts:
       title: Building Mixed-Effects Intuitions
     - url: https://cogs219.github.io/knitted_Rmd/intro_mixed_effects.html
       title: Introduction to Mixed-Effects Models
+    - url: https://cogs219.github.io/knitted_Rmd/brms_vignette.html
+      title: Bayesian Regression
   - caption: Programming in PsychoPy
     chapters:
     - file: notebooks/python_basics
