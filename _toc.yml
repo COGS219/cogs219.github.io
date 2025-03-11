@@ -92,6 +92,8 @@ parts:
       title: Object Oriented Programming
     - file: notebooks/nltk_demo
       title: NLTK demo
+    - file: notebooks/imagemagick_demo
+      title: ImageMagick in Python
 #  - caption: In class activities
 #    chapters:
     # - file: notebooks/activity_print_pyramids
