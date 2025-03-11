@@ -90,6 +90,8 @@ parts:
       title: Regular Expressions
     - file: notebooks/classes
       title: Object Oriented Programming
+    - file: notebooks/nltk_demo
+      title: NLTK demo
 #  - caption: In class activities
 #    chapters:
     # - file: notebooks/activity_print_pyramids

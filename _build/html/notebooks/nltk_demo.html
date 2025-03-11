@@ -66,6 +66,7 @@
     <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Classes" href="classes.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -116,8 +117,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -193,7 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="ImageMagick.html">ImageMagick/GraphicsMagick reference</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Self Study Guides</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="var_string_num.html">Variables, Strings, and Numbers</a></li>
 
 
@@ -223,6 +222,7 @@
 
 
 
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">NLTK demo</a></li>
 </ul>
 
     </div>
@@ -405,7 +405,6 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concordances">Concordances</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispersion-plots">Dispersion plots</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams-and-their-frequencies">N-grams and their frequencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collocations">Collocations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemmatization">Lemmatization</a></li>
@@ -437,7 +436,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">gutenberg</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nltk.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">Text</span>
 
-<span class="n">pride_prejudice</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s2">&quot;https://psych750.github.io/data/pride_prejudice.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">pride_prejudice</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s2">&quot;https://cogs219.github.io/data/pride_prejudice.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -474,7 +473,9 @@ of some one or other of their daughters.
 <p>Now let’s tokenize and lowercase the text.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pride_prejudice_raw_tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">pride_prejudice</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#run the download command once</span>
+<span class="c1">#nltk.download(&#39;punkt_tab&#39;)</span>
+<span class="n">pride_prejudice_raw_tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">pride_prejudice</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Original tokens (first 100):&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pride_prejudice_raw_tokens</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
 
@@ -486,6 +487,11 @@ of some one or other of their daughters.
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /Users/martincz/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt_tab.zip.
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original tokens (first 100):
 [&#39;PRIDE&#39;, &#39;AND&#39;, &#39;PREJUDICE&#39;, &#39;By&#39;, &#39;Jane&#39;, &#39;Austen&#39;, &#39;Chapter&#39;, &#39;1&#39;, &#39;It&#39;, &#39;is&#39;, &#39;a&#39;, &#39;truth&#39;, &#39;universally&#39;, &#39;acknowledged&#39;, &#39;,&#39;, &#39;that&#39;, &#39;a&#39;, &#39;single&#39;, &#39;man&#39;, &#39;in&#39;, &#39;possession&#39;, &#39;of&#39;, &#39;a&#39;, &#39;good&#39;, &#39;fortune&#39;, &#39;,&#39;, &#39;must&#39;, &#39;be&#39;, &#39;in&#39;, &#39;want&#39;, &#39;of&#39;, &#39;a&#39;, &#39;wife&#39;, &#39;.&#39;, &#39;However&#39;, &#39;little&#39;, &#39;known&#39;, &#39;the&#39;, &#39;feelings&#39;, &#39;or&#39;, &#39;views&#39;, &#39;of&#39;, &#39;such&#39;, &#39;a&#39;, &#39;man&#39;, &#39;may&#39;, &#39;be&#39;, &#39;on&#39;, &#39;his&#39;, &#39;first&#39;, &#39;entering&#39;, &#39;a&#39;, &#39;neighbourhood&#39;, &#39;,&#39;, &#39;this&#39;, &#39;truth&#39;, &#39;is&#39;, &#39;so&#39;, &#39;well&#39;, &#39;fixed&#39;, &#39;in&#39;, &#39;the&#39;, &#39;minds&#39;, &#39;of&#39;, &#39;the&#39;, &#39;surrounding&#39;, &#39;families&#39;, &#39;,&#39;, &#39;that&#39;, &#39;he&#39;, &#39;is&#39;, &#39;considered&#39;, &#39;the&#39;, &#39;rightful&#39;, &#39;property&#39;, &#39;of&#39;, &#39;some&#39;, &#39;one&#39;, &#39;or&#39;, &#39;other&#39;, &#39;of&#39;, &#39;their&#39;, &#39;daughters&#39;, &#39;.&#39;, &#39;``&#39;, &#39;My&#39;, &#39;dear&#39;, &#39;Mr.&#39;, &#39;Bennet&#39;, &#39;,&#39;, &quot;&#39;&#39;&quot;, &#39;said&#39;, &#39;his&#39;, &#39;lady&#39;, &#39;to&#39;, &#39;him&#39;, &#39;one&#39;, &#39;day&#39;, &#39;,&#39;, &#39;``&#39;]
 Lowercased tokens (first 100):
@@ -560,19 +566,19 @@ Lowercased tokens (first 100):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Token count: 119960
-Type count: 6190
-Occurences of &#39;darcy&#39;: 408
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Token count: 120033
+Type count: 6191
+Occurences of &#39;darcy&#39;: 417
 Occurences of &#39;love&#39;: 91
 Occurences of &#39;money&#39;: 26
 Tokens that end in -ed: 4947
 Types that end in -ed: 860
 </pre></div>
 </div>
-<img alt="../_images/10e60d04e53aded97597a4e236a497999c906da3a1e89c3d670b05fc2c2e8ed5.png" src="../_images/10e60d04e53aded97597a4e236a497999c906da3a1e89c3d670b05fc2c2e8ed5.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Samples&#39;, ylabel=&#39;Counts&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x1737e9360&gt;
 </pre></div>
 </div>
+<img alt="../_images/902f08f93fcf78969e6e186b68c179559811fd81b8cdb58660c79464173f450c.png" src="../_images/902f08f93fcf78969e6e186b68c179559811fd81b8cdb58660c79464173f450c.png" />
 </div>
 </div>
 </section>
@@ -581,7 +587,9 @@ Types that end in -ed: 860
 <p>Stop words is jargon for very frequent words that tend to be not very informative as to the meaning of the text. For example, we can’t learn much about an English text from knowing that it has the words “a”, “the”, and “to” in it…  These frequent words dominate frequency distributions and so are often removed as part of pre-processing. NLTK has a collection of stop-words for English (other languages too!)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#run the download command once</span>
+<span class="c1">#nltk.download(&#39;stopwords&#39;)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
 
 
@@ -591,7 +599,12 @@ Types that end in -ed: 860
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;i&#39;, &#39;me&#39;, &#39;my&#39;, &#39;myself&#39;, &#39;we&#39;, &#39;our&#39;, &#39;ours&#39;, &#39;ourselves&#39;, &#39;you&#39;, &quot;you&#39;re&quot;, &quot;you&#39;ve&quot;, &quot;you&#39;ll&quot;, &quot;you&#39;d&quot;, &#39;your&#39;, &#39;yours&#39;, &#39;yourself&#39;, &#39;yourselves&#39;, &#39;he&#39;, &#39;him&#39;, &#39;his&#39;, &#39;himself&#39;, &#39;she&#39;, &quot;she&#39;s&quot;, &#39;her&#39;, &#39;hers&#39;, &#39;herself&#39;, &#39;it&#39;, &quot;it&#39;s&quot;, &#39;its&#39;, &#39;itself&#39;, &#39;they&#39;, &#39;them&#39;, &#39;their&#39;, &#39;theirs&#39;, &#39;themselves&#39;, &#39;what&#39;, &#39;which&#39;, &#39;who&#39;, &#39;whom&#39;, &#39;this&#39;, &#39;that&#39;, &quot;that&#39;ll&quot;, &#39;these&#39;, &#39;those&#39;, &#39;am&#39;, &#39;is&#39;, &#39;are&#39;, &#39;was&#39;, &#39;were&#39;, &#39;be&#39;, &#39;been&#39;, &#39;being&#39;, &#39;have&#39;, &#39;has&#39;, &#39;had&#39;, &#39;having&#39;, &#39;do&#39;, &#39;does&#39;, &#39;did&#39;, &#39;doing&#39;, &#39;a&#39;, &#39;an&#39;, &#39;the&#39;, &#39;and&#39;, &#39;but&#39;, &#39;if&#39;, &#39;or&#39;, &#39;because&#39;, &#39;as&#39;, &#39;until&#39;, &#39;while&#39;, &#39;of&#39;, &#39;at&#39;, &#39;by&#39;, &#39;for&#39;, &#39;with&#39;, &#39;about&#39;, &#39;against&#39;, &#39;between&#39;, &#39;into&#39;, &#39;through&#39;, &#39;during&#39;, &#39;before&#39;, &#39;after&#39;, &#39;above&#39;, &#39;below&#39;, &#39;to&#39;, &#39;from&#39;, &#39;up&#39;, &#39;down&#39;, &#39;in&#39;, &#39;out&#39;, &#39;on&#39;, &#39;off&#39;, &#39;over&#39;, &#39;under&#39;, &#39;again&#39;, &#39;further&#39;, &#39;then&#39;, &#39;once&#39;, &#39;here&#39;, &#39;there&#39;, &#39;when&#39;, &#39;where&#39;, &#39;why&#39;, &#39;how&#39;, &#39;all&#39;, &#39;any&#39;, &#39;both&#39;, &#39;each&#39;, &#39;few&#39;, &#39;more&#39;, &#39;most&#39;, &#39;other&#39;, &#39;some&#39;, &#39;such&#39;, &#39;no&#39;, &#39;nor&#39;, &#39;not&#39;, &#39;only&#39;, &#39;own&#39;, &#39;same&#39;, &#39;so&#39;, &#39;than&#39;, &#39;too&#39;, &#39;very&#39;, &#39;s&#39;, &#39;t&#39;, &#39;can&#39;, &#39;will&#39;, &#39;just&#39;, &#39;don&#39;, &quot;don&#39;t&quot;, &#39;should&#39;, &quot;should&#39;ve&quot;, &#39;now&#39;, &#39;d&#39;, &#39;ll&#39;, &#39;m&#39;, &#39;o&#39;, &#39;re&#39;, &#39;ve&#39;, &#39;y&#39;, &#39;ain&#39;, &#39;aren&#39;, &quot;aren&#39;t&quot;, &#39;couldn&#39;, &quot;couldn&#39;t&quot;, &#39;didn&#39;, &quot;didn&#39;t&quot;, &#39;doesn&#39;, &quot;doesn&#39;t&quot;, &#39;hadn&#39;, &quot;hadn&#39;t&quot;, &#39;hasn&#39;, &quot;hasn&#39;t&quot;, &#39;haven&#39;, &quot;haven&#39;t&quot;, &#39;isn&#39;, &quot;isn&#39;t&quot;, &#39;ma&#39;, &#39;mightn&#39;, &quot;mightn&#39;t&quot;, &#39;mustn&#39;, &quot;mustn&#39;t&quot;, &#39;needn&#39;, &quot;needn&#39;t&quot;, &#39;shan&#39;, &quot;shan&#39;t&quot;, &#39;shouldn&#39;, &quot;shouldn&#39;t&quot;, &#39;wasn&#39;, &quot;wasn&#39;t&quot;, &#39;weren&#39;, &quot;weren&#39;t&quot;, &#39;won&#39;, &quot;won&#39;t&quot;, &#39;wouldn&#39;, &quot;wouldn&#39;t&quot;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to
+[nltk_data]     /Users/martincz/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a&#39;, &#39;about&#39;, &#39;above&#39;, &#39;after&#39;, &#39;again&#39;, &#39;against&#39;, &#39;ain&#39;, &#39;all&#39;, &#39;am&#39;, &#39;an&#39;, &#39;and&#39;, &#39;any&#39;, &#39;are&#39;, &#39;aren&#39;, &quot;aren&#39;t&quot;, &#39;as&#39;, &#39;at&#39;, &#39;be&#39;, &#39;because&#39;, &#39;been&#39;, &#39;before&#39;, &#39;being&#39;, &#39;below&#39;, &#39;between&#39;, &#39;both&#39;, &#39;but&#39;, &#39;by&#39;, &#39;can&#39;, &#39;couldn&#39;, &quot;couldn&#39;t&quot;, &#39;d&#39;, &#39;did&#39;, &#39;didn&#39;, &quot;didn&#39;t&quot;, &#39;do&#39;, &#39;does&#39;, &#39;doesn&#39;, &quot;doesn&#39;t&quot;, &#39;doing&#39;, &#39;don&#39;, &quot;don&#39;t&quot;, &#39;down&#39;, &#39;during&#39;, &#39;each&#39;, &#39;few&#39;, &#39;for&#39;, &#39;from&#39;, &#39;further&#39;, &#39;had&#39;, &#39;hadn&#39;, &quot;hadn&#39;t&quot;, &#39;has&#39;, &#39;hasn&#39;, &quot;hasn&#39;t&quot;, &#39;have&#39;, &#39;haven&#39;, &quot;haven&#39;t&quot;, &#39;having&#39;, &#39;he&#39;, &quot;he&#39;d&quot;, &quot;he&#39;ll&quot;, &#39;her&#39;, &#39;here&#39;, &#39;hers&#39;, &#39;herself&#39;, &quot;he&#39;s&quot;, &#39;him&#39;, &#39;himself&#39;, &#39;his&#39;, &#39;how&#39;, &#39;i&#39;, &quot;i&#39;d&quot;, &#39;if&#39;, &quot;i&#39;ll&quot;, &quot;i&#39;m&quot;, &#39;in&#39;, &#39;into&#39;, &#39;is&#39;, &#39;isn&#39;, &quot;isn&#39;t&quot;, &#39;it&#39;, &quot;it&#39;d&quot;, &quot;it&#39;ll&quot;, &quot;it&#39;s&quot;, &#39;its&#39;, &#39;itself&#39;, &quot;i&#39;ve&quot;, &#39;just&#39;, &#39;ll&#39;, &#39;m&#39;, &#39;ma&#39;, &#39;me&#39;, &#39;mightn&#39;, &quot;mightn&#39;t&quot;, &#39;more&#39;, &#39;most&#39;, &#39;mustn&#39;, &quot;mustn&#39;t&quot;, &#39;my&#39;, &#39;myself&#39;, &#39;needn&#39;, &quot;needn&#39;t&quot;, &#39;no&#39;, &#39;nor&#39;, &#39;not&#39;, &#39;now&#39;, &#39;o&#39;, &#39;of&#39;, &#39;off&#39;, &#39;on&#39;, &#39;once&#39;, &#39;only&#39;, &#39;or&#39;, &#39;other&#39;, &#39;our&#39;, &#39;ours&#39;, &#39;ourselves&#39;, &#39;out&#39;, &#39;over&#39;, &#39;own&#39;, &#39;re&#39;, &#39;s&#39;, &#39;same&#39;, &#39;shan&#39;, &quot;shan&#39;t&quot;, &#39;she&#39;, &quot;she&#39;d&quot;, &quot;she&#39;ll&quot;, &quot;she&#39;s&quot;, &#39;should&#39;, &#39;shouldn&#39;, &quot;shouldn&#39;t&quot;, &quot;should&#39;ve&quot;, &#39;so&#39;, &#39;some&#39;, &#39;such&#39;, &#39;t&#39;, &#39;than&#39;, &#39;that&#39;, &quot;that&#39;ll&quot;, &#39;the&#39;, &#39;their&#39;, &#39;theirs&#39;, &#39;them&#39;, &#39;themselves&#39;, &#39;then&#39;, &#39;there&#39;, &#39;these&#39;, &#39;they&#39;, &quot;they&#39;d&quot;, &quot;they&#39;ll&quot;, &quot;they&#39;re&quot;, &quot;they&#39;ve&quot;, &#39;this&#39;, &#39;those&#39;, &#39;through&#39;, &#39;to&#39;, &#39;too&#39;, &#39;under&#39;, &#39;until&#39;, &#39;up&#39;, &#39;ve&#39;, &#39;very&#39;, &#39;was&#39;, &#39;wasn&#39;, &quot;wasn&#39;t&quot;, &#39;we&#39;, &quot;we&#39;d&quot;, &quot;we&#39;ll&quot;, &quot;we&#39;re&quot;, &#39;were&#39;, &#39;weren&#39;, &quot;weren&#39;t&quot;, &quot;we&#39;ve&quot;, &#39;what&#39;, &#39;when&#39;, &#39;where&#39;, &#39;which&#39;, &#39;while&#39;, &#39;who&#39;, &#39;whom&#39;, &#39;why&#39;, &#39;will&#39;, &#39;with&#39;, &#39;won&#39;, &quot;won&#39;t&quot;, &#39;wouldn&#39;, &quot;wouldn&#39;t&quot;, &#39;y&#39;, &#39;you&#39;, &quot;you&#39;d&quot;, &quot;you&#39;ll&quot;, &#39;your&#39;, &quot;you&#39;re&quot;, &#39;yours&#39;, &#39;yourself&#39;, &#39;yourselves&#39;, &quot;you&#39;ve&quot;]
 </pre></div>
 </div>
 </div>
@@ -609,10 +622,10 @@ Suppose we want to process a 1000 books. At this rate, we’re talking about nea
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0c25e42f5f1783ab5a86ac8666d5dec28afcbdc3da9b19bb15b805e132618040.png" src="../_images/0c25e42f5f1783ab5a86ac8666d5dec28afcbdc3da9b19bb15b805e132618040.png" />
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Samples&#39;, ylabel=&#39;Counts&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x173925ea0&gt;
 </pre></div>
 </div>
+<img alt="../_images/5ff3cba1f0702b7c79e5bf9fb9adf045e7aa4b1fc53908eb39a9bcb7a911eca5.png" src="../_images/5ff3cba1f0702b7c79e5bf9fb9adf045e7aa4b1fc53908eb39a9bcb7a911eca5.png" />
 </div>
 </div>
 <p>A handy method inside FreqDist is <code class="docutils literal notranslate"><span class="pre">most_common</span></code>:</p>
@@ -623,16 +636,16 @@ Suppose we want to process a 1000 books. At this rate, we’re talking about nea
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;elizabeth&#39;, 632),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;elizabeth&#39;, 635),
  (&#39;could&#39;, 525),
  (&#39;would&#39;, 468),
- (&#39;darcy&#39;, 408),
+ (&#39;darcy&#39;, 417),
  (&#39;said&#39;, 401),
  (&#39;much&#39;, 326),
- (&#39;bennet&#39;, 321),
+ (&#39;bennet&#39;, 323),
  (&#39;must&#39;, 305),
- (&#39;bingley&#39;, 302),
- (&#39;jane&#39;, 290)]
+ (&#39;bingley&#39;, 305),
+ (&#39;jane&#39;, 292)]
 </pre></div>
 </div>
 </div>
@@ -668,20 +681,6 @@ None
 </div>
 </div>
 </section>
-<section id="dispersion-plots">
-<h2>Dispersion plots<a class="headerlink" href="#dispersion-plots" title="Link to this heading">#</a></h2>
-<p>Another neat method inside the <code class="docutils literal notranslate"><span class="pre">Text</span></code> class is a dispersion plot.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="n">pride_prejudice_raw_tokens</span><span class="p">)</span><span class="o">.</span><span class="n">dispersion_plot</span><span class="p">([</span><span class="s1">&#39;love&#39;</span><span class="p">,</span> <span class="s1">&#39;money&#39;</span><span class="p">,</span> <span class="s1">&#39;marriage&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/4cb07ac21681df4ee82567c8337a0b0bca00b36a168c36402f797799b13f4a38.png" src="../_images/4cb07ac21681df4ee82567c8337a0b0bca00b36a168c36402f797799b13f4a38.png" />
-</div>
-</div>
-</section>
 <section id="n-grams-and-their-frequencies">
 <h2>N-grams and their frequencies<a class="headerlink" href="#n-grams-and-their-frequencies" title="Link to this heading">#</a></h2>
 <p>N-grams are word sequences of n-length. For example, 2-grams (typically called bigrams) are 2 word combinations (e.g., they have, I was, red ball) that occur in a text. 3-grams (trigrams) are all the 3-word combinations. To compute them, use nltk’s bigram and trigram modules</p>
@@ -703,14 +702,14 @@ None
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;lady&#39;, &#39;catherine&#39;), 113),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((&#39;lady&#39;, &#39;catherine&#39;), 115),
  ((&#39;miss&#39;, &#39;bingley&#39;), 87),
  ((&#39;miss&#39;, &#39;bennet&#39;), 65),
  ((&#39;said&#39;, &#39;elizabeth&#39;), 45),
  ((&#39;sir&#39;, &#39;william&#39;), 44),
+ ((&#39;miss&#39;, &#39;darcy&#39;), 39),
  ((&#39;de&#39;, &#39;bourgh&#39;), 39),
  ((&#39;young&#39;, &#39;man&#39;), 38),
- ((&#39;miss&#39;, &#39;darcy&#39;), 38),
  ((&#39;dare&#39;, &#39;say&#39;), 31),
  ((&#39;colonel&#39;, &#39;fitzwilliam&#39;), 30),
  ((&#39;colonel&#39;, &#39;forster&#39;), 28),
@@ -722,17 +721,7 @@ None
  ((&#39;great&#39;, &#39;deal&#39;), 23),
  ((&#39;uncle&#39;, &#39;aunt&#39;), 23),
  ((&#39;went&#39;, &#39;away&#39;), 21),
- ((&#39;could&#39;, &#39;help&#39;), 20),
- ((&#39;thousand&#39;, &#39;pounds&#39;), 20),
- ((&#39;miss&#39;, &#39;de&#39;), 20),
- ((&#39;replied&#39;, &#39;elizabeth&#39;), 19),
- ((&#39;next&#39;, &#39;morning&#39;), 19),
- ((&#39;lady&#39;, &#39;lucas&#39;), 18),
- ((&#39;said&#39;, &#39;miss&#39;), 18),
- ((&#39;made&#39;, &#39;answer&#39;), 17),
- ((&#39;young&#39;, &#39;lady&#39;), 17),
- ((&#39;much&#39;, &#39;better&#39;), 17),
- ((&#39;soon&#39;, &#39;afterwards&#39;), 16)]
+ ((&#39;could&#39;, &#39;help&#39;), 20)]
 </pre></div>
 </div>
 </div>
@@ -769,7 +758,7 @@ None
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package gutenberg to
-[nltk_data]     /Users/glupyan/nltk_data...
+[nltk_data]     /Users/martincz/nltk_data...
 [nltk_data]   Package gutenberg is already up-to-date!
 </pre></div>
 </div>
@@ -826,8 +815,8 @@ None
  (&#39;went&#39;, &#39;away&#39;),
  (&#39;miss&#39;, &#39;lucas&#39;),
  (&#39;next&#39;, &#39;morning&#39;),
- (&#39;depend&#39;, &#39;upon&#39;),
  (&#39;miss&#39;, &#39;darcy&#39;),
+ (&#39;depend&#39;, &#39;upon&#39;),
  (&#39;gracechurch&#39;, &#39;street&#39;),
  (&#39;made&#39;, &#39;answer&#39;),
  (&#39;soon&#39;, &#39;afterwards&#39;)]
@@ -923,7 +912,9 @@ None
 <p>A lemma is the base form of a word. It is what would typically be used as an entry in an English dictionary. Lemmatization refers to grouping together words that are inflectional variants of the same lemma: (go,went), (read, reading, reads), (cat, cats), etc..</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#download wordnet on first run</span>
+<span class="c1">#nltk.download(&#39;wordnet&#39;)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
 
 <span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">WordNetLemmatizer</span><span class="p">()</span>
 
@@ -945,7 +936,7 @@ leaves : leaf
 </div>
 </div>
 </div>
-<p>Ok, so we can see a few problems here. First, went stayed as went. And “leaves” was matched to “leaf” whereas I was thinking of “leaves” as in a person leaves the room. The reason is that the WordNetLemmatizer is stupid. It defaults to treating words as nouns (with some exceptions). We can, however, pass it a part of speech as an argument:</p>
+<p>Ok, so we can see a few problems here. First, went stayed as went. And “leaves” was matched to “leaf” whereas I was thinking of “leaves” as in a person leaves the room. The reason is that the WordNetLemmatizer has limitations. It defaults to treating words as nouns (with some exceptions). We can, however, pass it a part of speech as an argument:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For the wordnet lemmatizer, the possible parts of speech are: n for noun, v for verb, a for adjective, r for adverb, s for satellite adjective</p>
@@ -1082,7 +1073,7 @@ an essay (especially one written as an assignment)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Lemma(&#39;low.a.01.low&#39;)]
 [Lemma(&#39;poor.a.02.poor&#39;)]
 [Synset(&#39;step.v.01&#39;)]
-[Synset(&#39;chew.v.01&#39;), Synset(&#39;swallow.v.01&#39;)]
+[Synset(&#39;swallow.v.01&#39;), Synset(&#39;chew.v.01&#39;)]
 </pre></div>
 </div>
 </div>
@@ -1147,18 +1138,18 @@ an essay (especially one written as an assignment)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;physical_entity&#39;,
- &#39;whole&#39;,
- &#39;crocodilian_reptile&#39;,
- &#39;chordate&#39;,
- &#39;diapsid&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;whole&#39;,
+ &#39;physical_entity&#39;,
  &#39;organism&#39;,
- &#39;entity&#39;,
  &#39;vertebrate&#39;,
- &#39;animal&#39;,
+ &#39;diapsid&#39;,
+ &#39;chordate&#39;,
+ &#39;entity&#39;,
  &#39;object&#39;,
  &#39;reptile&#39;,
- &#39;living_thing&#39;]
+ &#39;animal&#39;,
+ &#39;living_thing&#39;,
+ &#39;crocodilian_reptile&#39;]
 </pre></div>
 </div>
 </div>
@@ -1246,7 +1237,6 @@ an essay (especially one written as an assignment)
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concordances">Concordances</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispersion-plots">Dispersion plots</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams-and-their-frequencies">N-grams and their frequencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collocations">Collocations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lemmatization">Lemmatization</a></li>
